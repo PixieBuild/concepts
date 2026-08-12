@@ -1,5 +1,9 @@
 [
   {
+    "file": "bar-sq.webp",
+    "note": "1:1 crop of bar.webp"
+  },
+  {
     "file": "bar.webp",
     "photographer": "Declan Sun",
     "profile": "https://unsplash.com/@declansun",
@@ -60,6 +64,10 @@
     "license": "Unsplash License"
   },
   {
+    "file": "dining-seafood-sq.webp",
+    "note": "1:1 crop of dining-seafood.webp"
+  },
+  {
     "file": "dining-seafood.webp",
     "photographer": "Max Mota",
     "profile": "https://unsplash.com/@maxmota",
@@ -78,41 +86,6 @@
     "photographer": "Erim Berk Benli",
     "profile": "https://unsplash.com/@erimbenli",
     "photo": "https://unsplash.com/photos/wooden-chairs-and-table-on-a-balcony-overlooking-the-ocean-eZ2FwUavp-M",
-    "license": "Unsplash License"
-  },
-  {
-    "file": "gallery-bread.webp",
-    "photographer": "Nadya Spetnitskaya",
-    "profile": "https://unsplash.com/@kiboka",
-    "photo": "https://unsplash.com/photos/person-making-dough-beside-brown-wooden-rolling-pin-tOYiQxF9-Ys",
-    "license": "Unsplash License"
-  },
-  {
-    "file": "gallery-breakfast.webp",
-    "photographer": "Valeriia Miller",
-    "profile": "https://unsplash.com/@valeriiamiller",
-    "photo": "https://unsplash.com/photos/coffee-sits-on-a-wooden-table-in-the-sun-FqNEPHVdxaU",
-    "license": "Unsplash License"
-  },
-  {
-    "file": "gallery-details.webp",
-    "photographer": "Tom Crew",
-    "profile": "https://unsplash.com/@tomcrewceramics",
-    "photo": "https://unsplash.com/photos/closeup-photo-of-white-bowl-on-white-surface-Mz__0nr1AM8",
-    "license": "Unsplash License"
-  },
-  {
-    "file": "gallery-stair.webp",
-    "photographer": "Catrina Carrigan",
-    "profile": "https://unsplash.com/@catrinalouisec",
-    "photo": "https://unsplash.com/photos/brown-wooden-staircase-with-black-metal-railings-am3p9BjXRh8",
-    "license": "Unsplash License"
-  },
-  {
-    "file": "gallery-village.webp",
-    "photographer": "Chelsea Essig",
-    "profile": "https://unsplash.com/@chelseaessig",
-    "photo": "https://unsplash.com/photos/a-harbor-filled-with-lots-of-boats-next-to-a-lush-green-hillside-zCSIIoGQr2s",
     "license": "Unsplash License"
   },
   {
@@ -135,6 +108,10 @@
     "profile": "https://unsplash.com/@thomasthomask",
     "photo": "https://unsplash.com/photos/stone-archway-overlooks-coastal-town-and-harbor-9iucvHSubXI",
     "license": "Unsplash License"
+  },
+  {
+    "file": "mark.png",
+    "note": "Casa Lume monogram, cut from the supplied logo lockup"
   },
   {
     "file": "pool.webp",
@@ -279,11 +256,8 @@
     "note": "1:1 crop of window-shutters.webp"
   },
   {
-    "file": "spa-detail.webp",
-    "photographer": "Camille Brodard",
-    "profile": "https://unsplash.com/@kmile_ch",
-    "photo": "https://unsplash.com/photos/white-plastic-pump-bottle-beside-pink-tulips-and-gray-towel-VxAwTeiqDao",
-    "license": "Unsplash License"
+    "file": "spa-wide.webp",
+    "note": "3:2 crop of spa.webp"
   },
   {
     "file": "spa.webp",
@@ -318,13 +292,6 @@
     "photographer": "Kirill Petropavlov",
     "profile": "https://unsplash.com/@kirillpetropavlov",
     "photo": "https://unsplash.com/photos/aerial-view-of-village-on-mountain-cliff-during-orange-sunset-cYrMQA7a3Wc",
-    "license": "Unsplash License"
-  },
-  {
-    "file": "window-shutters.webp",
-    "photographer": "Gio L",
-    "profile": "https://unsplash.com/@artenico",
-    "photo": "https://unsplash.com/photos/two-windows-and-a-lamp-on-a-yellow-wall-SmSG8_rfO34",
     "license": "Unsplash License"
   },
   {
