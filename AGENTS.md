@@ -30,7 +30,7 @@ app/
 ├── robots.ts
 ├── (gallery)/         root layout #1 — the internal gallery
 └── (concepts)/
-    └── aurora-dental/ root layout #2 — reference concept, copy this
+    └── casa-lume/      root layout #2 — reference concept, copy this
 lib/concepts.ts        the registry the gallery reads
 components/ui/         shadcn
 ```
@@ -51,7 +51,7 @@ There is deliberately no `app/layout.tsx`, so each route group is its own root l
 8. Dark mode? (opt-in per concept)
 9. Status — `draft` or `ready`
 
-**Step 2 — copy `app/(concepts)/aurora-dental/`** and adapt it. It has every piece a concept needs: `layout.tsx`, `theme.css`, `site.ts`, `page.tsx`, `sitemap.ts`, `opengraph-image.tsx`, `_components/`.
+**Step 2 — copy `app/(concepts)/casa-lume/`** and adapt it. It has every piece a concept needs: `layout.tsx`, `theme.css`, `site.ts`, `page.tsx`, `sitemap.ts`, `opengraph-image.tsx`, `_lib/`, `_components/`.
 
 **Step 3 — add an entry to `CONCEPTS` in `lib/concepts.ts`.** A concept that isn't registered does not appear on the home page. `slug` must equal the folder name.
 
@@ -97,5 +97,7 @@ shadcn with **Base UI** (`@base-ui/react`), Nova preset, `lucide-react` icons �
   `<Button nativeButton={false} render={<Link href="/x" />}>Open</Button>`
 - `components/ui/` is shared and themed entirely through tokens, so it re-themes automatically. Never fork a ui component per concept — change the concept's tokens, or build a local component in its `_components/`.
 - Dark mode is `next-themes`. Use `<ThemeToggle />`; never hand-roll a theme script.
-- `_`-prefixed folders never become routes.
+- `_`-prefixed folders never become routes. Put a component in the `_components/` of the deepest
+  route that uses it: `booking/_components/` for booking-only. The concept's root `_components/`
+  is for shared components and for the home page, since home is the root route.
 - Server Components by default; push `"use client"` to the leaf.

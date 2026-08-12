@@ -43,32 +43,47 @@ export type Concept = {
   };
   /** Shown on the gallery card. The concept owns its own sitemap. */
   pages: ConceptPage[];
-  /** Screenshot for the gallery card, e.g. "/previews/aurora-dental.png". */
+  /** Screenshot for the gallery card, e.g. "/previews/casa-lume.png". */
   thumbnail?: string;
 };
 
 export const CONCEPTS: Concept[] = [
   {
-    slug: "aurora-dental",
-    name: "Aurora Dental",
-    tagline: "Calm, trust-first clinic site with online booking",
+    slug: "casa-lume",
+    name: "Casa Lume",
+    tagline: "Editorial luxury hotel site with a full booking flow",
     description:
-      "A modern dental practice site built around reassurance rather than hard sell. Soft cyan palette, generous whitespace, and a booking call-to-action that follows the visitor down the page.",
-    category: "healthcare",
-    industry: "Dental clinic",
-    tags: ["clinic", "booking", "soft", "rounded", "single-page", "light"],
+      "A secluded Ligurian boutique hotel built on quiet luxury — Cormorant Garamond at display scale, terracotta on warm ivory, and generous whitespace. Includes a four-step room booking flow, restaurant reservation, and experience booking, all validated on the frontend.",
+    category: "hospitality",
+    industry: "Boutique hotel",
+    tags: [
+      "hotel",
+      "editorial",
+      "booking",
+      "multi-page",
+      "terracotta",
+      "mediterranean",
+      "motion",
+      "serif",
+    ],
     bestFor:
-      "Local health practices that want to look modern and approachable without feeling corporate.",
+      "Hospitality and travel clients who want restraint and strong typography rather than a conventional hotel template.",
     status: "ready",
     addedAt: "2026-08-11",
     theme: {
-      fonts: "Fraunces / Inter",
-      accent: "oklch(0.62 0.13 220)",
-      supportsDarkMode: true,
+      fonts: "Cormorant Garamond / Manrope",
+      accent: "#B56A4A",
+      supportsDarkMode: false,
     },
     pages: [
       { path: "", label: "Home" },
-      { path: "/services", label: "Services" },
+      { path: "/rooms", label: "Rooms" },
+      { path: "/rooms/sea-view-suite", label: "Room detail" },
+      { path: "/dining", label: "Dining" },
+      { path: "/experiences", label: "Experiences" },
+      { path: "/gallery", label: "Gallery" },
+      { path: "/location", label: "Location" },
+      { path: "/booking", label: "Booking" },
     ],
   },
 ];
