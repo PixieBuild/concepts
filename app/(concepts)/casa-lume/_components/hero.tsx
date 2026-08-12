@@ -5,12 +5,13 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AvailabilityBar } from "./availability-bar";
 import { FadeIn, StaggerLines } from "./motion-primitives";
+import { Shell } from "./section";
 import { IMAGE_BASE } from "@/app/(concepts)/casa-lume/_lib/content";
 import { path } from "@/app/(concepts)/casa-lume/site";
 
 export function Hero() {
   return (
-    <section className="relative isolate flex h-svh max-h-256 min-h-136 w-full flex-col overflow-hidden">
+    <section className="relative isolate flex h-svh min-h-136 w-full flex-col overflow-hidden">
       <Image
         src={`${IMAGE_BASE}/hero.webp`}
         alt="The terrace and pool above the coast at dusk"
@@ -32,8 +33,8 @@ export function Hero() {
         className="absolute inset-x-0 top-0 h-48 bg-linear-to-b from-foreground/60 via-foreground/20 to-transparent"
       />
 
-      <div className="relative flex flex-1 flex-col justify-center px-5 pt-24 pb-24 text-background sm:px-8 lg:px-12">
-        <div className="mx-auto w-full max-w-[100rem]">
+      <div className="relative flex flex-1 flex-col justify-center pt-42 pb-24 text-background lg:pt-44">
+        <Shell>
           <FadeIn delay={0.1}>
             <p className="eyebrow flex items-center gap-4 text-background/90">
               <span aria-hidden className="h-px w-12 bg-background/45" />
@@ -70,11 +71,11 @@ export function Hero() {
               <ArrowRight />
             </Button>
           </FadeIn>
-        </div>
+        </Shell>
       </div>
 
-      <div className="relative px-5 pb-8 sm:px-8 lg:px-12 lg:pb-10">
-        <div className="mx-auto flex w-full max-w-[100rem] items-end gap-8">
+      <div className="relative pb-8 lg:pb-10">
+        <Shell className="flex items-end gap-8">
           <FadeIn delay={1.2} className="hidden shrink-0 pb-1 lg:block">
             <span className="flex flex-col items-center gap-4 text-background/50">
               <span className="eyebrow [writing-mode:vertical-rl]">Scroll</span>
@@ -85,7 +86,7 @@ export function Hero() {
           <div className="hero-rise min-w-0 flex-1">
             <AvailabilityBar />
           </div>
-        </div>
+        </Shell>
       </div>
     </section>
   );

@@ -66,14 +66,15 @@ export function SiteHeader() {
                   key={link.href}
                   href={href}
                   className={cn(
-                    "relative text-[0.72rem] tracking-[0.18em] uppercase transition-opacity hover:opacity-100",
+                    "group relative text-[0.72rem] tracking-[0.18em] uppercase transition-opacity hover:opacity-100",
                     active ? "opacity-100" : "opacity-70",
                   )}
                 >
                   {link.label}
                   <span
+                    aria-hidden
                     className={cn(
-                      "absolute -bottom-1.5 left-0 h-px w-full origin-left scale-x-0 bg-current transition-transform duration-500",
+                      "absolute -bottom-1.5 left-0 h-px w-full origin-left scale-x-0 bg-primary transition-transform duration-500 group-hover:scale-x-100",
                       active && "scale-x-100",
                     )}
                   />

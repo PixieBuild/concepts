@@ -42,7 +42,7 @@
     "file": "courtyard.webp",
     "photographer": "Krzysztof",
     "profile": "https://unsplash.com/@krzysztof_h",
-    "photo": "https://unsplash.com/photos/historic-stone-courtyard-with-stairs-and-green-plants-y3IxGNBCZKI",
+    "photo": "https://unsplash.com/photos/tuscan-villa-facade-with-shutters-and-urns-aKtX0XV7zzs",
     "license": "Unsplash License"
   },
   {
@@ -158,6 +158,11 @@
     "license": "Unsplash License"
   },
   {
+    "file": "room-garden-card.webp",
+    "photo": "https://unsplash.com/photos/warm-light-illuminates-a-bedroom-with-a-bed-and-plant-hkCXcR2mcds",
+    "license": "Unsplash License"
+  },
+  {
     "file": "room-garden-terrace.webp",
     "photographer": "Chris Weiher",
     "profile": "https://unsplash.com/@chrisvomradio",
@@ -170,6 +175,10 @@
     "profile": "https://unsplash.com/@martinaj",
     "photo": "https://unsplash.com/photos/a-patio-area-with-a-tiled-floor-and-potted-trees-hJlrZg8aL_A",
     "license": "Unsplash License"
+  },
+  {
+    "file": "room-olive-card.webp",
+    "note": "4:5 copy of room-olive-window.webp"
   },
   {
     "file": "room-olive-interior.webp",
@@ -207,6 +216,11 @@
     "license": "Unsplash License"
   },
   {
+    "file": "room-seaview-card.webp",
+    "photo": "https://unsplash.com/photos/the-sun-is-shining-through-the-curtains-on-a-bed-VPFi-s-xyXU",
+    "license": "Unsplash License"
+  },
+  {
     "file": "room-seaview-interior.webp",
     "photographer": "Andrew Neel",
     "profile": "https://unsplash.com/@andrewtneel",
@@ -232,6 +246,11 @@
     "photographer": "Diane Wuttke",
     "profile": "https://unsplash.com/@diianne211",
     "photo": "https://unsplash.com/photos/white-ceramic-vase-on-white-book--37ysvsiUbk",
+    "license": "Unsplash License"
+  },
+  {
+    "file": "room-signature-card.webp",
+    "photo": "https://unsplash.com/photos/dimly-lit-bedroom-with-sunlight-through-window-D2QjyBiACmY",
     "license": "Unsplash License"
   },
   {
