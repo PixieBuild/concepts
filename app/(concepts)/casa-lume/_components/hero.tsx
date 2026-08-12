@@ -11,7 +11,7 @@ import { path } from "@/app/(concepts)/casa-lume/site";
 
 export function Hero() {
   return (
-    <section className="relative isolate flex h-svh min-h-136 w-full flex-col overflow-hidden">
+    <section className="relative isolate flex min-h-svh w-full flex-col overflow-hidden">
       <Image
         src={`${IMAGE_BASE}/hero.webp`}
         alt="The terrace and pool above the coast at dusk"
