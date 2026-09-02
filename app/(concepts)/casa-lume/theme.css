@@ -137,36 +137,3 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
-
-/* Scroll reveals run as compositor-driven CSS transitions. Motion's
-   whileInView drove 58 of these from the main thread, which is what made
-   scrolling stutter. */
-.theme-casa-lume [data-reveal] {
-  opacity: 0;
-  transform: translate3d(0, 1.75rem, 0);
-  transition:
-    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-.theme-casa-lume [data-reveal="image"] {
-  transform: scale(1.05);
-  transition:
-    opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.theme-casa-lume [data-reveal][data-shown="true"] {
-  opacity: 1;
-  transform: none;
-  will-change: auto;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .theme-casa-lume [data-reveal] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}

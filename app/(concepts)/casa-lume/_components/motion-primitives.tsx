@@ -1,33 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-
-function useRevealed<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        setShown(true);
-        observer.disconnect();
-      },
-      { rootMargin: "0px 0px -8% 0px" },
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return { ref, shown };
-}
+const REVEAL_EASE = [0.33, 0.9, 0.28, 1] as const;
+const VIEWPORT = { once: true, margin: "0px 0px -12% 0px" } as const;
 
 export function Reveal({
   children,
@@ -38,18 +15,18 @@ export function Reveal({
   delay?: number;
   className?: string;
 }) {
-  const { ref, shown } = useRevealed<HTMLDivElement>();
+  const reduced = useReducedMotion();
 
   return (
-    <div
-      ref={ref}
-      data-reveal=""
-      data-shown={shown || undefined}
-      style={delay ? { transitionDelay: `${delay}s` } : undefined}
+    <motion.div
       className={className}
+      initial={reduced ? undefined : { opacity: 0, y: 20 }}
+      whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
+      viewport={VIEWPORT}
+      transition={{ duration: 1.2, delay, ease: REVEAL_EASE }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 
@@ -62,18 +39,18 @@ export function RevealImage({
   className?: string;
   delay?: number;
 }) {
-  const { ref, shown } = useRevealed<HTMLDivElement>();
+  const reduced = useReducedMotion();
 
   return (
-    <div
-      ref={ref}
-      data-reveal="image"
-      data-shown={shown || undefined}
-      style={delay ? { transitionDelay: `${delay}s` } : undefined}
+    <motion.div
       className={className}
+      initial={reduced ? undefined : { opacity: 0, clipPath: "inset(12% 0% 0% 0%)" }}
+      whileInView={reduced ? undefined : { opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }}
+      viewport={VIEWPORT}
+      transition={{ duration: 1.5, delay, ease: REVEAL_EASE }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 
