@@ -71,7 +71,7 @@ export function TableReservation({ trigger }: { trigger?: React.ReactElement }) 
         render={trigger ?? <Button>Reserve a table</Button>}
       />
 
-      <DialogContent className="max-h-[92svh] overflow-y-auto sm:max-w-lg">
+      <DialogContent data-lenis-prevent className="max-h-[92svh] overflow-y-auto sm:max-w-lg">
         <AnimatePresence mode="wait" initial={false}>
           {confirmed ? (
             <motion.div

@@ -87,7 +87,7 @@ export function ExperienceBooking({
         render={trigger ?? <Button variant="outline">Arrange this</Button>}
       />
 
-      <DialogContent className="max-h-[92svh] overflow-y-auto sm:max-w-lg">
+      <DialogContent data-lenis-prevent className="max-h-[92svh] overflow-y-auto sm:max-w-lg">
         <AnimatePresence mode="wait" initial={false}>
           {confirmed && chosen ? (
             <motion.div

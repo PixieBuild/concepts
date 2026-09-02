@@ -4,6 +4,7 @@ import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "@/app/globals.css";
 import "./theme.css";
 
+import { SmoothScroll } from "@/components/smooth-scroll";
 import { MobileBookBar } from "./_components/mobile-book-bar";
 import { SiteFooter } from "./_components/site-footer";
 import { SiteHeader } from "./_components/site-header";
@@ -64,6 +65,7 @@ export default function CasaLumeLayout({
       className={`theme-casa-lume ${body.variable} ${heading.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col overflow-x-hidden bg-background font-sans text-foreground">
+        <SmoothScroll />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

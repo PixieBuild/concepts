@@ -123,7 +123,7 @@ function MobileAvailabilitySheet({
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger render={trigger ?? defaultTrigger} />
 
-      <SheetContent side="bottom" className="max-h-[92svh] overflow-y-auto">
+      <SheetContent data-lenis-prevent side="bottom" className="max-h-[92svh] overflow-y-auto">
         <SheetHeader className="text-left">
           <SheetTitle className="font-heading text-3xl leading-none font-normal">
             Your stay
