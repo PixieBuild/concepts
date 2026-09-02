@@ -84,7 +84,7 @@ export const ROOMS: Room[] = [
   },
   {
     slug: "signature-suite",
-    name: "Casa Lume Signature",
+    name: "Lume Signature",
     tagline: "The whole top floor, and the terrace above it",
     description:
       "Two rooms, a private roof terrace with a plunge pool, and the only view in the house that takes in both headlands.",

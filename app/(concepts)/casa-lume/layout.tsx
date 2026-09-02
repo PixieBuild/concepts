@@ -4,6 +4,7 @@ import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "@/app/globals.css";
 import "./theme.css";
 
+import { BuiltBy } from "@/components/built-by";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { MobileBookBar } from "./_components/mobile-book-bar";
 import { SiteFooter } from "./_components/site-footer";
@@ -70,6 +71,7 @@ export default function CasaLumeLayout({
         <main className="flex-1">{children}</main>
         <SiteFooter />
         <MobileBookBar />
+        <BuiltBy />
       </body>
     </html>
   );

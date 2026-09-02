@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { AvailabilityBar } from "./availability-bar";
 import { FadeIn, StaggerLines } from "./motion-primitives";
 import { Shell } from "./section";
@@ -33,7 +32,7 @@ export function Hero() {
         className="absolute inset-x-0 top-0 h-48 bg-linear-to-b from-foreground/60 via-foreground/20 to-transparent"
       />
 
-      <div className="relative flex flex-1 flex-col justify-center pt-42 pb-24 text-background lg:pt-44">
+      <div className="relative flex flex-1 flex-col justify-center pt-46 pb-12 text-background lg:pt-48">
         <Shell>
           <FadeIn delay={0.1}>
             <p className="eyebrow flex items-center gap-4 text-background/90">
@@ -42,7 +41,7 @@ export function Hero() {
             </p>
           </FadeIn>
 
-          <h1 className="mt-9 max-w-[14ch] font-heading text-[clamp(3rem,7vw,6.5rem)] leading-[0.96] font-light tracking-tight">
+          <h1 className="mt-6 max-w-[14ch] font-heading text-[clamp(3rem,min(7vw,11.5vh),8.5rem)] leading-[1.05] font-light tracking-[0.006em]">
             <StaggerLines
               className="flex flex-col"
               lineClassName="block"
@@ -54,36 +53,32 @@ export function Hero() {
           </h1>
 
           <FadeIn delay={0.8}>
-            <p className="mt-10 max-w-md text-[1.0625rem] leading-relaxed text-background/80">
+            <p className="mt-8 max-w-[25.5rem] text-[1.0625rem] leading-relaxed text-background/80">
               A seventeen-room house on the terraces above the Ligurian coast.
               Long lunches, cold water, and nothing that needs doing.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.95}>
-            <Button
-              size="lg"
-              nativeButton={false}
-              className="mt-11 h-12 rounded-none bg-background px-8 text-(--clay) hover:bg-background/85"
-              render={<Link href={path("/rooms")} />}
+            <Link
+              href={path("/rooms")}
+              className="group relative mt-11 inline-flex items-center gap-3.5 pb-3 text-[0.8125rem] tracking-[0.16em] text-background uppercase focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background"
             >
-              Discover the house
-              <ArrowRight />
-            </Button>
+              Enter the house
+              <ArrowRight className="size-4 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5" />
+              <span aria-hidden className="absolute inset-x-0 bottom-0 h-px bg-background/30" />
+              <span
+                aria-hidden
+                className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-background transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
+              />
+            </Link>
           </FadeIn>
         </Shell>
       </div>
 
       <div className="relative pb-8 lg:pb-10">
-        <Shell className="flex items-end gap-8">
-          <FadeIn delay={1.2} className="hidden shrink-0 pb-1 lg:block">
-            <span className="flex flex-col items-center gap-4 text-background/50">
-              <span className="eyebrow [writing-mode:vertical-rl]">Scroll</span>
-              <span aria-hidden className="h-12 w-px bg-background/30" />
-            </span>
-          </FadeIn>
-
-          <div className="hero-rise min-w-0 flex-1">
+        <Shell>
+          <div className="hero-rise">
             <AvailabilityBar />
           </div>
         </Shell>

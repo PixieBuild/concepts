@@ -12,7 +12,7 @@ export function Shell({
   return (
     <div
       className={cn(
-        "mx-auto w-full max-w-[100rem] px-5 sm:px-8 lg:px-12",
+        "mx-auto w-full max-w-[100rem] px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-24",
         className,
       )}
     >

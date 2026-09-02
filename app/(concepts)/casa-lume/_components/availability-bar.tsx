@@ -50,12 +50,12 @@ export function AvailabilityBar() {
 
   return (
     <>
-      <div className="hidden border border-background/15 bg-foreground/45 backdrop-blur-md lg:grid lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-stretch">
+      <div className="hidden border border-background/12 bg-foreground/35 backdrop-blur-md lg:grid lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-stretch">
         <DateField
           tone="dark"
           icon={<CalendarDays className="size-4" />}
           label="Check in"
-          className="px-7 py-5"
+          className="px-6 py-4"
           value={search.arrival}
           onChange={search.setArrival}
         />
@@ -63,7 +63,7 @@ export function AvailabilityBar() {
           tone="dark"
           icon={<CalendarDays className="size-4" />}
           label="Check out"
-          className="border-l border-background/15 px-7 py-5"
+          className="border-l border-background/12 px-6 py-4"
           value={search.departure}
           onChange={search.setDeparture}
           disabledBefore={search.arrival}
@@ -73,14 +73,14 @@ export function AvailabilityBar() {
           tone="dark"
           icon={<Users className="size-4" />}
           label="Guests"
-          className="border-l border-background/15 px-7 py-5"
+          className="border-l border-background/12 px-6 py-4"
           value={search.guests}
           onChange={search.setGuests}
         />
         <Button
           size="lg"
           onClick={search.submit}
-          className="m-3 h-auto rounded-none bg-background px-8 text-(--clay) hover:bg-background/85"
+          className="m-2.5 h-auto rounded-none bg-background px-7 text-(--clay) hover:bg-background/85"
         >
           Check availability
           <ArrowRight />
@@ -109,7 +109,7 @@ function MobileAvailabilitySheet({
     >
       <span className="flex flex-col gap-1">
         <span className="eyebrow text-background/60">Check availability</span>
-        <span className="text-[1.0625rem] leading-none font-medium">
+        <span className="text-[1.0625rem] leading-tight font-medium">
           {search.arrival
             ? `${formatDate(search.arrival)} — ${formatDate(search.departure, "…")}`
             : "Choose your dates"}

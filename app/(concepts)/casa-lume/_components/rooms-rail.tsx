@@ -54,7 +54,7 @@ export function RoomsRail() {
     <div>
       <ul
         ref={railRef}
-        className="hide-scrollbar mx-auto flex w-full max-w-[100rem] snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth scroll-pl-5 px-5 pb-2 sm:scroll-pl-8 sm:px-8 lg:scroll-pl-12 lg:px-12"
+        className="hide-scrollbar mx-auto flex w-full max-w-[100rem] snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth scroll-pl-5 px-5 pb-2 sm:scroll-pl-8 sm:px-8 lg:scroll-pl-12 lg:px-12 xl:scroll-pl-16 xl:px-16 2xl:scroll-pl-24 2xl:px-24"
       >
         {ROOMS.map((room) => (
           <li

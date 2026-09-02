@@ -31,7 +31,7 @@ const SOCIAL = [
 export function SiteFooter() {
   return (
     <footer className="border-t border-border/70 bg-secondary/40">
-      <div className="mx-auto w-full max-w-[100rem] px-5 pt-16 pb-28 sm:px-8 sm:py-20 lg:px-12">
+      <div className="mx-auto w-full max-w-[100rem] px-5 pt-16 pb-28 sm:px-8 sm:py-20 lg:px-12 xl:px-16 2xl:px-24">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr] md:gap-10">
           <div>
             <Logo showLocation />
@@ -101,7 +101,17 @@ export function SiteFooter() {
 
         <div className="mt-16 flex flex-col gap-3 border-t border-border/70 pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Casa Lume. All rights reserved.</p>
-          <p>A concept property. Photography to follow.</p>
+          <p className="flex items-center gap-1.5">
+            A concept property, built by
+            <a
+              href="https://pixiebuild.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
+            >
+              PixieBuild
+            </a>
+          </p>
         </div>
       </div>
     </footer>

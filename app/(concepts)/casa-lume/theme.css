@@ -102,8 +102,7 @@
   }
 }
 
-/* Buttons carry the concept's uppercase, squared treatment. Scoped here rather
-   than forking the shared shadcn primitive. */
+/* Buttons carry the concept's uppercase, squared treatment. */
 .theme-casa-lume [data-slot="button"] {
   border-radius: 0;
   font-size: 0.8125rem;

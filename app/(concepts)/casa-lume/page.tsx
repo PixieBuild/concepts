@@ -357,19 +357,17 @@ function Location() {
             </Reveal>
           </div>
 
-          <div className="lg:col-span-7">
-            <RevealImage>
-              <div className="relative aspect-3/2 overflow-hidden">
-                <Image
-                  src={`${IMAGE_BASE}/coastline.webp`}
-                  alt="The coastline between Monterosso and Punta Mesco"
-                  fill
-                  sizes="(min-width:1600px) 848px, (min-width:1024px) 57vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-            </RevealImage>
-          </div>
+          <RevealImage className="lg:col-span-7">
+            <div className="relative aspect-3/2 overflow-hidden lg:aspect-auto lg:h-full">
+              <Image
+                src={`${IMAGE_BASE}/coastline.webp`}
+                alt="The coastline between Monterosso and Punta Mesco"
+                fill
+                sizes="(min-width:1600px) 848px, (min-width:1024px) 57vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </RevealImage>
         </div>
       </Shell>
     </section>

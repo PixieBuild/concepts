@@ -48,7 +48,7 @@ export function SiteHeader() {
             inverted ? "opacity-0" : "opacity-100",
           )}
         />
-        <div className="relative mx-auto flex h-18 w-full max-w-[100rem] items-center justify-between gap-6 px-5 sm:px-8 lg:h-20 lg:px-12">
+        <div className="relative mx-auto flex h-18 w-full max-w-[100rem] items-center justify-between gap-6 px-5 sm:px-8 lg:h-20 lg:px-12 xl:px-16 2xl:px-24">
           <Link
             href={path()}
             className="shrink-0 transition-opacity hover:opacity-70"
