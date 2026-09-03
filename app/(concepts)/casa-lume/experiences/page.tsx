@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 
 import { ExperienceBooking } from "./_components/experience-booking";
 import { Reveal, RevealImage } from "@/app/(concepts)/casa-lume/_components/motion-primitives";
@@ -10,16 +10,22 @@ import { path, url } from "@/app/(concepts)/casa-lume/site";
 const description =
   "A spa cut into the rock, an infinity pool on the lowest terrace, a restored gozzo with a skipper who grew up in the next bay.";
 
-export const metadata: Metadata = {
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
   title: "Experiences",
   description,
   alternates: { canonical: path("/experiences") },
   openGraph: {
+    images: (await parent).openGraph?.images ?? [],
     title: "Experiences at Casa Lume",
     description,
     url: url("/experiences"),
   },
-};
+  };
+}
 
 export default function ExperiencesPage() {
   const [spa, pool, boat, hike, wine, dinner] = EXPERIENCES;

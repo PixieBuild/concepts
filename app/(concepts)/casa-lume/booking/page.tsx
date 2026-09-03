@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 
 import { BookingFlow } from "./_components/booking-flow";
 import { fromDateParam } from "@/app/(concepts)/casa-lume/_lib/booking";
@@ -7,16 +7,22 @@ import { path, url } from "@/app/(concepts)/casa-lume/site";
 const description =
   "Reserve a room at Casa Lume. Seventeen rooms above the Ligurian sea, open April to early November.";
 
-export const metadata: Metadata = {
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
   title: "Book your stay",
   description,
   alternates: { canonical: path("/booking") },
   openGraph: {
+    images: (await parent).openGraph?.images ?? [],
     title: "Book your stay at Casa Lume",
     description,
     url: url("/booking"),
   },
-};
+  };
+}
 
 export default async function BookingPage({ searchParams }: PageProps<"/casa-lume/booking">) {
   const params = await searchParams;

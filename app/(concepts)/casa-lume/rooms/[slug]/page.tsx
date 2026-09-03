@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Check } from "lucide-react";
@@ -15,9 +15,10 @@ export function generateStaticParams() {
   return ROOMS.map((room) => ({ slug: room.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps<"/casa-lume/rooms/[slug]">): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: PageProps<"/casa-lume/rooms/[slug]">,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { slug } = await params;
   const room = getRoom(slug);
   if (!room) return {};
@@ -27,6 +28,7 @@ export async function generateMetadata({
     description: room.description,
     alternates: { canonical: path(`/rooms/${room.slug}`) },
     openGraph: {
+      images: (await parent).openGraph?.images ?? [],
       title: `${room.name} — Casa Lume`,
       description: room.description,
       url: url(`/rooms/${room.slug}`),

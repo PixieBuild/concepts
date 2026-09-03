@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 
 import { GalleryGrid } from "./_components/gallery-grid";
 import { PageOpener, Shell } from "@/app/(concepts)/casa-lume/_components/section";
@@ -8,16 +8,22 @@ import { path, url } from "@/app/(concepts)/casa-lume/site";
 const description =
   "The house, the terraces, the water and the table — Casa Lume in pictures.";
 
-export const metadata: Metadata = {
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
   title: "Gallery",
   description,
   alternates: { canonical: path("/gallery") },
   openGraph: {
+    images: (await parent).openGraph?.images ?? [],
     title: "Casa Lume in pictures",
     description,
     url: url("/gallery"),
   },
-};
+  };
+}
 
 export default function GalleryPage() {
   return (

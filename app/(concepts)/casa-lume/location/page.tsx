@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { ArrowUpRight, Mail, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -16,16 +16,22 @@ const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
 const description =
   "Casa Lume sits on the terraces between Monterosso al Mare and Punta Mesco. Ninety minutes from Genoa, fifteen from the station.";
 
-export const metadata: Metadata = {
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
   title: "Location & contact",
   description,
   alternates: { canonical: path("/location") },
   openGraph: {
+    images: (await parent).openGraph?.images ?? [],
     title: "Finding Casa Lume",
     description,
     url: url("/location"),
   },
-};
+  };
+}
 
 export default function LocationPage() {
   return (

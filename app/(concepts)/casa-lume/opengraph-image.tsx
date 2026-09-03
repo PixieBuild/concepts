@@ -1,17 +1,13 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "Casa Lume — a boutique hotel on the Ligurian coast";
+import { OG_MARK, OG_TERRACE } from "./_lib/og-assets";
+
+export const runtime = "edge";
+export const alt = "Casa Lume — seventeen rooms above the Ligurian sea";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function OpengraphImage() {
-  const mark = await readFile(
-    join(process.cwd(), "public/concepts/casa-lume/mark.png"),
-  );
-  const markSrc = `data:image/png;base64,${mark.toString("base64")}`;
-
+export default function OpengraphImage() {
   return new ImageResponse(
     (
       <div
@@ -19,9 +15,6 @@ export default async function OpengraphImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: 84,
           background: "#faf7f1",
           color: "#2b2724",
         }}
@@ -29,34 +22,50 @@ export default async function OpengraphImage() {
         <div
           style={{
             display: "flex",
-            alignItems: "center",
+            flexDirection: "column",
             justifyContent: "space-between",
-            fontSize: 24,
-            letterSpacing: 6,
+            width: 660,
+            padding: "64px 56px 64px 72px",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-            <img src={markSrc} width={88} height={88} alt="" />
-            <span style={{ display: "flex" }}>CASA LUME</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+            <img src={OG_MARK} width={64} height={64} alt="" />
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ display: "flex", fontSize: 26, letterSpacing: 7 }}>
+                CASA LUME
+              </span>
+              <span
+                style={{
+                  display: "flex",
+                  marginTop: 6,
+                  fontSize: 12,
+                  letterSpacing: 5,
+                  color: "#8a7f74",
+                }}
+              >
+                MONTEROSSO, LIGURIA
+              </span>
+            </div>
           </div>
-          <span style={{ display: "flex", color: "#8a7f74" }}>
-            LIGURIA, ITALY
-          </span>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 26 }}>
+            <div style={{ display: "flex", width: 72, height: 2, background: "#b56a4a" }} />
+            <div style={{ display: "flex", fontSize: 66, lineHeight: 1.06 }}>
+              Seventeen rooms, ninety steps above the sea.
+            </div>
+            <div style={{ display: "flex", fontSize: 22, color: "#6e655c" }}>
+              A family house on the terraces · April to November
+            </div>
+          </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-          <div
-            style={{ display: "flex", width: 96, height: 3, background: "#b56a4a" }}
-          />
-          <div
-            style={{ display: "flex", fontSize: 88, lineHeight: 1.04, maxWidth: 900 }}
-          >
-            Where the hills meet the sea.
-          </div>
-          <div style={{ display: "flex", fontSize: 28, color: "#6e655c" }}>
-            Seventeen rooms above a cove · April – November
-          </div>
-        </div>
+        <img
+          src={OG_TERRACE}
+          width={540}
+          height={630}
+          alt=""
+          style={{ objectFit: "cover" }}
+        />
       </div>
     ),
     size,

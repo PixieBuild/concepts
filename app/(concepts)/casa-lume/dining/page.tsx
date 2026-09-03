@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 
 import { Reveal, RevealImage } from "@/app/(concepts)/casa-lume/_components/motion-primitives";
 import Image from "next/image";
@@ -10,16 +10,22 @@ import { path, url } from "@/app/(concepts)/casa-lume/site";
 const description =
   "Sale seats twenty-six on the lower terrace, with one menu written each afternoon. Bar Lume pours Ligurian vermouth from five until late.";
 
-export const metadata: Metadata = {
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
   title: "Dining",
   description,
   alternates: { canonical: path("/dining") },
   openGraph: {
+    images: (await parent).openGraph?.images ?? [],
     title: "Dining at Casa Lume",
     description,
     url: url("/dining"),
   },
-};
+  };
+}
 
 const NUMERALS = ["I", "II", "III", "IV"];
 

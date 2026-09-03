@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -16,16 +16,22 @@ import { path, url } from "@/app/(concepts)/casa-lume/site";
 const description =
   "Seventeen rooms and suites above the Ligurian sea — garden terraces, sea-facing balconies, and a signature suite with its own roof and plunge pool.";
 
-export const metadata: Metadata = {
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
   title: "Rooms & suites",
   description,
   alternates: { canonical: path("/rooms") },
   openGraph: {
+    images: (await parent).openGraph?.images ?? [],
     title: "Rooms & suites at Casa Lume",
     description,
     url: url("/rooms"),
   },
-};
+  };
+}
 
 export default function RoomsPage() {
   return (
