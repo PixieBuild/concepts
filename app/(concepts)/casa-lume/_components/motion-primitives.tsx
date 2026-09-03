@@ -92,7 +92,7 @@ export function RevealImage({
   return (
     <motion.div
       ref={ref}
-      className={cn("relative", className)}
+      className={cn("relative overflow-hidden", className)}
       initial={false}
       animate={{ clipPath: show ? "inset(0% 0% 0% 0%)" : "inset(100% 0% 0% 0%)" }}
       transition={{ duration, delay, ease: EASE }}
