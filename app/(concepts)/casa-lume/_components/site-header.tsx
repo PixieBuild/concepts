@@ -14,13 +14,22 @@ import { path } from "@/app/(concepts)/casa-lume/site";
 export function SiteHeader() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [heroRoom, setHeroRoom] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const overHero = !pathname.startsWith(path("/booking"));
-  const inverted = overHero && !scrolled && !menuOpen;
+  const plainPage = pathname.startsWith(path("/booking"));
+  const inverted =
+    !plainPage && !scrolled && !menuOpen && (pathname !== path() || heroRoom);
+  const grounded = plainPage || scrolled || menuOpen;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      const hero = document.getElementById("hero");
+      setScrolled(
+        hero ? hero.getBoundingClientRect().bottom <= 96 : window.scrollY > 24,
+      );
+      setHeroRoom(hero?.dataset.room === "true");
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -45,7 +54,7 @@ export function SiteHeader() {
           aria-hidden
           className={cn(
             "absolute inset-0 border-b border-border/60 bg-background/92 backdrop-blur-md transition-opacity duration-500 ease-out",
-            inverted ? "opacity-0" : "opacity-100",
+            grounded ? "opacity-100" : "opacity-0",
           )}
         />
         <div className="relative mx-auto flex h-18 w-full max-w-[100rem] items-center justify-between gap-6 px-5 sm:px-8 lg:h-20 lg:px-12 xl:px-16 2xl:px-24">
@@ -89,7 +98,7 @@ export function SiteHeader() {
               variant="outline"
               nativeButton={false}
               className={cn(
-                "hidden h-10 px-6 sm:inline-flex",
+                "hidden h-11 px-7 sm:inline-flex",
                 inverted
                   ? "border-background/45 bg-transparent text-background hover:bg-background hover:text-foreground"
                   : "border-foreground/25 bg-transparent hover:bg-foreground hover:text-background",

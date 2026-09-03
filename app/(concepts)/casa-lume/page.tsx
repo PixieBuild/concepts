@@ -3,8 +3,10 @@ import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { AvailabilityBar } from "./_components/availability-bar";
 import { Hero } from "./_components/hero";
-import { Reveal, RevealImage } from "./_components/motion-primitives";
+import { HouseChapters } from "./_components/house-chapters";
+import { Parallax, Reveal, RevealImage } from "./_components/motion-primitives";
 import { RoomsRail } from "./_components/rooms-rail";
 import { SectionHeading, Shell } from "./_components/section";
 import {
@@ -22,96 +24,23 @@ export default function CasaLumeHome() {
     <>
       <Hero />
 
-      <TheHouse />
+      <div className="border-b border-border">
+        <Shell>
+          <AvailabilityBar />
+        </Shell>
+      </div>
+
+      <HouseChapters />
       <Rooms />
-      <Dining />
-      <Experiences />
-      <Location />
-      <Reviews />
-      <FinalCta />
+      <Water />
+      <div className="relative z-10 bg-background">
+        <Dining />
+        <Experiences />
+        <Location />
+        <Reviews />
+        <FinalCta />
+      </div>
     </>
-  );
-}
-
-function TheHouse() {
-  return (
-    <section id="the-house" className="scroll-mt-24 py-24 sm:py-32 lg:py-40">
-      <Shell>
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5 lg:sticky lg:top-32 lg:self-start">
-            <SectionHeading
-              eyebrow="The house"
-              title={
-                <>
-                  A family house that
-                  <em className="font-normal italic"> never quite </em>
-                  stopped being one.
-                </>
-              }
-              intro="Built in 1961 as a summer place for a Genoese family, Casa Lume kept its proportions when it became a hotel — small rooms, thick walls, and a kitchen that still works to whatever the boats brought in."
-            />
-
-            <Reveal delay={0.15}>
-              <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-9 border-t border-border pt-10">
-                {[
-                  { term: "Rooms", detail: "Seventeen, no two alike" },
-                  { term: "Season", detail: "April – early November" },
-                  { term: "The sea", detail: "Ninety steps down" },
-                  { term: "Nearest village", detail: "Monterosso, 12 min" },
-                ].map((item) => (
-                  <div key={item.term}>
-                    <dt className="eyebrow text-muted-foreground">{item.term}</dt>
-                    <dd className="mt-3 font-heading text-xl leading-snug font-normal">
-                      {item.detail}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
-
-          </div>
-
-          <div className="lg:col-span-7">
-            <RevealImage>
-              <div className="relative aspect-3/2 overflow-hidden">
-                <Image
-                  src={`${IMAGE_BASE}/house-terraces.webp`}
-                  alt="The house seen from the olive terraces"
-                  fill
-                  sizes="(min-width:1600px) 848px, (min-width:1024px) 57vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-            </RevealImage>
-
-            <div className="mt-6 grid grid-cols-2 gap-6">
-              <RevealImage delay={0.12}>
-                <div className="relative aspect-square overflow-hidden">
-                  <Image
-                    src={`${IMAGE_BASE}/courtyard.webp`}
-                    alt="The courtyard in the middle of the afternoon"
-                    fill
-                    sizes="(min-width:1600px) 412px, (min-width:1024px) 28vw, 50vw"
-                    className="object-cover"
-                  />
-                </div>
-              </RevealImage>
-              <RevealImage delay={0.2} className="pt-10">
-                <div className="relative aspect-square overflow-hidden">
-                  <Image
-                    src={`${IMAGE_BASE}/terrace-cliff.webp`}
-                    alt="The terrace above the water"
-                    fill
-                    sizes="(min-width:1600px) 412px, (min-width:1024px) 28vw, 50vw"
-                    className="object-cover object-top"
-                  />
-                </div>
-              </RevealImage>
-            </div>
-          </div>
-        </div>
-      </Shell>
-    </section>
   );
 }
 
@@ -131,6 +60,36 @@ function Rooms() {
   );
 }
 
+function Water() {
+  return (
+    <section className="sticky top-0 h-svh overflow-hidden">
+      <div className="absolute inset-0">
+        <Parallax className="absolute inset-0" amount={6}>
+          <Image
+            src={`${IMAGE_BASE}/bathing-platform.webp`}
+            alt="The bathing platform below the house at dusk"
+            fill
+            sizes="100vw"
+            className="object-cover object-[50%_38%]"
+          />
+        </Parallax>
+        <Shell className="absolute inset-x-0 bottom-0 pb-12 text-background lg:pb-16">
+          <Reveal>
+            <p className="eyebrow text-background/70">The water</p>
+            <p className="mt-5 max-w-lg font-heading text-[clamp(2.25rem,4.5vw,3.75rem)] leading-[1.02] font-light">
+              Ninety steps down, and worth every one of them.
+            </p>
+            <p className="mt-6 max-w-sm text-[1.0625rem] leading-relaxed text-background/80">
+              A concrete platform on the rocks, a ladder into deep water, and
+              nobody else. Towels go down at eight.
+            </p>
+          </Reveal>
+        </Shell>
+      </div>
+    </section>
+  );
+}
+
 function Dining() {
   return (
     <section className="bg-secondary/50 py-24 sm:py-32 lg:py-40">
@@ -138,22 +97,22 @@ function Dining() {
         <div className="grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-20">
           <div className="order-2 lg:order-1 lg:col-span-7">
             <RevealImage>
-              <div className="relative aspect-3/2 overflow-hidden">
+              <Parallax className="aspect-3/2">
                 <Image
-                  src={`${IMAGE_BASE}/dining-terrace.webp`}
-                  alt="The lower terrace laid for dinner"
+                  src={`${IMAGE_BASE}/evening/dining-terrace.webp`}
+                  alt="The lower terrace laid for dinner at dusk"
                   fill
                   sizes="(min-width:1600px) 848px, (min-width:1024px) 57vw, 100vw"
                   className="object-cover"
                 />
-              </div>
+              </Parallax>
             </RevealImage>
             <div className="mt-6 grid grid-cols-2 gap-6">
               <RevealImage delay={0.12}>
                 <div className="relative aspect-square overflow-hidden">
                   <Image
-                    src={`${IMAGE_BASE}/dining-seafood-sq.webp`}
-                    alt="A platter of octopus and langoustine"
+                    src={`${IMAGE_BASE}/evening/dining-detail.webp`}
+                    alt="Grilled octopus, focaccia and a glass of Vermentino on the terrace"
                     fill
                     sizes="(min-width:1600px) 412px, (min-width:1024px) 28vw, 50vw"
                     className="object-cover"
@@ -419,17 +378,16 @@ function Reviews() {
 function FinalCta() {
   return (
     <section className="relative isolate">
-      <Image
-        src={`${IMAGE_BASE}/terrace-last-light.webp`}
-        alt="The terrace at last light"
-        fill
-        sizes="100vw"
-        className="object-cover"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-linear-to-b from-foreground/45 via-foreground/35 to-foreground/70"
-      />
+      <Parallax className="absolute inset-0" amount={5}>
+        <Image
+          src={`${IMAGE_BASE}/evening/night-house.webp`}
+          alt="The house at night seen from the water, every window lit"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </Parallax>
+      <div aria-hidden className="absolute inset-0 bg-foreground/25" />
 
       <Shell className="relative flex min-h-[82svh] flex-col items-center justify-center py-28 text-center text-background">
         <Reveal>

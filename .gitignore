@@ -43,3 +43,6 @@ next-env.d.ts
 
 # local agent config
 .claude/settings.json
+
+# Paid source imagery for concepts; kept locally, never committed.
+/assets

@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
+import { RevealImage } from "./motion-primitives";
 import { Shell } from "./section";
 import { ROOMS } from "@/app/(concepts)/casa-lume/_lib/content";
 import { formatCurrency } from "@/app/(concepts)/casa-lume/_lib/booking";
@@ -56,7 +57,7 @@ export function RoomsRail() {
         ref={railRef}
         className="hide-scrollbar mx-auto flex w-full max-w-[100rem] snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth scroll-pl-5 px-5 pb-2 sm:scroll-pl-8 sm:px-8 lg:scroll-pl-12 lg:px-12 xl:scroll-pl-16 xl:px-16 2xl:scroll-pl-24 2xl:px-24"
       >
-        {ROOMS.map((room) => (
+        {ROOMS.map((room, index) => (
           <li
             key={room.slug}
             className="w-[78%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] xl:w-[calc((100%-4.5rem)/4)]"
@@ -65,15 +66,20 @@ export function RoomsRail() {
               href={path(`/rooms/${room.slug}`)}
               className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             >
-              <div className="relative aspect-4/5 overflow-hidden">
-                <Image
-                  src={room.card}
-                  alt={room.photo.alt}
-                  fill
-                  sizes="(min-width: 1280px) 22vw, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, 78vw"
-                  className="object-cover transition-transform duration-1200 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-104"
-                />
-              </div>
+              <RevealImage
+                delay={index * 0.1}
+                className="aspect-4/5 overflow-hidden"
+              >
+                <div className="relative aspect-4/5 overflow-hidden">
+                  <Image
+                    src={room.card}
+                    alt={room.photo.alt}
+                    fill
+                    sizes="(min-width: 1280px) 22vw, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, 78vw"
+                    className="object-cover transition-transform duration-1200 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-104"
+                  />
+                </div>
+              </RevealImage>
 
               <div className="mt-6 flex items-baseline justify-between gap-4">
                 <h3 className="font-heading text-[1.75rem] leading-none font-normal">

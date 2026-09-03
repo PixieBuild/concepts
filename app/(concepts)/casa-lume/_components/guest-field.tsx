@@ -20,7 +20,7 @@ export function GuestField({
   min?: number;
   max?: number;
   className?: string;
-  tone?: "light" | "dark";
+  tone?: "light" | "dark" | "bar";
   icon?: React.ReactNode;
 }) {
   const dark = tone === "dark";
@@ -29,12 +29,16 @@ export function GuestField({
     <div
       className={cn(
         "flex items-center gap-4",
-        dark ? "text-background" : "border-b border-border/70 pb-2.5",
+        dark && "text-background",
+        tone === "light" && "border-b border-border/70 pb-2.5",
         className,
       )}
     >
       {icon && (
-        <span className="shrink-0 text-background/55" aria-hidden>
+        <span
+          className={cn("shrink-0", dark ? "text-background/55" : "text-muted-foreground")}
+          aria-hidden
+        >
           {icon}
         </span>
       )}
@@ -47,14 +51,20 @@ export function GuestField({
         >
           {label}
         </span>
-        <span className="text-[1.0625rem] leading-tight font-medium">
+        <span
+          className={cn(
+            tone === "bar"
+              ? "font-heading text-2xl leading-none font-normal"
+              : "text-[1.0625rem] leading-tight font-medium",
+          )}
+        >
           {value} {value === 1 ? "guest" : "guests"}
         </span>
       </div>
       <span
         className={cn(
-          "flex shrink-0 items-stretch border",
-          dark ? "border-background/30" : "border-border",
+          "flex shrink-0 items-stretch",
+          dark ? "border border-background/30" : "border border-border",
         )}
       >
         <StepButton

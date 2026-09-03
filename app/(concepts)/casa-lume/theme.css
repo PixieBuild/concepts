@@ -83,25 +83,6 @@
   }
 }
 
-.theme-casa-lume .hero-rise {
-  animation: hero-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
-}
-
-@keyframes hero-rise {
-  from {
-    transform: translate3d(0, calc(100% + 3rem), 0);
-  }
-  to {
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .theme-casa-lume .hero-rise {
-    animation: none;
-  }
-}
-
 /* Buttons carry the concept's uppercase, squared treatment. */
 .theme-casa-lume [data-slot="button"] {
   border-radius: 0;

@@ -44,7 +44,7 @@ export const ROOMS: Room[] = [
       "Air conditioning",
     ],
     photo: { src: `${IMAGE_BASE}/room-garden.webp`, alt: "A shaded garden terrace with potted citrus" },
-    card: `${IMAGE_BASE}/room-garden-card.webp`,
+    card: `${IMAGE_BASE}/evening/room-garden.webp`,
     gallery: [
       { src: `${IMAGE_BASE}/room-garden-bed.webp`, alt: "Bed dressed in white linen, morning light across the wall" },
       { src: `${IMAGE_BASE}/room-garden-terrace.webp`, alt: "A lemon tree on the private terrace above the sea" },
@@ -56,7 +56,7 @@ export const ROOMS: Room[] = [
     name: "Sea View Suite",
     tagline: "First floor, with the whole gulf in the window",
     description:
-      "Tall shuttered windows framing the gulf, a deep soaking tub, and light that moves across the room all day.",
+      "Tall shuttered windows framing the gulf, a deep soaking tub, and copper light until sunset.",
     longDescription: [
       "On the first floor the ceilings lift and the windows grow tall. Each Sea View Suite faces due west across the gulf, which means the room fills with a long copper light for the last hour before sunset.",
       "There is a freestanding tub set where you can see the water from it, a writing desk that no one uses for work, and a pair of chairs angled toward the window rather than the television.",
@@ -75,7 +75,7 @@ export const ROOMS: Room[] = [
       "Air conditioning",
     ],
     photo: { src: `${IMAGE_BASE}/room-seaview.webp`, alt: "A tall window framing the open sea" },
-    card: `${IMAGE_BASE}/room-seaview-card.webp`,
+    card: `${IMAGE_BASE}/evening/room-seaview.webp`,
     gallery: [
       { src: `${IMAGE_BASE}/room-seaview-interior.webp`, alt: "Suite interior with linen curtains and daylight" },
       { src: `${IMAGE_BASE}/room-seaview-tub.webp`, alt: "Freestanding tub set beside the window" },
@@ -87,7 +87,7 @@ export const ROOMS: Room[] = [
     name: "Lume Signature",
     tagline: "The whole top floor, and the terrace above it",
     description:
-      "Two rooms, a private roof terrace with a plunge pool, and the only view in the house that takes in both headlands.",
+      "The whole top floor: two rooms, a roof terrace with a plunge pool, and both headlands in view.",
     longDescription: [
       "The Signature occupies what was the family's own floor. A sitting room, a bedroom behind heavy linen curtains, and a stair that climbs to a roof terrace no other guest can reach.",
       "Up there: a plunge pool, four sun beds, an outdoor shower, and the only vantage in the house that holds both headlands at once. Most guests take breakfast up and stay through lunch.",
@@ -106,7 +106,7 @@ export const ROOMS: Room[] = [
       "Daily provisioning of your choosing",
     ],
     photo: { src: `${IMAGE_BASE}/room-signature.webp`, alt: "The roof terrace with loungers facing the sea" },
-    card: `${IMAGE_BASE}/room-signature-card.webp`,
+    card: `${IMAGE_BASE}/evening/room-signature.webp`,
     gallery: [
       { src: `${IMAGE_BASE}/room-signature-sitting.webp`, alt: "Sitting room in quiet neutral tones" },
       { src: `${IMAGE_BASE}/room-signature-pool.webp`, alt: "The plunge pool on the private terrace" },
@@ -118,7 +118,7 @@ export const ROOMS: Room[] = [
     name: "Olive Room",
     tagline: "Tucked into the hillside, quietest in the house",
     description:
-      "The smallest and most private room, set back into the terraces with a window full of olive branches.",
+      "The smallest and quietest room, set into the hillside with a window full of olive branches.",
     longDescription: [
       "Built into the hill behind the main house, the Olive Room is the one guests return for. It is the smallest room we have and the one that books first.",
       "A single deep window looks straight into the olive terraces. You hear nothing but the cicadas and, twice a day, the bell in the village below.",
@@ -136,7 +136,7 @@ export const ROOMS: Room[] = [
       "Air conditioning",
     ],
     photo: { src: `${IMAGE_BASE}/room-olive.webp`, alt: "A small white room under a beamed ceiling" },
-    card: `${IMAGE_BASE}/room-olive-card.webp`,
+    card: `${IMAGE_BASE}/evening/room-olive.webp`,
     gallery: [
       { src: `${IMAGE_BASE}/room-olive-interior.webp`, alt: "The room in soft afternoon daylight" },
       { src: `${IMAGE_BASE}/room-olive-window.webp`, alt: "An open shutter over the roofs and the water" },

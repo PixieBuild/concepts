@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowRight, CalendarDays, Users } from "lucide-react";
+import { ArrowRight, CalendarDays } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -50,37 +50,40 @@ export function AvailabilityBar() {
 
   return (
     <>
-      <div className="hidden border border-background/12 bg-foreground/35 backdrop-blur-md lg:grid lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-stretch">
+      <div className="hidden lg:grid lg:grid-cols-[minmax(11rem,auto)_1fr_1fr_1fr_auto] lg:items-stretch">
+        <div className="flex flex-col justify-center gap-2 pr-10">
+          <p className="eyebrow text-primary">Your stay</p>
+          <p className="text-sm text-muted-foreground">Seventeen rooms, seasonal rates</p>
+        </div>
         <DateField
-          tone="dark"
-          icon={<CalendarDays className="size-4" />}
-          label="Check in"
-          className="px-6 py-4"
+          tone="bar"
+          label="Arrival"
+          placeholder="Choose a date"
+          className="border-l border-border px-8 py-6"
           value={search.arrival}
           onChange={search.setArrival}
         />
         <DateField
-          tone="dark"
-          icon={<CalendarDays className="size-4" />}
-          label="Check out"
-          className="border-l border-background/12 px-6 py-4"
+          tone="bar"
+          label="Departure"
+          placeholder="Choose a date"
+          className="border-l border-border px-8 py-6"
           value={search.departure}
           onChange={search.setDeparture}
           disabledBefore={search.arrival}
           invalid={search.invalid}
         />
         <GuestField
-          tone="dark"
-          icon={<Users className="size-4" />}
+          tone="bar"
           label="Guests"
-          className="border-l border-background/12 px-6 py-4"
+          className="border-l border-border px-8 py-6"
           value={search.guests}
           onChange={search.setGuests}
         />
         <Button
           size="lg"
           onClick={search.submit}
-          className="m-2.5 h-auto rounded-none bg-background px-7 text-(--clay) hover:bg-background/85"
+          className="h-auto self-stretch rounded-none px-10"
         >
           Check availability
           <ArrowRight />
@@ -105,17 +108,17 @@ function MobileAvailabilitySheet({
   const defaultTrigger = (
     <button
       type="button"
-      className="flex w-full items-center justify-between gap-4 border border-background/20 bg-foreground/45 px-5 py-4 text-left text-background backdrop-blur-md"
+      className="flex w-full items-center justify-between gap-4 py-5 text-left text-foreground"
     >
-      <span className="flex flex-col gap-1">
-        <span className="eyebrow text-background/60">Check availability</span>
-        <span className="text-[1.0625rem] leading-tight font-medium">
+      <span className="flex flex-col gap-2">
+        <span className="eyebrow text-primary">Your stay</span>
+        <span className="font-heading text-2xl leading-none font-normal">
           {search.arrival
             ? `${formatDate(search.arrival)} — ${formatDate(search.departure, "…")}`
             : "Choose your dates"}
         </span>
       </span>
-      <CalendarDays className="size-5 shrink-0" />
+      <CalendarDays className="size-5 shrink-0 text-muted-foreground" />
     </button>
   );
 

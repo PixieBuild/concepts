@@ -13,7 +13,14 @@ export function MobileBookBar() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.6);
+    const onScroll = () => {
+      const hero = document.getElementById("hero");
+      setVisible(
+        hero
+          ? hero.getBoundingClientRect().bottom <= 96
+          : window.scrollY > window.innerHeight * 0.6,
+      );
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
