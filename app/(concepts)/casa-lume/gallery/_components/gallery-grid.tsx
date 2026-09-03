@@ -12,6 +12,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const SIZES: Record<string, string> = {
   "md:col-span-12": "(min-width:1600px) 1504px, (min-width:768px) 92vw, 100vw",
+  "md:col-span-8": "(min-width:1600px) 990px, (min-width:768px) 62vw, 100vw",
   "md:col-span-6": "(min-width:1600px) 740px, (min-width:768px) 46vw, 100vw",
   "md:col-span-4": "(min-width:1600px) 485px, (min-width:768px) 30vw, 100vw",
 };
@@ -61,7 +62,7 @@ export function GalleryGrid() {
               whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-8% 0px" }}
               transition={{ duration: 1.1, ease: EASE, delay: (i % 3) * 0.08 }}
-              className="group block w-full overflow-hidden text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+              className="group block h-full w-full overflow-hidden text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
               aria-label={`Open ${item.alt}`}
             >
               <div className={`relative overflow-hidden ${item.ratio}`}>

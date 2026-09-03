@@ -122,8 +122,8 @@ function Dining() {
               <RevealImage delay={0.22}>
                 <div className="relative aspect-square overflow-hidden">
                   <Image
-                    src={`${IMAGE_BASE}/bar-sq.webp`}
-                    alt="Bottles behind the bar"
+                    src={`${IMAGE_BASE}/evening/bar.webp`}
+                    alt="Bar Lume at seven"
                     fill
                     sizes="(min-width:1600px) 412px, (min-width:1024px) 28vw, 50vw"
                     className="object-cover"
@@ -204,7 +204,7 @@ function Experiences() {
             >
               <div className="relative aspect-3/2 overflow-hidden">
                 <Image
-                  src={`${IMAGE_BASE}/spa-wide.webp`}
+                  src={`${IMAGE_BASE}/evening/spa.webp`}
                   alt={lead.photo.alt}
                   fill
                   sizes="(min-width:1600px) 848px, (min-width:1024px) 57vw, 100vw"

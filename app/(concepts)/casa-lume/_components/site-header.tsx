@@ -18,8 +18,7 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const plainPage = pathname.startsWith(path("/booking"));
-  const inverted =
-    !plainPage && !scrolled && !menuOpen && (pathname !== path() || heroRoom);
+  const inverted = heroRoom && !scrolled && !menuOpen;
   const grounded = plainPage || scrolled || menuOpen;
 
   useEffect(() => {

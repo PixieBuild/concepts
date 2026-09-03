@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { Reveal, RevealImage } from "@/app/(concepts)/casa-lume/_components/motion-primitives";
 import Image from "next/image";
-import { PageHero, SectionHeading, Shell } from "@/app/(concepts)/casa-lume/_components/section";
+import { PageOpener, SectionHeading, Shell } from "@/app/(concepts)/casa-lume/_components/section";
 import { TableReservation } from "./_components/table-reservation";
 import { IMAGE_BASE, DINING } from "@/app/(concepts)/casa-lume/_lib/content";
 import { path, url } from "@/app/(concepts)/casa-lume/site";
@@ -58,11 +58,11 @@ const MENU = [
 export default function DiningPage() {
   return (
     <>
-      <PageHero
+      <PageOpener
         eyebrow="Dining"
         title="One menu, written each afternoon."
         intro="The kitchen does not decide until the boats are in and the garden has been walked. Whatever arrives is what you eat, and it is always enough."
-        photo={{ src: `${IMAGE_BASE}/dining-terrace.webp`, alt: "The lower terrace laid for dinner" }}
+        photo={{ src: `${IMAGE_BASE}/evening/dining-terrace.webp`, alt: "The lower terrace laid for dinner at dusk" }}
       />
 
       <section className="py-24 sm:py-32 lg:py-40">
@@ -96,8 +96,8 @@ export default function DiningPage() {
               <RevealImage>
                 <div className="relative aspect-3/2 overflow-hidden">
                   <Image
-                    src={`${IMAGE_BASE}/dining-pass.webp`}
-                    alt="The pass as service begins"
+                    src={`${IMAGE_BASE}/evening/house-kitchen.webp`}
+                    alt="The kitchen at the end of the afternoon, before the menu is written"
                     fill
                     sizes="(min-width:1600px) 844px, (min-width:1024px) 56vw, 100vw"
                     className="object-cover"
@@ -108,8 +108,8 @@ export default function DiningPage() {
                 <RevealImage delay={0.12}>
                   <div className="relative aspect-square overflow-hidden">
                     <Image
-                      src={`${IMAGE_BASE}/dining-pasta.webp`}
-                      alt="Trofie with hand-pounded pesto"
+                      src={`${IMAGE_BASE}/evening/plate.webp`}
+                      alt="Trofie with hand-pounded pesto at the pass"
                       fill
                       sizes="(min-width:1600px) 410px, (min-width:1024px) 27vw, 50vw"
                       className="object-cover"
@@ -119,8 +119,8 @@ export default function DiningPage() {
                 <RevealImage delay={0.2} className="pt-10">
                   <div className="relative aspect-square overflow-hidden">
                     <Image
-                      src={`${IMAGE_BASE}/dining-table.webp`}
-                      alt="A terrace table with the candles lit"
+                      src={`${IMAGE_BASE}/evening/table-dusk.webp`}
+                      alt="A table on the lower terrace, the candle just lit"
                       fill
                       sizes="(min-width:1600px) 410px, (min-width:1024px) 27vw, 50vw"
                       className="object-cover"
@@ -188,8 +188,8 @@ export default function DiningPage() {
               <RevealImage>
                 <div className="relative aspect-3/2 overflow-hidden">
                   <Image
-                    src={`${IMAGE_BASE}/bar.webp`}
-                    alt="The bar counter and its six stools"
+                    src={`${IMAGE_BASE}/evening/bar.webp`}
+                    alt="Bar Lume, six stools and the courtyard door open"
                     fill
                     sizes="(min-width:1600px) 844px, (min-width:1024px) 56vw, 100vw"
                     className="object-cover"

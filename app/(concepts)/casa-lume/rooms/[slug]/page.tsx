@@ -46,35 +46,38 @@ export default async function RoomDetailPage({
 
   return (
     <>
-      <section className="relative isolate overflow-hidden">
-        <Image
-          src={room.photo.src}
-          alt={room.photo.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="ken-burns object-cover"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-linear-to-b from-foreground/55 via-foreground/30 to-foreground/80"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-linear-to-r from-foreground/60 via-foreground/15 to-transparent"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-(--clay) opacity-25 mix-blend-soft-light"
-        />
-        <Shell className="relative flex min-h-[78svh] flex-col justify-end pt-36 pb-16 text-background sm:pb-20">
-          <p className="eyebrow flex items-center gap-4 text-background/85">
-            <span aria-hidden className="h-px w-12 bg-background/45" />
-            {room.tagline}
-          </p>
-          <h1 className="mt-6 max-w-[14ch] font-heading text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.95] font-light tracking-[-0.02em]">
-            {room.name}
-          </h1>
+      <section className="pt-32 pb-16 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24">
+        <Shell className="grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-16">
+          <Reveal className="lg:col-span-6">
+            <p className="eyebrow flex items-center gap-4 text-primary">
+              <span aria-hidden className="h-px w-8 bg-border" />
+              {room.tagline}
+            </p>
+            <h1 className="mt-6 font-heading text-[clamp(2.75rem,6.5vw,6rem)] leading-[1] font-light tracking-[-0.015em]">
+              {room.name}
+            </h1>
+            <p className="mt-7 max-w-md text-[1.0625rem] leading-relaxed text-muted-foreground">
+              {room.description}
+            </p>
+            <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-border pt-8 sm:grid-cols-4">
+              <Spec label="Sleeps" value={String(room.guests)} />
+              <Spec label="Size" value={room.size} />
+              <Spec label="View" value={room.view} />
+              <Spec label="Bed" value={room.bed} />
+            </dl>
+          </Reveal>
+          <RevealImage className="lg:col-span-5 lg:col-start-8" delay={0.1}>
+            <div className="relative aspect-4/5 overflow-hidden">
+              <Image
+                src={room.photo.src}
+                alt={room.photo.alt}
+                fill
+                preload
+                sizes="(min-width:1600px) 620px, (min-width:1024px) 40vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </RevealImage>
         </Shell>
       </section>
 
@@ -145,21 +148,26 @@ export default async function RoomDetailPage({
             </aside>
           </div>
 
-          <div className="mt-20 grid gap-6 sm:mt-28 sm:grid-cols-3">
+          <ul className="mt-20 grid gap-x-6 gap-y-10 sm:mt-28 sm:grid-cols-3">
             {room.gallery.map((item, index) => (
-              <RevealImage key={item.src} delay={index * 0.1}>
-                <div className="relative aspect-4/5 overflow-hidden">
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    sizes="(min-width:1600px) 485px, (min-width:640px) 31vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-              </RevealImage>
+              <li key={item.src}>
+                <RevealImage delay={index * 0.1}>
+                  <div className="relative aspect-4/5 overflow-hidden">
+                    <Image
+                      src={item.src}
+                      alt=""
+                      fill
+                      sizes="(min-width:1600px) 485px, (min-width:640px) 31vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </RevealImage>
+                <Reveal delay={index * 0.1 + 0.2}>
+                  <p className="mt-4 text-sm text-muted-foreground">{item.alt}</p>
+                </Reveal>
+              </li>
             ))}
-          </div>
+          </ul>
         </Shell>
       </div>
 
@@ -207,6 +215,15 @@ export default async function RoomDetailPage({
         </Shell>
       </section>
     </>
+  );
+}
+
+function Spec({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <dt className="eyebrow text-muted-foreground">{label}</dt>
+      <dd className="mt-2.5 text-[0.95rem]">{value}</dd>
+    </div>
   );
 }
 

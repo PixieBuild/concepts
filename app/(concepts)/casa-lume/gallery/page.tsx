@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { GalleryGrid } from "./_components/gallery-grid";
-import { PageHero, Shell } from "@/app/(concepts)/casa-lume/_components/section";
+import { PageOpener, Shell } from "@/app/(concepts)/casa-lume/_components/section";
 import { IMAGE_BASE } from "@/app/(concepts)/casa-lume/_lib/content";
 import { path, url } from "@/app/(concepts)/casa-lume/site";
 
@@ -22,11 +22,11 @@ export const metadata: Metadata = {
 export default function GalleryPage() {
   return (
     <>
-      <PageHero
+      <PageOpener
         eyebrow="Gallery"
         title="The house, in pictures."
-        intro="Photographed across one week in late June, from first light on the terrace to the last table clearing at midnight."
-        photo={{ src: `${IMAGE_BASE}/house-terraces.webp`, alt: "The house seen from the olive terraces" }}
+        intro="One evening in late June, from the last of the sun on the terraces to the lights coming on across the water."
+        photo={{ src: `${IMAGE_BASE}/evening/house-terraces.webp`, alt: "The house seen from the olive terraces" }}
       />
 
       <div className="py-20 sm:py-28 lg:py-32">

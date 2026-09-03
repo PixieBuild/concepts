@@ -4,7 +4,7 @@ import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal, RevealImage } from "@/app/(concepts)/casa-lume/_components/motion-primitives";
 import Image from "next/image";
-import { PageHero, SectionHeading, Shell } from "@/app/(concepts)/casa-lume/_components/section";
+import { PageOpener, SectionHeading, Shell } from "@/app/(concepts)/casa-lume/_components/section";
 import { IMAGE_BASE, NEARBY, TRAVEL } from "@/app/(concepts)/casa-lume/_lib/content";
 import { path, url } from "@/app/(concepts)/casa-lume/site";
 
@@ -30,11 +30,12 @@ export const metadata: Metadata = {
 export default function LocationPage() {
   return (
     <>
-      <PageHero
+      <PageOpener
         eyebrow="Location"
         title="Above a cove the road does not reach."
         intro="Twelve minutes from Monterosso, and a long way from everything else. We collect you from the station if you tell us the train."
-        photo={{ src: `${IMAGE_BASE}/headland-path.webp`, alt: "The coastline seen from the headland path" }}
+        photo={{ src: `${IMAGE_BASE}/village-dusk.webp`, alt: "Vernazza at dusk, twenty minutes along the coast" }}
+        ratio="aspect-21/9"
       />
 
       <section className="py-24 sm:py-32 lg:py-40">
@@ -91,8 +92,8 @@ export default function LocationPage() {
                 >
                   <div className="relative aspect-3/2 overflow-hidden">
                     <Image
-                      src={`${IMAGE_BASE}/coastline.webp`}
-                      alt="The coastline from Monterosso al Mare to Punta Mesco"
+                      src={`${IMAGE_BASE}/evening/gate.webp`}
+                      alt="The gate at the top of the track, where the car stays"
                       fill
                       sizes="(min-width:1600px) 848px, (min-width:1024px) 57vw, 100vw"
                       className="object-cover transition-transform duration-1400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-103"

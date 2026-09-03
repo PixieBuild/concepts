@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { FadeIn, Reveal } from "./motion-primitives";
+import { Reveal, RevealImage } from "./motion-primitives";
 import Image from "next/image";
 
 export function Shell({
@@ -60,58 +60,45 @@ export function SectionHeading({
   );
 }
 
-export function PageHero({
+export function PageOpener({
   eyebrow,
   title,
   intro,
   photo,
+  ratio = "aspect-3/2",
 }: {
   eyebrow: string;
   title: string;
   intro?: string;
   photo: { src: string; alt: string };
+  ratio?: string;
 }) {
   return (
-    <section className="relative isolate overflow-hidden">
-      <Image
-        src={photo.src}
-        alt={photo.alt}
-        fill
-        priority
-        sizes="100vw"
-        className="ken-burns object-cover"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-linear-to-b from-foreground/55 via-foreground/30 to-foreground/80"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-linear-to-r from-foreground/60 via-foreground/15 to-transparent"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-(--clay) opacity-25 mix-blend-soft-light"
-      />
-      <Shell className="relative flex min-h-[62svh] flex-col justify-end pt-36 pb-16 text-background sm:min-h-[68svh] sm:pb-20">
-        <FadeIn delay={0.05}>
-          <p className="eyebrow flex items-center gap-4 text-background/85">
-            <span aria-hidden className="h-px w-12 bg-background/45" />
-            {eyebrow}
-          </p>
-        </FadeIn>
-        <FadeIn delay={0.18}>
-          <h1 className="mt-7 max-w-[15ch] font-heading text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.96] font-light tracking-tight">
+    <section className="pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-44 lg:pb-32">
+      <Shell className="grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-16">
+        <Reveal className="lg:col-span-5">
+          <p className="eyebrow text-primary">{eyebrow}</p>
+          <h1 className="mt-6 font-heading text-[clamp(2.75rem,6vw,5.5rem)] leading-[1.02] font-light tracking-[-0.015em] text-balance">
             {title}
           </h1>
-        </FadeIn>
-        {intro && (
-          <FadeIn delay={0.32}>
-            <p className="mt-7 max-w-lg text-[1.0625rem] leading-relaxed text-background/90">
+          {intro && (
+            <p className="mt-7 max-w-md text-[1.0625rem] leading-relaxed text-muted-foreground">
               {intro}
             </p>
-          </FadeIn>
-        )}
+          )}
+        </Reveal>
+        <RevealImage className="lg:col-span-7" delay={0.1}>
+          <div className={cn("relative overflow-hidden", ratio)}>
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              fill
+              preload
+              sizes="(min-width:1600px) 900px, (min-width:1024px) 57vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </RevealImage>
       </Shell>
     </section>
   );

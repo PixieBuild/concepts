@@ -43,12 +43,12 @@ export const ROOMS: Room[] = [
       "Nespresso and a stocked pantry",
       "Air conditioning",
     ],
-    photo: { src: `${IMAGE_BASE}/room-garden.webp`, alt: "A shaded garden terrace with potted citrus" },
+    photo: { src: `${IMAGE_BASE}/evening/room-garden.webp`, alt: "The Garden Suite, glass doors open onto the lemon terrace" },
     card: `${IMAGE_BASE}/evening/room-garden.webp`,
     gallery: [
-      { src: `${IMAGE_BASE}/room-garden-bed.webp`, alt: "Bed dressed in white linen, morning light across the wall" },
-      { src: `${IMAGE_BASE}/room-garden-terrace.webp`, alt: "A lemon tree on the private terrace above the sea" },
-      { src: `${IMAGE_BASE}/room-garden-bath.webp`, alt: "Freestanding bath in a warm plastered bathroom" },
+      { src: `${IMAGE_BASE}/evening/hero-bedroom.webp`, alt: "The bedroom at seven in the evening, light through the shutters" },
+      { src: `${IMAGE_BASE}/room-garden-terrace.webp`, alt: "The lemon trees the family planted in the 1950s" },
+      { src: `${IMAGE_BASE}/room-garden-bed.webp`, alt: "Morning light across the bed" },
     ],
   },
   {
@@ -74,12 +74,12 @@ export const ROOMS: Room[] = [
       "Evening aperitivo service",
       "Air conditioning",
     ],
-    photo: { src: `${IMAGE_BASE}/room-seaview.webp`, alt: "A tall window framing the open sea" },
+    photo: { src: `${IMAGE_BASE}/evening/room-seaview.webp`, alt: "The Sea View Suite, tub beside the tall window and the open sea beyond" },
     card: `${IMAGE_BASE}/evening/room-seaview.webp`,
     gallery: [
-      { src: `${IMAGE_BASE}/room-seaview-interior.webp`, alt: "Suite interior with linen curtains and daylight" },
-      { src: `${IMAGE_BASE}/room-seaview-tub.webp`, alt: "Freestanding tub set beside the window" },
-      { src: `${IMAGE_BASE}/room-seaview-balcony.webp`, alt: "The balcony railing above the water" },
+      { src: `${IMAGE_BASE}/evening/house-corridor.webp`, alt: "The first-floor corridor outside the suite" },
+      { src: `${IMAGE_BASE}/bathing-platform.webp`, alt: "The water, ninety steps down" },
+      { src: `${IMAGE_BASE}/room-signature-sitting.webp`, alt: "Linen at the window" },
     ],
   },
   {
@@ -105,12 +105,12 @@ export const ROOMS: Room[] = [
       "Airport transfer included",
       "Daily provisioning of your choosing",
     ],
-    photo: { src: `${IMAGE_BASE}/room-signature.webp`, alt: "The roof terrace with loungers facing the sea" },
+    photo: { src: `${IMAGE_BASE}/evening/room-signature.webp`, alt: "The top-floor sitting room opening onto the roof terrace and plunge pool" },
     card: `${IMAGE_BASE}/evening/room-signature.webp`,
     gallery: [
-      { src: `${IMAGE_BASE}/room-signature-sitting.webp`, alt: "Sitting room in quiet neutral tones" },
-      { src: `${IMAGE_BASE}/room-signature-pool.webp`, alt: "The plunge pool on the private terrace" },
-      { src: `${IMAGE_BASE}/room-signature-bed.webp`, alt: "Bedroom in linen and pale plaster" },
+      { src: `${IMAGE_BASE}/evening/house-upper-terrace.webp`, alt: "The terrace above, two chairs facing the gulf" },
+      { src: `${IMAGE_BASE}/room-signature-pool.webp`, alt: "Roofs and the sea from the terrace edge" },
+      { src: `${IMAGE_BASE}/room-garden-bath.webp`, alt: "The bath, in stone" },
     ],
   },
   {
@@ -135,12 +135,12 @@ export const ROOMS: Room[] = [
       "Direct access to the hill path",
       "Air conditioning",
     ],
-    photo: { src: `${IMAGE_BASE}/room-olive.webp`, alt: "A small white room under a beamed ceiling" },
+    photo: { src: `${IMAGE_BASE}/evening/room-olive.webp`, alt: "The Olive Room, a deep window onto the olive terraces" },
     card: `${IMAGE_BASE}/evening/room-olive.webp`,
     gallery: [
-      { src: `${IMAGE_BASE}/room-olive-interior.webp`, alt: "The room in soft afternoon daylight" },
-      { src: `${IMAGE_BASE}/room-olive-window.webp`, alt: "An open shutter over the roofs and the water" },
-      { src: `${IMAGE_BASE}/room-olive-terraces.webp`, alt: "Olive branches backlit on the terraces" },
+      { src: `${IMAGE_BASE}/room-olive-terraces.webp`, alt: "Olives in the last light, outside the window" },
+      { src: `${IMAGE_BASE}/room-olive-window.webp`, alt: "The view over the roofs to the water" },
+      { src: `${IMAGE_BASE}/evening/house-terraces.webp`, alt: "The house on its terraces" },
     ],
   },
 ];
@@ -168,7 +168,7 @@ export const EXPERIENCES: Experience[] = [
     price: "From €140",
     description:
       "Two treatment rooms in the old cellar, cut into the rock and kept cool without air conditioning. Oils pressed from the estate's own olives.",
-    photo: { src: `${IMAGE_BASE}/spa.webp`, alt: "A treatment room cut into the old cellar" },
+    photo: { src: `${IMAGE_BASE}/evening/spa.webp`, alt: "A treatment room cut into the old cellar, one candle lit" },
   },
   {
     slug: "infinity-pool",
@@ -178,7 +178,7 @@ export const EXPERIENCES: Experience[] = [
     price: "Included",
     description:
       "Set on the lowest terrace so the water meets the horizon. Twelve loungers, never more. Towels and a jug of something cold arrive without asking.",
-    photo: { src: `${IMAGE_BASE}/pool.webp`, alt: "The pool edge meeting the horizon" },
+    photo: { src: `${IMAGE_BASE}/evening/pool.webp`, alt: "The pool edge meeting the horizon at sunset" },
   },
   {
     slug: "private-boat",
@@ -188,7 +188,7 @@ export const EXPERIENCES: Experience[] = [
     price: "From €680",
     description:
       "A restored 1970s gozzo and a skipper who grew up in the next bay. Swim off the coves that the ferries cannot reach, and lunch somewhere with no road to it.",
-    photo: { src: `${IMAGE_BASE}/boat.webp`, alt: "A wooden boat on flat water at dusk" },
+    photo: { src: `${IMAGE_BASE}/evening/gozzo.webp`, alt: "The gozzo moored in the cove below the terraces" },
   },
   {
     slug: "coastal-hike",
@@ -198,7 +198,7 @@ export const EXPERIENCES: Experience[] = [
     price: "From €90",
     description:
       "A guided walk out along the old mule track at first light, before the heat. Ends at a chapel above the water with coffee and focaccia.",
-    photo: { src: `${IMAGE_BASE}/headland-path.webp`, alt: "The coastal path along the headland" },
+    photo: { src: `${IMAGE_BASE}/evening/headland-path.webp`, alt: "The mule track along the headland at first light" },
   },
   {
     slug: "wine-tasting",
@@ -218,7 +218,7 @@ export const EXPERIENCES: Experience[] = [
     price: "From €260 for two",
     description:
       "One table, carried out to the far terrace at seven. Five courses, no menu, and the sun going down behind Punta Mesco.",
-    photo: { src: `${IMAGE_BASE}/sunset-dinner.webp`, alt: "A single table laid outdoors at sunset" },
+    photo: { src: `${IMAGE_BASE}/evening/dinner-point.webp`, alt: "One table on the point, the sun going down behind Punta Mesco" },
   },
 ];
 
@@ -254,20 +254,29 @@ export const TESTIMONIALS: Testimonial[] = [
 ];
 
 export const GALLERY = [
-  { src: `${IMAGE_BASE}/village-dusk.webp`, alt: "The village below the house at dusk", span: "md:col-span-12", ratio: "aspect-21/9" },
+  { src: `${IMAGE_BASE}/evening/hero-terrace.webp`, alt: "The Garden Suite doorway from the terrace at seven", span: "md:col-span-12", ratio: "aspect-21/9" },
 
-  { src: `${IMAGE_BASE}/terrace-last-light.webp`, alt: "The terrace at last light", span: "md:col-span-6", ratio: "aspect-3/2" },
-  { src: `${IMAGE_BASE}/coastline.webp`, alt: "The coast below the olive terraces", span: "md:col-span-6", ratio: "aspect-3/2" },
+  { src: `${IMAGE_BASE}/evening/house-upper-terrace.webp`, alt: "The upper terrace under the vines", span: "md:col-span-6", ratio: "aspect-3/2" },
+  { src: `${IMAGE_BASE}/evening/house-kitchen.webp`, alt: "The kitchen before the menu is written", span: "md:col-span-6", ratio: "aspect-3/2" },
 
-  { src: `${IMAGE_BASE}/shutters-sq.webp`, alt: "Shutters closed against the afternoon", span: "md:col-span-4", ratio: "aspect-square" },
-  { src: `${IMAGE_BASE}/wine-sq.webp`, alt: "Terracotta on a shelf in the hall", span: "md:col-span-4", ratio: "aspect-square" },
-  { src: `${IMAGE_BASE}/bread-sq.webp`, alt: "Hands, focaccia, flour", span: "md:col-span-4", ratio: "aspect-square" },
+  { src: `${IMAGE_BASE}/evening/room-seaview.webp`, alt: "The Sea View Suite", span: "md:col-span-4", ratio: "aspect-4/5" },
+  { src: `${IMAGE_BASE}/bathing-platform.webp`, alt: "The bathing platform, ninety steps down", span: "md:col-span-4", ratio: "aspect-4/5" },
+  { src: `${IMAGE_BASE}/room-olive-terraces.webp`, alt: "Olives in the last light", span: "md:col-span-4", ratio: "aspect-4/5" },
 
-  { src: `${IMAGE_BASE}/terrace-cliff.webp`, alt: "The house on the cliff above the water", span: "md:col-span-6", ratio: "aspect-4/5" },
-  { src: `${IMAGE_BASE}/bathing-platform.webp`, alt: "The bathing platform, ninety steps down", span: "md:col-span-6", ratio: "aspect-4/5" },
+  { src: `${IMAGE_BASE}/evening/dining-terrace.webp`, alt: "The lower terrace laid for dinner", span: "md:col-span-8", ratio: "aspect-3/2" },
+  { src: `${IMAGE_BASE}/evening/dining-detail.webp`, alt: "Octopus, focaccia, Vermentino", span: "md:col-span-4", ratio: "aspect-square md:aspect-auto md:h-full" },
 
-  { src: `${IMAGE_BASE}/headland-path.webp`, alt: "The headland path at first light", span: "md:col-span-6", ratio: "aspect-3/2" },
-  { src: `${IMAGE_BASE}/room-seaview.webp`, alt: "The Sea View Suite", span: "md:col-span-6", ratio: "aspect-3/2" },
+  { src: `${IMAGE_BASE}/evening/house-corridor.webp`, alt: "The upstairs corridor", span: "md:col-span-6", ratio: "aspect-3/2" },
+  { src: `${IMAGE_BASE}/room-olive-window.webp`, alt: "Over the roofs to the water", span: "md:col-span-6", ratio: "aspect-3/2" },
+
+  { src: `${IMAGE_BASE}/evening/pool.webp`, alt: "The pool on the lowest terrace", span: "md:col-span-6", ratio: "aspect-3/2" },
+  { src: `${IMAGE_BASE}/evening/dinner-point.webp`, alt: "Dinner on the point", span: "md:col-span-6", ratio: "aspect-3/2" },
+
+  { src: `${IMAGE_BASE}/coastline.webp`, alt: "The coast below the olive terraces", span: "md:col-span-4", ratio: "aspect-4/5" },
+  { src: `${IMAGE_BASE}/evening/headland-path.webp`, alt: "The headland path", span: "md:col-span-4", ratio: "aspect-4/5" },
+  { src: `${IMAGE_BASE}/evening/gozzo.webp`, alt: "The gozzo in the cove", span: "md:col-span-4", ratio: "aspect-4/5" },
+
+  { src: `${IMAGE_BASE}/evening/night-house.webp`, alt: "The house at night from the water", span: "md:col-span-12", ratio: "aspect-21/9" },
 ] as const;
 
 export const DINING = {

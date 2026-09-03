@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ExperienceBooking } from "./_components/experience-booking";
 import { Reveal, RevealImage } from "@/app/(concepts)/casa-lume/_components/motion-primitives";
 import Image from "next/image";
-import { PageHero, SectionHeading, Shell } from "@/app/(concepts)/casa-lume/_components/section";
+import { PageOpener, SectionHeading, Shell } from "@/app/(concepts)/casa-lume/_components/section";
 import { IMAGE_BASE, EXPERIENCES } from "@/app/(concepts)/casa-lume/_lib/content";
 import { path, url } from "@/app/(concepts)/casa-lume/site";
 
@@ -26,11 +26,11 @@ export default function ExperiencesPage() {
 
   return (
     <>
-      <PageHero
+      <PageOpener
         eyebrow="Experiences"
         title="Days arranged, or left alone."
         intro="Nothing is compulsory and nothing is scheduled unless you ask. But everything below can be ready by the time you come down."
-        photo={{ src: `${IMAGE_BASE}/pool.webp`, alt: "The infinity pool on the lowest terrace" }}
+        photo={{ src: `${IMAGE_BASE}/evening/house-upper-terrace.webp`, alt: "Two chairs on the upper terrace, facing the gulf" }}
       />
 
       <section id={spa.slug} className="scroll-mt-24 py-24 sm:py-32 lg:py-40">
@@ -39,7 +39,7 @@ export default function ExperiencesPage() {
             <RevealImage className="lg:col-span-7">
               <div className="relative aspect-3/2 overflow-hidden">
                 <Image
-                  src={`${IMAGE_BASE}/spa-wide.webp`}
+                  src={`${IMAGE_BASE}/evening/spa.webp`}
                   alt={spa.photo.alt}
                   fill
                   sizes="(min-width:1600px) 848px, (min-width:1024px) 57vw, 100vw"
