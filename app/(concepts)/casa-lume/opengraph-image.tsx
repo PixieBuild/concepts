@@ -2,7 +2,6 @@ import { ImageResponse } from "next/og";
 
 import { OG_MARK, OG_TERRACE } from "./_lib/og-assets";
 
-export const runtime = "edge";
 export const alt = "Casa Lume — seventeen rooms above the Ligurian sea";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
