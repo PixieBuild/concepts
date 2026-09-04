@@ -101,7 +101,25 @@ export function Hero() {
     const observer = new ResizeObserver(update);
     observer.observe(stageEl);
     observer.observe(slotEl);
-    return () => observer.disconnect();
+    const viewport = window.visualViewport;
+    viewport?.addEventListener("resize", update);
+
+    // Safari can drop the sticky stage's scroll context after a dialog's
+    // scroll lock releases; a forced layout pass on unlock restores it.
+    const locks = new MutationObserver(() => {
+      if (document.body.style.overflow || document.body.style.overflowY) return;
+      stageEl.style.position = "relative";
+      void stageEl.offsetHeight;
+      stageEl.style.position = "";
+      update();
+    });
+    locks.observe(document.body, { attributes: true, attributeFilter: ["style"] });
+
+    return () => {
+      observer.disconnect();
+      locks.disconnect();
+      viewport?.removeEventListener("resize", update);
+    };
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -161,7 +179,7 @@ export function Hero() {
   return (
     <section id="hero" ref={section} className="relative h-[320svh] motion-reduce:h-svh">
       <div ref={stage} className="sticky top-0 h-svh overflow-clip">
-        <Shell className="flex h-full flex-col pt-24 lg:grid lg:grid-cols-12 lg:gap-x-10 lg:pt-28">
+        <Shell className="flex h-full flex-col pt-28 sm:pt-32 lg:grid lg:grid-cols-12 lg:gap-x-10 lg:pt-28">
           <motion.div
             style={{ y: copyY, opacity: copyOpacity }}
             className="lg:col-span-7 lg:flex lg:flex-col lg:justify-center lg:pb-24 xl:pr-8 2xl:col-span-6"
@@ -186,8 +204,8 @@ export function Hero() {
             </h1>
 
             <FadeIn delay={0.5} play={ready}>
-              <div className="mt-7 flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between sm:gap-10 lg:mt-12">
-                <p className="max-w-[23rem] text-[1.0625rem] leading-relaxed text-muted-foreground">
+              <div className="mt-8 flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between sm:gap-10 lg:mt-12">
+                <p className="hidden max-w-[23rem] text-[1.0625rem] leading-relaxed text-muted-foreground sm:block">
                   A family house on the terraces between Monterosso and Punta
                   Mesco. Long lunches, cold water, and nothing that needs doing.
                 </p>
@@ -210,7 +228,7 @@ export function Hero() {
           <div
             ref={slot}
             aria-hidden
-            className="mt-9 min-h-[34svh] flex-1 lg:col-span-5 lg:mt-0 lg:h-full lg:min-h-0 2xl:col-span-6 2xl:h-auto 2xl:mb-[9svh]"
+            className="mt-10 min-h-[40svh] flex-1 lg:col-span-5 lg:mt-0 lg:h-full lg:min-h-0 2xl:col-span-6 2xl:h-auto 2xl:mb-[9svh]"
           />
         </Shell>
 

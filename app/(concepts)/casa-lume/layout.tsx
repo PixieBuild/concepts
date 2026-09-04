@@ -65,7 +65,7 @@ export default function CasaLumeLayout({
       lang="en"
       className={`theme-casa-lume ${body.variable} ${heading.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col overflow-x-hidden bg-background font-sans text-foreground">
+      <body className="flex min-h-full flex-col overflow-x-clip bg-background font-sans text-foreground">
         <SmoothScroll />
         <SiteHeader />
         <main className="flex-1">{children}</main>
