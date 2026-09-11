@@ -17,9 +17,12 @@ import {
 } from "@/components/ui/card";
 import { CONCEPT_CATEGORIES, conceptPath, type Concept } from "@/lib/concepts";
 
+const MAX_TAGS = 4;
+
 export function ConceptCard({ concept }: { concept: Concept }) {
   const [copied, setCopied] = useState(false);
   const href = conceptPath(concept.slug);
+  const hiddenTags = concept.tags.length - MAX_TAGS;
 
   async function copyLink() {
     await navigator.clipboard.writeText(
@@ -32,7 +35,7 @@ export function ConceptCard({ concept }: { concept: Concept }) {
   return (
     <Card className="group flex flex-col overflow-hidden pt-0 transition-shadow hover:shadow-md">
       <div
-        className="relative aspect-16/10 w-full overflow-hidden border-b"
+        className="relative aspect-video w-full overflow-hidden border-b"
         style={{ backgroundColor: concept.theme.accent }}
       >
         {concept.thumbnail && (
@@ -46,7 +49,7 @@ export function ConceptCard({ concept }: { concept: Concept }) {
         )}
       </div>
 
-      <CardHeader>
+      <CardHeader className="gap-1">
         <div className="flex items-start justify-between gap-3">
           <CardTitle className="text-base">{concept.name}</CardTitle>
           <div className="flex shrink-0 items-center gap-1.5">
@@ -63,34 +66,29 @@ export function ConceptCard({ concept }: { concept: Concept }) {
             )}
           </div>
         </div>
-        <CardDescription>{concept.tagline}</CardDescription>
+        <CardDescription className="line-clamp-2">
+          {concept.tagline}
+        </CardDescription>
       </CardHeader>
 
-      <CardContent className="flex flex-1 flex-col gap-3">
-        <p className="text-sm leading-relaxed text-muted-foreground">
+      <CardContent className="flex flex-1 flex-col gap-2.5">
+        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
           {concept.description}
         </p>
 
-        <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs text-muted-foreground">
-          <dt className="font-medium text-foreground">Industry</dt>
-          <dd>{concept.industry}</dd>
-          <dt className="font-medium text-foreground">Type</dt>
-          <dd>{CONCEPT_CATEGORIES[concept.category]}</dd>
-          <dt className="font-medium text-foreground">Fonts</dt>
-          <dd>{concept.theme.fonts}</dd>
-          <dt className="font-medium text-foreground">Pages</dt>
-          <dd>{concept.pages.map(p => p.label).join(", ")}</dd>
-        </dl>
+        <p className="flex flex-wrap gap-x-1.5 text-xs text-muted-foreground *:whitespace-nowrap">
+          <span className="font-medium text-foreground">
+            {concept.industry}
+          </span>
+          <span>{CONCEPT_CATEGORIES[concept.category]}</span>
+          <span>{concept.theme.fonts}</span>
+          <span title={concept.pages.map((p) => p.label).join(", ")}>
+            {concept.pages.length} pages
+          </span>
+        </p>
 
-        {concept.bestFor && (
-          <p className="rounded-md bg-muted px-2.5 py-2 text-xs leading-relaxed text-muted-foreground">
-            <span className="font-medium text-foreground">Best for: </span>
-            {concept.bestFor}
-          </p>
-        )}
-
-        <div className="mt-auto flex flex-wrap gap-1.5 pt-1">
-          {concept.tags.map(tag => (
+        <div className="mt-auto flex flex-wrap gap-1.5">
+          {concept.tags.slice(0, MAX_TAGS).map((tag) => (
             <Badge
               key={tag}
               variant="secondary"
@@ -99,6 +97,15 @@ export function ConceptCard({ concept }: { concept: Concept }) {
               {tag}
             </Badge>
           ))}
+          {hiddenTags > 0 && (
+            <Badge
+              variant="outline"
+              className="text-[0.7rem] font-normal"
+              title={concept.tags.slice(MAX_TAGS).join(", ")}
+            >
+              +{hiddenTags}
+            </Badge>
+          )}
         </div>
       </CardContent>
 
