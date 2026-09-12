@@ -58,8 +58,8 @@ export function GalleryGrid() {
             <motion.button
               type="button"
               onClick={() => setIndex(i)}
-              initial={reduced ? undefined : { opacity: 0, y: 24 }}
-              whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
+              initial={reduced ? undefined : { opacity: 0, transform: "translateY(24px)" }}
+              whileInView={reduced ? undefined : { opacity: 1, transform: "translateY(0px)" }}
               viewport={{ once: true, margin: "-8% 0px" }}
               transition={{ duration: 1.1, ease: EASE, delay: (i % 3) * 0.08 }}
               className="group block h-full w-full overflow-hidden text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"

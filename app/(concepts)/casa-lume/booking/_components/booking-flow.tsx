@@ -81,9 +81,9 @@ export function BookingFlow({
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={step}
-            initial={reduced ? undefined : { opacity: 0, y: 16 }}
-            animate={reduced ? undefined : { opacity: 1, y: 0 }}
-            exit={reduced ? undefined : { opacity: 0, y: -12 }}
+            initial={reduced ? undefined : { opacity: 0, transform: "translateY(16px)" }}
+            animate={reduced ? undefined : { opacity: 1, transform: "translateY(0px)" }}
+            exit={reduced ? undefined : { opacity: 0, transform: "translateY(-12px)" }}
             transition={{ duration: 0.55, ease: EASE }}
           >
             {step === 0 && (

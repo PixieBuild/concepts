@@ -15,6 +15,10 @@ import { cn } from "@/lib/utils";
 const EASE = [0.16, 1, 0.3, 1] as const;
 const VIEWPORT = { once: true, margin: "0px 0px -12% 0px" } as const;
 
+// Text animates `transform` as a string, never the `y` shortcut: Motion hands a whole
+// transform to the compositor to interpolate, while `y` is written from JavaScript each
+// frame and Chrome snaps it to device pixels, so slow settles tick instead of glide.
+
 export function Reveal({
   children,
   delay = 0,
@@ -29,8 +33,8 @@ export function Reveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, transform: "translateY(28px)" }}
+      whileInView={{ opacity: 1, transform: "translateY(0px)" }}
       viewport={VIEWPORT}
       transition={{ duration: reduced ? 0 : 1.4, delay, ease: EASE }}
     >
@@ -140,13 +144,13 @@ const lineVariants: Variants = {
 };
 
 const lineChild: Variants = {
-  hidden: { y: "112%" },
-  show: { y: 0, transition: { duration: 1, ease: EASE } },
+  hidden: { transform: "translateY(112%)" },
+  show: { transform: "translateY(0%)", transition: { duration: 1, ease: EASE } },
 };
 
 const staticLineChild: Variants = {
-  hidden: { y: "112%" },
-  show: { y: 0, transition: { duration: 0 } },
+  hidden: { transform: "translateY(112%)" },
+  show: { transform: "translateY(0%)", transition: { duration: 0 } },
 };
 
 export function StaggerLines({

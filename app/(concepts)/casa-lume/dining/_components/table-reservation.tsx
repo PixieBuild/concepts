@@ -76,8 +76,8 @@ export function TableReservation({ trigger }: { trigger?: React.ReactElement }) 
           {confirmed ? (
             <motion.div
               key="done"
-              initial={reduced ? undefined : { opacity: 0, y: 12 }}
-              animate={reduced ? undefined : { opacity: 1, y: 0 }}
+              initial={reduced ? undefined : { opacity: 0, transform: "translateY(12px)" }}
+              animate={reduced ? undefined : { opacity: 1, transform: "translateY(0px)" }}
               transition={{ duration: 0.6, ease: EASE }}
               className="py-4 text-center"
             >

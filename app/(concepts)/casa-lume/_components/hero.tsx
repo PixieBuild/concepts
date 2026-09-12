@@ -171,17 +171,17 @@ export function Hero() {
   const roomOpacity = useTransform(through, [0.05, 0.7], [0, 1]);
   const roomScale = useTransform(through, [0, 1], [1.18, 1]);
 
-  const copyY = useTransform(progress, [0, 0.3], [0, -72]);
+  const copyTransform = useTransform(progress, [0, 0.3], ["translateY(0px)", "translateY(-72px)"]);
   const copyOpacity = useTransform(progress, [0, 0.2], [1, 0]);
   const captionOpacity = useTransform(progress, [0.86, 0.97], [0, 1]);
-  const captionY = useTransform(progress, [0.86, 0.97], [28, 0]);
+  const captionTransform = useTransform(progress, [0.86, 0.97], ["translateY(28px)", "translateY(0px)"]);
 
   return (
     <section id="hero" ref={section} className="relative h-[320svh] motion-reduce:h-svh">
       <div ref={stage} className="sticky top-0 h-svh overflow-clip">
         <Shell className="flex h-full flex-col pt-28 sm:pt-32 lg:grid lg:grid-cols-12 lg:gap-x-10 lg:pt-28">
           <motion.div
-            style={{ y: copyY, opacity: copyOpacity }}
+            style={{ transform: copyTransform, opacity: copyOpacity }}
             className="lg:col-span-7 lg:flex lg:flex-col lg:justify-center lg:pb-24 xl:pr-8 2xl:col-span-6"
           >
             <FadeIn delay={0.05} play={ready}>
@@ -285,7 +285,7 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          style={{ opacity: captionOpacity, y: captionY }}
+          style={{ opacity: captionOpacity, transform: captionTransform }}
           className="pointer-events-none absolute inset-x-0 bottom-0 text-background"
         >
           <Shell className="pb-10 lg:pb-16">
