@@ -1,11 +1,10 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
+import { cn } from "@/lib/utils";
 import { Mark, Wordmark } from "./mark";
-import { IMAGES, LOTS, MENU, TIMELINE } from "../_lib/content";
 
 const Ctx = createContext(false);
 
@@ -13,23 +12,25 @@ export function usePageRevealed() {
   return useContext(Ctx);
 }
 
-type Phase = "lay" | "hold" | "peek" | "turn" | "done";
+type Phase = "far" | "landed" | "right" | "bottom" | "open" | "done";
 
-const AT = { hold: 0.7, peek: 1.7, turn: 2.25, done: 4.0 };
-const TURN = AT.done - AT.turn;
-const TURN_EASE = [0.65, 0, 0.25, 1] as const;
+// Seconds from mount. The sheet spins in folded, lands, opens twice, then lifts away.
+const AT = { landed: 0.15, right: 1.5, bottom: 2.25, open: 3.0, done: 3.75 };
+const SPIN = AT.right - AT.landed - 0.25;
+const OPEN = 0.75;
+const OPEN_EASE = [0.6, 0, 0.2, 1] as const;
 
 const GRAIN =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.12 0 0 0 0 0.1 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.12 0 0 0 0 0.1 0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
 
-// The site sits under a printed front page. The sheet is laid down, a corner is
-// lifted, and the page is turned away. Entrances elsewhere wait for `usePageRevealed`.
+const order: Phase[] = ["far", "landed", "right", "bottom", "open", "done"];
+const after = (phase: Phase, target: Phase) => order.indexOf(phase) >= order.indexOf(target);
+
 export function Newspaper({ children }: { children: React.ReactNode }) {
   const reduced = useReducedMotion();
-  const [phase, setPhase] = useState<Phase>("lay");
+  const [phase, setPhase] = useState<Phase>("far");
   const [fonts, setFonts] = useState(false);
-  const revealed = reduced === true || phase === "turn" || phase === "done";
-  const turning = phase === "turn" || phase === "done";
+  const revealed = reduced === true || after(phase, "open");
 
   useEffect(() => {
     let cancelled = false;
@@ -59,20 +60,27 @@ export function Newspaper({ children }: { children: React.ReactNode }) {
     };
   }, [fonts, reduced]);
 
-  const sheet = {
-    lay: "translateX(0px) rotateY(0deg) rotateZ(0deg)",
-    hold: "translateX(0px) rotateY(0deg) rotateZ(0deg)",
-    peek: "translateX(0px) rotateY(-14deg) rotateZ(0deg)",
-    turn: "translateX(-6%) rotateY(-176deg) rotateZ(-3deg)",
-    done: "translateX(-6%) rotateY(-176deg) rotateZ(-3deg)",
-  }[phase];
+  const rightOpen = after(phase, "right");
+  const bottomOpen = after(phase, "bottom");
+  const lifting = after(phase, "open");
+
+  // The folded quarter sits in the sheet's top-left; shift the sheet so whatever is
+  // currently unfolded stays centred on screen.
+  const shiftX = rightOpen ? 0 : 25;
+  const shiftY = bottomOpen ? 0 : 25;
+  const sheetTransform =
+    phase === "far"
+      ? `translate(${shiftX}%, ${shiftY}%) scale(0.12) rotateZ(-540deg)`
+      : lifting
+        ? "translate(0%, -3%) scale(1.06) rotateZ(0deg)"
+        : `translate(${shiftX}%, ${shiftY}%) scale(1) rotateZ(0deg)`;
 
   return (
     <Ctx.Provider value={revealed}>
       <motion.div
         initial={false}
-        animate={{ transform: reduced || turning ? "scale(1)" : "scale(0.965)" }}
-        transition={{ duration: TURN * 0.9, ease: TURN_EASE }}
+        animate={{ transform: reduced || lifting ? "scale(1)" : "scale(0.96)" }}
+        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         className="origin-top"
       >
         {children}
@@ -80,135 +88,134 @@ export function Newspaper({ children }: { children: React.ReactNode }) {
 
       <AnimatePresence>
         {!reduced && phase !== "done" && (
-          <div
+          <motion.div
             aria-hidden
-            className="pointer-events-none fixed inset-0 z-[70] overflow-hidden [perspective:1800px] [perspective-origin:20%_50%]"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: lifting ? 0 : 1 }}
+            transition={{ duration: AT.done - AT.open, ease: [0.4, 0, 0.6, 1] }}
+            className="pointer-events-none fixed inset-0 z-[70] overflow-hidden bg-[#141b17] [perspective:1700px]"
           >
-            <motion.div
-              initial={{ opacity: 0.55 }}
-              animate={{ opacity: turning ? 0 : 0.55 }}
-              transition={{ duration: TURN * 0.8, ease: "easeOut" }}
-              className="absolute inset-0 bg-[#141b17]"
-            />
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: turning ? 0.5 : 0 }}
-              transition={{ duration: TURN * 0.45, ease: "easeIn" }}
-              className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.55),rgba(0,0,0,0)_38%)]"
-            />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,rgba(232,226,210,0.14),rgba(0,0,0,0)_60%)]" />
 
             <motion.div
-              initial={{ opacity: 0, transform: "translateX(0px) rotateY(0deg) rotateZ(0deg) scale(1.015)" }}
-              animate={{ opacity: phase === "turn" ? [1, 1, 0] : 1, transform: `${sheet} scale(1)` }}
+              initial={{ opacity: 0, transform: sheetTransform, filter: "blur(14px)" }}
+              animate={{
+                opacity: fonts ? 1 : 0,
+                transform: sheetTransform,
+                filter: phase === "far" ? "blur(14px)" : "blur(0px)",
+              }}
               transition={
-                phase === "lay"
-                  ? { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
-                  : phase === "peek"
-                    ? { type: "spring", stiffness: 140, damping: 14, mass: 0.9 }
-                    : { transform: { duration: TURN, ease: TURN_EASE }, opacity: { duration: TURN, times: [0, 0.82, 1] } }
+                phase === "landed"
+                  ? { transform: { duration: SPIN, ease: [0.2, 0.8, 0.2, 1] }, filter: { duration: SPIN * 0.8 }, opacity: { duration: 0.3 } }
+                  : lifting
+                    ? { transform: { duration: AT.done - AT.open, ease: [0.4, 0, 0.6, 1] } }
+                    : { transform: { duration: OPEN, ease: OPEN_EASE } }
               }
-              className="absolute inset-0 origin-left [transform-style:preserve-3d] will-change-transform"
+              className="absolute inset-0 [transform-style:preserve-3d] will-change-transform"
             >
-              <Sheet fonts={fonts} />
-              <div className="absolute inset-0 bg-[#e8e4da] [backface-visibility:hidden] [transform:rotateY(180deg)]">
-                <div className="absolute inset-0 opacity-[0.08] [background:repeating-linear-gradient(0deg,#182019_0_1px,transparent_1px_9px)]" />
-                <div className="absolute inset-0 opacity-70" style={{ backgroundImage: GRAIN }} />
+              {/* Folded panels come first in the DOM so the fixed faces paint over them
+                  while they sit flat behind; once open they no longer overlap. */}
+              <Fold open={rightOpen} axis="y" className="top-0 left-1/2 h-full w-1/2">
+                <Fold open={bottomOpen} axis="x" className="inset-x-0 top-1/2 h-1/2">
+                  <Quarter />
+                </Fold>
+                <div className="absolute inset-x-0 top-0 h-1/2 [transform-style:preserve-3d]">
+                  <Quarter />
+                </div>
+              </Fold>
+
+              <div className="absolute top-0 left-0 h-full w-1/2 [transform-style:preserve-3d]">
+                <Fold open={bottomOpen} axis="x" className="inset-x-0 top-1/2 h-1/2">
+                  <Quarter />
+                </Fold>
+                <div className="absolute inset-x-0 top-0 h-1/2 [transform-style:preserve-3d]">
+                  <Quarter nameplate />
+                </div>
               </div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: turning ? 0.55 : phase === "peek" ? 0.12 : 0 }}
-                transition={{ duration: phase === "peek" ? 0.4 : TURN * 0.5, ease: "easeIn" }}
-                className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0)_30%,rgba(0,0,0,0.5))] [backface-visibility:hidden]"
-              />
+
+              <Crease open={rightOpen} className="top-0 left-1/2 h-full w-px" />
+              <Crease open={bottomOpen} className="top-1/2 left-0 h-px w-full" />
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </Ctx.Provider>
   );
 }
 
-const NOTES_COLUMN = [
-  ...TIMELINE.map((t) => `${t.year}. ${t.text}`),
-  ...LOTS.map((l) => `No. ${l.no}, ${l.origin}. ${l.process}, ${l.altitude}. In the cup: ${l.cup}.`),
-];
-const COUNTER_COLUMN = MENU.flatMap((g) => g.items.map((i) => `${i.name}, ${i.price}${i.desc ? `. ${i.desc}` : ""}.`));
-
-// The front page: dateline, masthead, a headline, a photograph and the day's columns.
-function Sheet({ fonts }: { fonts: boolean }) {
+// A hinged panel: folded flat behind its neighbour, then swung open on the crease.
+function Fold({
+  open,
+  axis,
+  className,
+  children,
+}: {
+  open: boolean;
+  axis: "x" | "y";
+  className: string;
+  children: React.ReactNode;
+}) {
+  const closed = axis === "y" ? "rotateY(180deg) translateZ(6px)" : "rotateX(-180deg) translateZ(6px)";
   return (
-    <div className="absolute inset-0 flex flex-col overflow-hidden bg-[#eceae3] text-[#182019] [backface-visibility:hidden]">
-      <div className="pointer-events-none absolute inset-0 opacity-60" style={{ backgroundImage: GRAIN }} />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.35),rgba(255,255,255,0)_40%,rgba(0,0,0,0.05))]" />
+    <motion.div
+      initial={false}
+      animate={{ transform: open ? `rotate${axis.toUpperCase()}(0deg) translateZ(0px)` : closed }}
+      transition={{ duration: OPEN, ease: OPEN_EASE }}
+      className={cn(
+        "absolute [transform-style:preserve-3d] will-change-transform",
+        axis === "y" ? "origin-left" : "origin-top",
+        className,
+      )}
+    >
+      {children}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: fonts ? 1 : 0 }}
-        transition={{ duration: 0.5 }}
-        className="relative mx-auto flex w-full max-w-[80rem] flex-1 flex-col px-5 sm:px-8 lg:px-10 2xl:max-w-[100rem] 2xl:px-14"
-      >
-        <div className="label flex justify-between border-b border-current pt-5 pb-3 text-[#5e665f] sm:pt-6">
-          <span>Vol. XVII · No. 41</span>
-          <span className="hidden sm:inline">Portland, Oregon · Friday morning</span>
-          <span>Free with a cup</span>
-        </div>
+        initial={false}
+        animate={{ opacity: open ? 0 : 1 }}
+        transition={{ duration: OPEN * 0.8, ease: "easeOut" }}
+        className={cn(
+          "pointer-events-none absolute inset-0 [backface-visibility:hidden]",
+          axis === "y"
+            ? "bg-[linear-gradient(to_right,rgba(0,0,0,0.42),rgba(0,0,0,0)_55%)]"
+            : "bg-[linear-gradient(to_bottom,rgba(0,0,0,0.42),rgba(0,0,0,0)_55%)]",
+        )}
+      />
+    </motion.div>
+  );
+}
 
-        <div className="flex flex-col items-center pt-6 text-center sm:pt-9">
-          <Mark className="size-9 sm:size-11" />
-          <Wordmark className="mt-3 text-[clamp(1.9rem,7.4vw,4.9rem)] 2xl:text-[6rem]" />
-          <p className="label mt-3 text-[#5e665f] sm:tracking-[0.24em]">
-            Coffee house &amp; roastery · since 2009 · low sun, 11°
-          </p>
-          <div className="mt-4 h-[5px] w-full border-y border-current" />
-        </div>
-
-        <div className="grid flex-1 grid-cols-1 gap-x-8 gap-y-6 pt-6 sm:grid-cols-[1.2fr_1fr] sm:pt-8 lg:grid-cols-[1.25fr_1fr_0.8fr] lg:gap-x-10">
-          <div className="min-w-0">
-            <h2 className="poster text-[clamp(1.6rem,4.2vw,3rem)] leading-[1.02] font-medium tracking-[0.04em] uppercase 2xl:text-[3.6rem]">
-              The first batch is out.
-            </h2>
-            <p className="mt-3 max-w-[48ch] font-heading text-[0.95rem] italic text-[#5e665f] sm:text-base 2xl:text-[1.35rem]">
-              Twelve kilos of Huila, roasted by ear at a quarter past seven. Cups from seven, bags from Friday.
-            </p>
-            <div className="mt-4 columns-2 gap-6 text-justify text-[0.6rem] leading-[1.55] text-[#182019]/70 sm:text-[0.66rem] 2xl:text-[0.95rem] 2xl:leading-[1.6]">
-              {NOTES_COLUMN.map((story) => (
-                <p key={story} className="mb-2 break-inside-avoid">
-                  {story}
-                </p>
-              ))}
-            </div>
+// One quarter of the sheet: paper front, paper back, and the nameplate on the folded face.
+function Quarter({ nameplate = false }: { nameplate?: boolean }) {
+  return (
+    <div className="absolute inset-0 [transform-style:preserve-3d]">
+      <div className="absolute inset-0 overflow-hidden bg-[#eceae3] [backface-visibility:hidden]">
+        <div className="absolute inset-0 opacity-60" style={{ backgroundImage: GRAIN }} />
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.28),rgba(255,255,255,0)_45%,rgba(0,0,0,0.05))]" />
+        {nameplate ? (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center text-[#182019] sm:gap-4">
+            <Mark className="size-9 sm:size-12" />
+            <Wordmark className="text-[clamp(1.3rem,4.6vw,3.4rem)]" />
+            <p className="label text-[#5e665f] sm:tracking-[0.24em]">Portland · since 2009</p>
+            <span className="mt-1 h-[5px] w-24 border-y border-[#182019] sm:w-40" />
           </div>
-
-          <figure className="m-0 hidden sm:block">
-            <div className="border border-current p-1">
-              <div className="relative aspect-[4/3] border border-current">
-                <Image src={IMAGES.archive.src} alt="" fill sizes="40vw" className="object-cover" priority />
-              </div>
-            </div>
-            <figcaption className="mt-2 font-heading text-[0.8rem] italic 2xl:text-[0.95rem]">
-              Mara &amp; Tomas behind the new counter, opening day, 2009.
-            </figcaption>
-            <div className="mt-4 text-justify text-[0.66rem] leading-[1.55] text-[#182019]/70 2xl:text-[0.95rem] 2xl:leading-[1.6]">
-              {COUNTER_COLUMN.slice(0, 7).map((story) => (
-                <p key={story} className="mb-2">
-                  {story}
-                </p>
-              ))}
-            </div>
-          </figure>
-
-          <div className="hidden min-w-0 lg:block">
-            <p className="label border-b border-current pb-2 text-[#5e665f]">On the counter today</p>
-            <div className="mt-3 text-[0.66rem] leading-[1.55] text-[#182019]/70 2xl:text-[0.95rem] 2xl:leading-[1.6]">
-              {COUNTER_COLUMN.slice(7).map((story) => (
-                <p key={story} className="mb-2 border-b border-dotted border-[#182019]/25 pb-1.5">
-                  {story}
-                </p>
-              ))}
-            </div>
-          </div>
-        </div>
-      </motion.div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(to_top,#eceae3,rgba(236,234,227,0))]" />
+        ) : (
+          <div className="absolute inset-x-[12%] inset-y-[14%] opacity-[0.14] [background:repeating-linear-gradient(0deg,#182019_0_1px,transparent_1px_10px)]" />
+        )}
+      </div>
+      <div className="absolute inset-0 bg-[#e6e2d8] [backface-visibility:hidden] [transform:rotateY(180deg)]">
+        <div className="absolute inset-0 opacity-70" style={{ backgroundImage: GRAIN }} />
+        <div className="absolute inset-[12%] opacity-[0.07] [background:repeating-linear-gradient(0deg,#182019_0_1px,transparent_1px_10px)]" />
+      </div>
     </div>
+  );
+}
+
+function Crease({ open, className }: { open: boolean; className: string }) {
+  return (
+    <motion.div
+      initial={false}
+      animate={{ opacity: open ? 0.18 : 0 }}
+      transition={{ duration: OPEN, ease: "easeOut" }}
+      className={cn("pointer-events-none absolute bg-[#182019] [backface-visibility:hidden]", className)}
+    />
   );
 }
