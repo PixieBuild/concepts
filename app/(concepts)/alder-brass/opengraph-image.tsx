@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 import { OG_CUP, OG_MARK } from "./_lib/og-assets";
 
-export const alt = "Ember & Oak — Coffee house and roastery, Portland, since 2009";
+export const alt = "Alder & Brass — Coffee house and roastery, Portland, since 2009";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -32,7 +32,7 @@ export default function OpengraphImage() {
             <img src={OG_MARK} width={64} height={64} alt="" />
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div style={{ display: "flex", fontSize: 30, letterSpacing: 6 }}>
-                EMBER <span style={{ fontStyle: "italic", color: "#a8874a", margin: "0 12px", letterSpacing: 0 }}>&amp;</span> OAK
+                ALDER <span style={{ fontStyle: "italic", color: "#a8874a", margin: "0 12px", letterSpacing: 0 }}>&amp;</span> BRASS
               </div>
               <div style={{ display: "flex", marginTop: 8, fontSize: 12, letterSpacing: 4, color: "#5e665f" }}>
                 COFFEE HOUSE &amp; ROASTERY · PORTLAND · SINCE 2009

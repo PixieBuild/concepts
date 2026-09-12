@@ -8,7 +8,7 @@ import { Roast } from "./_components/roast";
 import { Room } from "./_components/room";
 import { Visit } from "./_components/visit";
 
-export default function EmberOakPage() {
+export default function AlderBrassPage() {
   return (
     <>
       <Masthead />

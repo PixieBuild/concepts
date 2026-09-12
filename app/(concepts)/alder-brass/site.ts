@@ -1,4 +1,4 @@
-export const BASE_PATH = "/ember-oak";
+export const BASE_PATH = "/alder-brass";
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";

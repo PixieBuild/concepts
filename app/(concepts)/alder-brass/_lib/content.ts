@@ -1,8 +1,8 @@
-export const BRAND = "Ember & Oak";
+export const BRAND = "Alder & Brass";
 export const EST = 2009;
 export const PHONE_DISPLAY = "(503) 555-0142";
 export const PHONE_HREF = "tel:+15035550142";
-export const EMAIL = "hello@emberandoak.coffee";
+export const EMAIL = "hello@alderandbrass.coffee";
 
 export const ADDRESS = {
   line1: "214 Alder Street",
@@ -24,7 +24,7 @@ export const NAV_LINKS = [
   { href: "#visit", label: "Find us", short: "Find us" },
 ];
 
-export const IMAGE_BASE = "/concepts/ember-oak";
+export const IMAGE_BASE = "/concepts/alder-brass";
 
 export const IMAGES = {
   cup: {

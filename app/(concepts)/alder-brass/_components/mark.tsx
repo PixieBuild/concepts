@@ -19,7 +19,7 @@ export function Wordmark({ className }: { className?: string }) {
         className,
       )}
     >
-      Ember <em className="tracking-normal italic text-(--brass)">&amp;</em> Oak
+      Alder <em className="tracking-normal italic text-(--brass)">&amp;</em> Brass
     </span>
   );
 }

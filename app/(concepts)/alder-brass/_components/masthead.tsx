@@ -8,7 +8,7 @@ import { Mark } from "./mark";
 import { Shell } from "./shell";
 import { ADDRESS, NAV_LINKS } from "../_lib/content";
 
-const LETTERS = ["E", "M", "B", "E", "R", " ", "&", " ", "O", "A", "K"];
+const LETTERS = ["A", "L", "D", "E", "R", " ", "&", " ", "B", "R", "A", "S", "S"];
 
 export function Masthead() {
   const [ready, setReady] = useState(false);
@@ -40,7 +40,7 @@ export function Masthead() {
         {/* Each letter is pressed into the page in turn, like a line of type going through a press. */}
         <h1
           className="mt-3 flex justify-center font-heading text-[clamp(1.9rem,7.4vw,4.9rem)] leading-none tracking-[0.16em] uppercase [padding-left:0.16em] sm:mt-4 2xl:text-[6rem]"
-          aria-label="Ember & Oak"
+          aria-label="Alder & Brass"
         >
           {LETTERS.map((letter, index) => (
             <motion.span

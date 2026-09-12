@@ -89,8 +89,8 @@ export const CONCEPTS: Concept[] = [
     thumbnail: "/previews/casa-lume-v2.webp",
   },
   {
-    slug: "ember-oak",
-    name: "Ember & Oak",
+    slug: "alder-brass",
+    name: "Alder & Brass",
     tagline: "Printed-matter coffee house: masthead, plates, price list, roast sheet",
     description:
       "A Portland coffee house and roastery set like something the shop would have printed — a centred Old Standard masthead with a seal and double rules, photographs framed as captioned plates, the menu as a labelled price list, and a door-green roast sheet. The cup in the first plate detaches on scroll and lands as No. 1 on the counter list.",
@@ -117,7 +117,7 @@ export const CONCEPTS: Concept[] = [
       supportsDarkMode: false,
     },
     pages: [{ path: "", label: "Home" }],
-    thumbnail: "/previews/ember-oak-v2.jpg",
+    thumbnail: "/previews/alder-brass.jpg",
   },
   {
     slug: "meridian",

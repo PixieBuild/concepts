@@ -35,7 +35,7 @@ const hand = Caveat({
   weight: ["400", "600"],
 });
 
-const title = "Ember & Oak — Coffee house and roastery, Portland";
+const title = "Alder & Brass — Coffee house and roastery, Portland";
 const description =
   "A coffee house on Alder Street, Portland, since 2009. Small lots roasted twelve kilos at a time on a cast-iron drum, poured by hand, in a room built for slow mornings.";
 
@@ -100,13 +100,13 @@ const jsonLd = {
   ],
 };
 
-export default function EmberOakLayout({
+export default function AlderBrassLayout({
   children,
-}: LayoutProps<"/ember-oak">) {
+}: LayoutProps<"/alder-brass">) {
   return (
     <html
       lang="en"
-      className={`theme-ember-oak ${body.variable} ${display.variable} ${poster.variable} ${hand.variable} h-full antialiased`}
+      className={`theme-alder-brass ${body.variable} ${display.variable} ${poster.variable} ${hand.variable} h-full antialiased`}
     >
       <body
         id="top"
