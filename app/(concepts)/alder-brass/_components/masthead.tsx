@@ -5,19 +5,22 @@ import { motion, useReducedMotion } from "motion/react";
 
 import { FadeIn, SETTLE } from "./motion";
 import { Mark } from "./mark";
+import { usePageRevealed } from "./newspaper";
 import { Shell } from "./shell";
 import { ADDRESS, NAV_LINKS } from "../_lib/content";
 
 const LETTERS = ["A", "L", "D", "E", "R", " ", "&", " ", "B", "R", "A", "S", "S"];
 
 export function Masthead() {
-  const [ready, setReady] = useState(false);
+  const [fonts, setFonts] = useState(false);
+  const revealed = usePageRevealed();
   const reduced = useReducedMotion();
+  const ready = fonts && revealed;
 
   useEffect(() => {
     let cancelled = false;
     document.fonts.ready.then(() => {
-      if (!cancelled) setReady(true);
+      if (!cancelled) setFonts(true);
     });
     return () => {
       cancelled = true;
@@ -51,7 +54,7 @@ export function Masthead() {
               animate={{ opacity: ready ? 1 : 0, transform: ready || reduced ? "scale(1)" : "scale(1.28)" }}
               transition={{
                 duration: reduced ? 0 : 0.55,
-                delay: ready ? 0.25 + index * 0.06 : 0,
+                delay: ready ? 0.45 + index * 0.06 : 0,
                 ease: [0.16, 1, 0.3, 1],
               }}
             >

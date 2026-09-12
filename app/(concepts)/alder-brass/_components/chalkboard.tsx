@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
 import { cn } from "@/lib/utils";
+import { usePageRevealed } from "./newspaper";
 import { CHALK_LINES } from "../_lib/content";
 
 type Box = { x: number; y: number; w: number; h: number };
@@ -25,6 +26,7 @@ export function Chalkboard({
   className?: string;
 }) {
   const reduced = useReducedMotion();
+  const revealed = usePageRevealed();
   const canvas = useRef<HTMLCanvasElement>(null);
   const [drawn, setDrawn] = useState(false);
 
@@ -128,9 +130,9 @@ export function Chalkboard({
               index === 0 && "text-[1.5em]",
               index === 2 && "mt-[0.4em] text-[0.9em] uppercase tracking-[0.12em]",
             )}
-            initial={{ clipPath: reduced ? "inset(-10% -4% -20% 0%)" : "inset(-10% 100% -20% 0%)" }}
-            animate={{ clipPath: "inset(-10% -4% -20% 0%)" }}
-            transition={{ duration: reduced ? 0 : 0.9 + index * 0.2, delay: writeAt + index * 0.9, ease: "linear" }}
+            initial={false}
+            animate={{ clipPath: revealed || reduced ? "inset(-10% -4% -20% 0%)" : "inset(-10% 100% -20% 0%)" }}
+            transition={{ duration: reduced ? 0 : 0.9 + index * 0.2, delay: revealed ? writeAt + index * 0.9 : 0, ease: "linear" }}
           >
             {line}
           </motion.span>
@@ -148,7 +150,7 @@ export function Chalkboard({
         aria-hidden
         className="pointer-events-none absolute right-0 -bottom-[1.1em] text-[0.62em] tracking-[0.1em] whitespace-nowrap uppercase opacity-70"
         initial={{ opacity: 0 }}
-        animate={{ opacity: drawn ? 0 : 0.7 }}
+        animate={{ opacity: drawn || !revealed ? 0 : 0.7 }}
         transition={{ duration: 0.8, delay: drawn ? 0 : writeAt + 3.2 }}
       >
         pick up the chalk ↗

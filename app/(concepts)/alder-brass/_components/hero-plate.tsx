@@ -1,14 +1,18 @@
+"use client";
+
 import Image from "next/image";
 
 import { Chalkboard } from "./chalkboard";
 import { CupOrigin } from "./cup-flight";
 import { HandNote } from "./fx";
+import { usePageRevealed } from "./newspaper";
 import { Shell } from "./shell";
 import { CHALKBOARD, HOUSE_CUP, IMAGES, NOTES } from "../_lib/content";
 
 const WRITE_AT = 1.6;
 
 export function HeroPlate() {
+  const revealed = usePageRevealed();
   return (
     <Shell className="pt-6 pb-24 sm:pt-8 sm:pb-28 lg:pb-32">
       <figure className="m-0">
@@ -53,6 +57,7 @@ export function HeroPlate() {
           <CupOrigin className="absolute -bottom-12 right-2 size-36 sm:-bottom-20 sm:right-10 sm:size-52 lg:-bottom-24 lg:right-12 lg:size-64 2xl:-bottom-28 2xl:right-16 2xl:size-80" />
 
           <HandNote
+            play={revealed}
             delay={WRITE_AT + 0.8}
             className="absolute -bottom-11 right-[21rem] hidden -rotate-3 text-[1.5rem] text-(--green) lg:block 2xl:right-[26rem]"
           >

@@ -6,6 +6,7 @@ import "./theme.css";
 
 import { BuiltBy } from "@/components/built-by";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { Newspaper } from "./_components/newspaper";
 import { ADDRESS, BRAND, EMAIL } from "./_lib/content";
 import { SITE_URL, path, url } from "./site";
 
@@ -117,7 +118,9 @@ export default function AlderBrassLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <SmoothScroll lerp={0.2} />
-        <main className="flex-1">{children}</main>
+        <Newspaper>
+          <main className="flex-1">{children}</main>
+        </Newspaper>
         <BuiltBy />
       </body>
     </html>
