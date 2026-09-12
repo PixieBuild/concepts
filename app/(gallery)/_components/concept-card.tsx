@@ -83,7 +83,7 @@ export function ConceptCard({ concept }: { concept: Concept }) {
           <span>{CONCEPT_CATEGORIES[concept.category]}</span>
           <span>{concept.theme.fonts}</span>
           <span title={concept.pages.map((p) => p.label).join(", ")}>
-            {concept.pages.length} pages
+            {concept.pages.length} {concept.pages.length === 1 ? "page" : "pages"}
           </span>
         </p>
 
