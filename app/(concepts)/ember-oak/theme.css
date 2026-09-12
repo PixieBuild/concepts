@@ -1,0 +1,174 @@
+/* Scoped to `:root.theme-<slug>` so it outranks the `:root` defaults in
+   globals.css regardless of stylesheet order. */
+
+:root.theme-ember-oak {
+  --radius: 0;
+  --font-heading: var(--font-display);
+
+  --background: #eceae3;
+  --foreground: #182019;
+  --card: #f6f4ef;
+  --card-foreground: #182019;
+  --popover: #f6f4ef;
+  --popover-foreground: #182019;
+  --primary: #1e3a2f;
+  --primary-foreground: #e7e2d2;
+  --secondary: #e2dfd6;
+  --secondary-foreground: #182019;
+  --muted: #e2dfd6;
+  --muted-foreground: #5e665f;
+  --accent: #e2dfd6;
+  --accent-foreground: #182019;
+  --destructive: #8a3f28;
+  --border: #c9c6bb;
+  --input: #b8b5aa;
+  --ring: #1e3a2f;
+
+  --green: #1e3a2f;
+  --green-foreground: #e7e2d2;
+  --brass: #a8874a;
+  --brass-soft: #d9c79a;
+
+  scrollbar-width: thin;
+  scrollbar-color: #9a9c92 #e2dfd6;
+}
+
+.theme-ember-oak body {
+  font-size: 0.9375rem;
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+.theme-ember-oak .label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.theme-ember-oak .poster {
+  font-family: var(--font-poster);
+}
+
+.theme-ember-oak .hand {
+  font-family: var(--font-hand);
+  line-height: 1.1;
+}
+
+/* A printed sheet: two rules, lighter paper. */
+.theme-ember-oak .sheet {
+  position: relative;
+  border: 1px solid var(--foreground);
+  background: var(--card);
+  padding: 5px;
+}
+
+.theme-ember-oak .sheet-in {
+  position: relative;
+  border: 1px solid var(--foreground);
+}
+
+/* A rubber stamp: double brass rule, condensed caps, set a little off-square. */
+.theme-ember-oak .stamp {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  border: 2px solid var(--brass);
+  box-shadow: inset 0 0 0 3px var(--card), inset 0 0 0 4px var(--brass);
+  background: var(--card);
+  color: var(--brass);
+  font-family: var(--font-poster);
+  font-size: 1.05rem;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.theme-ember-oak .stamp-green {
+  border-color: var(--brass-soft);
+  color: var(--brass-soft);
+  background: var(--green);
+  box-shadow: inset 0 0 0 3px var(--green), inset 0 0 0 4px var(--brass-soft);
+}
+
+/* Steam: two soft wisps drifting up off the cup. */
+.theme-ember-oak .steam {
+  position: absolute;
+  bottom: 0;
+  width: 18%;
+  height: 70%;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at 50% 80%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.85) 35%, rgba(255, 255, 255, 0) 72%);
+  filter: blur(6px);
+  opacity: 0;
+  transform-origin: bottom center;
+  animation: steam-rise 3.4s ease-in-out infinite;
+}
+
+.theme-ember-oak .steam-a {
+  left: 36%;
+}
+
+.theme-ember-oak .steam-b {
+  left: 50%;
+  height: 58%;
+  animation-delay: 1.6s;
+  animation-duration: 3.9s;
+}
+
+@keyframes steam-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scaleX(1) rotate(0deg);
+  }
+  18% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80%) scaleX(1.9) rotate(-12deg);
+  }
+}
+
+/* Chalk on the board in the photograph. */
+.theme-ember-oak .chalk {
+  font-family: var(--font-hand);
+  font-weight: 600;
+  line-height: 1.15;
+  color: #efe9dc;
+  opacity: 0.92;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.5), 0 0 6px rgba(255, 255, 255, 0.12);
+  transform: rotate(-1deg);
+}
+
+/* Price list rows: the dotted leader draws toward the price on hover. */
+.theme-ember-oak .leader {
+  flex: 1;
+  margin-bottom: 0.3em;
+  border-bottom: 1px dotted var(--brass);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-ember-oak .menu-row .price {
+  transition: color 0.4s ease;
+}
+
+.theme-ember-oak .menu-row:hover .leader {
+  transform: scaleX(1);
+}
+
+.theme-ember-oak .menu-row:hover .price {
+  color: var(--brass);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-ember-oak .steam {
+    animation: none;
+  }
+}
+
+.theme-ember-oak ::selection {
+  background: color-mix(in srgb, #a8874a 30%, transparent);
+}
