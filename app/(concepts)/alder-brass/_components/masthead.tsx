@@ -30,13 +30,13 @@ export function Masthead() {
   return (
     <header>
       <Shell className="text-center">
-        <FadeIn play={ready} className="label flex justify-between pt-5 text-muted-foreground sm:pt-6">
+        <FadeIn play={ready} delay={0.5} className="label flex justify-between pt-5 text-muted-foreground sm:pt-6">
           <span className="hidden sm:inline">{ADDRESS.short}</span>
           <span className="sm:hidden">Alder St · Portland</span>
           <span>Open today till six</span>
         </FadeIn>
 
-        <FadeIn play={ready} delay={0.1} className="flex justify-center pt-5 sm:pt-7">
+        <FadeIn play={ready} delay={0.6} className="flex justify-center pt-5 sm:pt-7">
           <Mark className="size-10 sm:size-12" />
         </FadeIn>
 
@@ -54,7 +54,7 @@ export function Masthead() {
               animate={{ opacity: ready ? 1 : 0, transform: ready || reduced ? "scale(1)" : "scale(1.28)" }}
               transition={{
                 duration: reduced ? 0 : 0.55,
-                delay: ready ? 0.45 + index * 0.06 : 0,
+                delay: ready ? 0.7 + index * 0.06 : 0,
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
@@ -63,7 +63,7 @@ export function Masthead() {
           ))}
         </h1>
 
-        <FadeIn play={ready} delay={0.95} className="label mt-3 text-muted-foreground sm:mt-4 sm:tracking-[0.24em]">
+        <FadeIn play={ready} delay={1.25} className="label mt-3 text-muted-foreground sm:mt-4 sm:tracking-[0.24em]">
           <span className="hidden sm:inline">Coffee house &amp; roastery · Portland, Oregon · since 2009</span>
           <span className="sm:hidden">Coffee house &amp; roastery · since 2009</span>
         </FadeIn>
@@ -72,13 +72,13 @@ export function Masthead() {
           <motion.span
             initial={{ transform: reduced ? "scaleX(1)" : "scaleX(0)" }}
             animate={{ transform: ready || reduced ? "scaleX(1)" : "scaleX(0)" }}
-            transition={{ duration: reduced ? 0 : 1.1, delay: ready ? 1.05 : 0, ease: SETTLE }}
+            transition={{ duration: reduced ? 0 : 1.1, delay: ready ? 1.35 : 0, ease: SETTLE }}
             className="h-[5px] flex-1 origin-right border-y border-foreground"
           />
           <motion.span
             initial={{ opacity: 0, transform: reduced ? "scale(1)" : "scale(2.4)" }}
             animate={{ opacity: ready ? 1 : 0, transform: ready || reduced ? "scale(1)" : "scale(2.4)" }}
-            transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 18, delay: ready ? 2 : 0 }}
+            transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 18, delay: ready ? 2.3 : 0 }}
             className="text-(--brass) text-[0.7rem]"
           >
             ✦
@@ -86,7 +86,7 @@ export function Masthead() {
           <motion.span
             initial={{ transform: reduced ? "scaleX(1)" : "scaleX(0)" }}
             animate={{ transform: ready || reduced ? "scaleX(1)" : "scaleX(0)" }}
-            transition={{ duration: reduced ? 0 : 1.1, delay: ready ? 1.05 : 0, ease: SETTLE }}
+            transition={{ duration: reduced ? 0 : 1.1, delay: ready ? 1.35 : 0, ease: SETTLE }}
             className="h-[5px] flex-1 origin-left border-y border-foreground"
           />
         </div>

@@ -9,7 +9,7 @@ import { usePageRevealed } from "./newspaper";
 import { Shell } from "./shell";
 import { CHALKBOARD, HOUSE_CUP, IMAGES, NOTES } from "../_lib/content";
 
-const WRITE_AT = 1.6;
+const WRITE_AT = 2.4;
 
 export function HeroPlate() {
   const revealed = usePageRevealed();
