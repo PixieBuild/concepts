@@ -1,0 +1,143 @@
+/* Scoped to `:root.theme-<slug>` so it outranks the `:root` defaults in
+   globals.css regardless of stylesheet order. */
+
+:root.theme-meridian {
+  --radius: 0.7rem;
+
+  --background: #f3f2f2;
+  --foreground: #201e1d;
+  --card: #f3f2f2;
+  --card-foreground: #201e1d;
+  --popover: #f3f2f2;
+  --popover-foreground: #201e1d;
+  --primary: #ec3013;
+  --primary-foreground: #ffffff;
+  --secondary: #eae9e9;
+  --secondary-foreground: #201e1d;
+  --muted: #eae9e9;
+  --muted-foreground: color-mix(in srgb, #201e1d 60%, transparent);
+  --accent: #eae9e9;
+  --accent-foreground: #201e1d;
+  --destructive: #ae1800;
+  --border: color-mix(in srgb, #201e1d 16%, transparent);
+  --input: color-mix(in srgb, #201e1d 16%, transparent);
+  --ring: #ec3013;
+
+  --brand-700: #ae1800;
+  --brand-2: #e15b47;
+  --shadow-soft-sm: 0 1px 2px color-mix(in srgb, #2d2b2b 14%, transparent);
+  --shadow-soft-md: 0 3px 10px color-mix(in srgb, #2d2b2b 16%, transparent);
+  --shadow-soft-lg: 0 12px 32px color-mix(in srgb, #2d2b2b 22%, transparent);
+
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, #201e1d 34%, #f3f2f2) #f3f2f2;
+}
+
+:root.theme-meridian::-webkit-scrollbar {
+  width: 13px;
+}
+
+:root.theme-meridian::-webkit-scrollbar-track {
+  background: #f3f2f2;
+}
+
+:root.theme-meridian::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, #201e1d 30%, #f3f2f2);
+  border-radius: 999px;
+  border: 3px solid #f3f2f2;
+  background-clip: padding-box;
+}
+
+:root.theme-meridian::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, #201e1d 52%, #f3f2f2);
+  background-clip: padding-box;
+}
+
+@keyframes mrd-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes mrd-float-a {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes mrd-float-b {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(9px);
+  }
+}
+
+.theme-meridian .mrd-rise {
+  opacity: 0;
+  animation: mrd-rise 0.75s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.theme-meridian .mrd-d1 { animation-delay: 0.06s; }
+.theme-meridian .mrd-d2 { animation-delay: 0.14s; }
+.theme-meridian .mrd-d3 { animation-delay: 0.22s; }
+.theme-meridian .mrd-d4 { animation-delay: 0.3s; }
+.theme-meridian .mrd-d5 { animation-delay: 0.38s; }
+
+.theme-meridian .mrd-floatA {
+  animation: mrd-float-a 5.5s ease-in-out infinite;
+}
+
+.theme-meridian .mrd-floatB {
+  animation: mrd-float-b 6.5s ease-in-out infinite;
+}
+
+.theme-meridian .mrd-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--foreground) 26%, transparent) transparent;
+}
+
+.theme-meridian .mrd-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.theme-meridian .mrd-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.theme-meridian .mrd-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--foreground) 22%, transparent);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+.theme-meridian .mrd-scroll::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--foreground) 40%, transparent);
+  background-clip: padding-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root.theme-meridian {
+    scroll-behavior: auto;
+  }
+
+  .theme-meridian .mrd-rise,
+  .theme-meridian .mrd-floatA,
+  .theme-meridian .mrd-floatB {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
