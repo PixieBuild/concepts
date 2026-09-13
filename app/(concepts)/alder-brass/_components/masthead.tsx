@@ -4,18 +4,16 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
 import { FadeIn, SETTLE } from "./motion";
-import { Mark } from "./mark";
-import { usePageRevealed } from "./newspaper";
+import { LETTERS, Mark } from "./mark";
 import { Shell } from "./shell";
 import { ADDRESS, NAV_LINKS } from "../_lib/content";
 
-const LETTERS = ["A", "L", "D", "E", "R", " ", "&", " ", "B", "R", "A", "S", "S"];
-
-export function Masthead() {
+// `still` renders the finished masthead with no entrance, for the printed copy on the opening sheet.
+export function Masthead({ still = false }: { still?: boolean }) {
   const [fonts, setFonts] = useState(false);
-  const revealed = usePageRevealed();
-  const reduced = useReducedMotion();
-  const ready = fonts && revealed;
+  const reduced = useReducedMotion() || still;
+  // Prints as soon as the fonts land, under the opening page, so it is at rest when uncovered.
+  const ready = still || fonts;
 
   useEffect(() => {
     let cancelled = false;
@@ -54,7 +52,7 @@ export function Masthead() {
               animate={{ opacity: ready ? 1 : 0, transform: ready || reduced ? "scale(1)" : "scale(1.28)" }}
               transition={{
                 duration: reduced ? 0 : 0.55,
-                delay: ready ? 0.35 + index * 0.06 : 0,
+                delay: ready && !reduced ? 0.35 + index * 0.06 : 0,
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
@@ -72,13 +70,13 @@ export function Masthead() {
           <motion.span
             initial={{ transform: reduced ? "scaleX(1)" : "scaleX(0)" }}
             animate={{ transform: ready || reduced ? "scaleX(1)" : "scaleX(0)" }}
-            transition={{ duration: reduced ? 0 : 1.1, delay: ready ? 1.0 : 0, ease: SETTLE }}
+            transition={{ duration: reduced ? 0 : 1.1, delay: ready && !reduced ? 1.0 : 0, ease: SETTLE }}
             className="h-[5px] flex-1 origin-right border-y border-foreground"
           />
           <motion.span
             initial={{ opacity: 0, transform: reduced ? "scale(1)" : "scale(2.4)" }}
             animate={{ opacity: ready ? 1 : 0, transform: ready || reduced ? "scale(1)" : "scale(2.4)" }}
-            transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 18, delay: ready ? 1.95 : 0 }}
+            transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 18, delay: ready && !reduced ? 1.95 : 0 }}
             className="text-(--brass) text-[0.7rem]"
           >
             ✦
@@ -86,7 +84,7 @@ export function Masthead() {
           <motion.span
             initial={{ transform: reduced ? "scaleX(1)" : "scaleX(0)" }}
             animate={{ transform: ready || reduced ? "scaleX(1)" : "scaleX(0)" }}
-            transition={{ duration: reduced ? 0 : 1.1, delay: ready ? 1.0 : 0, ease: SETTLE }}
+            transition={{ duration: reduced ? 0 : 1.1, delay: ready && !reduced ? 1.0 : 0, ease: SETTLE }}
             className="h-[5px] flex-1 origin-left border-y border-foreground"
           />
         </div>

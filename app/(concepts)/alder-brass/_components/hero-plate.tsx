@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Chalkboard } from "./chalkboard";
 import { CupOrigin } from "./cup-flight";
 import { HandNote } from "./fx";
-import { usePageRevealed } from "./newspaper";
+import { usePageRevealed } from "./opening";
 import { Shell } from "./shell";
 import { CHALKBOARD, HOUSE_CUP, IMAGES, NOTES } from "../_lib/content";
 

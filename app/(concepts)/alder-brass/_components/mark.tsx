@@ -14,12 +14,31 @@ export function Mark({ className }: { className?: string }) {
 export function Wordmark({ className }: { className?: string }) {
   return (
     <span
-      className={cn(
-        "block font-heading leading-none tracking-[0.16em] uppercase [padding-left:0.16em]",
-        className,
-      )}
+      className={cn("block font-heading tracking-[0.16em] uppercase [padding-left:0.16em]", className)}
+      style={{ lineHeight: 1 }}
     >
       Alder <em className="tracking-normal italic text-(--brass)">&amp;</em> Brass
+    </span>
+  );
+}
+
+export const LETTERS = ["A", "L", "D", "E", "R", " ", "&", " ", "B", "R", "A", "S", "S"];
+
+// One span per letter, the same markup the masthead's h1 uses, so a copy of the
+// wordmark set this way has identical glyph positions: kerning across spans is
+// the same in both, and a hand-off between them cannot shift a letter.
+export function WordmarkLetters({ className }: { className?: string }) {
+  return (
+    <span
+      aria-hidden
+      className={cn("flex justify-center font-heading tracking-[0.16em] uppercase [padding-left:0.16em]", className)}
+      style={{ lineHeight: 1 }}
+    >
+      {LETTERS.map((letter, index) => (
+        <span key={index} className={letter === "&" ? "tracking-normal italic text-(--brass)" : undefined}>
+          {letter === " " ? "\u00a0" : letter}
+        </span>
+      ))}
     </span>
   );
 }

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
 import { cn } from "@/lib/utils";
-import { usePageRevealed } from "./newspaper";
+import { usePageRevealed } from "./opening";
 import { CHALK_LINES } from "../_lib/content";
 
 type Box = { x: number; y: number; w: number; h: number };
