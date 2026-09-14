@@ -71,15 +71,20 @@ export function Masthead() {
     };
   }, []);
 
-  // Measured before paint so the wordmark never shows at rest while the ground is up.
+  // Measured once the fonts have settled, before paint, so the pose is final by the time
+  // the wordmark becomes visible and never moves under the reader.
   useLayoutEffect(() => {
-    if (!hero) return;
+    if (!hero || !fonts) return;
     const measure = () => {
       if (markRef.current && wordRef.current) setPose(poseFor(markRef.current, wordRef.current));
     };
     measure();
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    window.visualViewport?.addEventListener("resize", measure);
+    return () => {
+      window.removeEventListener("resize", measure);
+      window.visualViewport?.removeEventListener("resize", measure);
+    };
   }, [hero, fonts]);
 
   const heroTransition = hero

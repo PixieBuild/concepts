@@ -21,6 +21,8 @@ export function usePageRevealed() {
 // page. They are the real elements, so the landing is `transform: none` and cannot miss.
 const ASSETS = [IMAGES.counter.src, IMAGES.counterTall.src, IMAGES.cup.src, IMAGES.mark];
 const MIN_HOLD = 1.3;
+const GROUND = "#182019";
+const PAPER = "#eceae3";
 export const EXIT = 1.15;
 export const EXIT_EASE = [0.65, 0, 0.3, 1] as const;
 
@@ -47,9 +49,11 @@ export function Opening({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (reduced) return;
     // Lock scrolling on the root, not the body: with `scrollbar-gutter: stable` the
-    // gutter stays reserved, so nothing shifts when the scrollbar comes back.
+    // gutter stays reserved, so nothing shifts when the scrollbar comes back. No element
+    // can paint the gutter, so the canvas itself goes ink until the ground lifts.
     const root = document.documentElement;
     root.style.overflow = "hidden";
+    root.style.backgroundColor = GROUND;
     const started = performance.now();
     let loaded = 0;
     let cancelled = false;
@@ -72,14 +76,21 @@ export function Opening({ children }: { children: React.ReactNode }) {
     return () => {
       cancelled = true;
       root.style.overflow = "";
+      root.style.backgroundColor = "";
+      root.style.transition = "";
     };
   }, [reduced]);
 
   useEffect(() => {
     if (stage !== "leave") return;
+    const root = document.documentElement;
+    root.style.transition = `background-color ${EXIT}s cubic-bezier(${EXIT_EASE.join(",")})`;
+    root.style.backgroundColor = PAPER;
     const t = window.setTimeout(() => {
       setStage("done");
-      document.documentElement.style.overflow = "";
+      root.style.overflow = "";
+      root.style.transition = "";
+      root.style.backgroundColor = "";
     }, EXIT * 1000 + 80);
     return () => window.clearTimeout(t);
   }, [stage]);
