@@ -109,7 +109,7 @@ export const CONCEPTS: Concept[] = [
     ],
     bestFor:
       "Cafés, bakeries and roasters who want a considered, typographic site with a menu and one memorable scroll moment, but no booking flow.",
-    status: "draft",
+    status: "ready",
     addedAt: "2026-09-11",
     theme: {
       fonts: "Old Standard TT / Libre Franklin",
@@ -147,6 +147,74 @@ export const CONCEPTS: Concept[] = [
     },
     pages: [{ path: "", label: "Home" }],
     thumbnail: "/previews/meridian-v2.jpg",
+  },
+  {
+    slug: "tarnbeck",
+    name: "Tarnbeck",
+    tagline: "Dark luxury product hero: a lit pocket watch cutting through its own wordmark",
+    description:
+      "A Cumbrian pocket-watch maker told in one frame — the watch floats in studio light on near-black while the name stands enormous behind it, the object cutting through the letters. Built in WebGL with HDRI lighting, contact shadow, bloom and film grain; the watch turns with the cursor.",
+    category: "ecommerce",
+    industry: "Watchmaker",
+    tags: ["3d", "webgl", "product", "dark", "luxury", "hero", "typography"],
+    bestFor:
+      "Product brands with one hero object — watches, audio, bottles — who want a single cinematic frame rather than a catalogue.",
+    status: "draft",
+    addedAt: "2026-09-14",
+    theme: { fonts: "Bricolage Grotesque / IBM Plex Mono", accent: "#c9a66b", supportsDarkMode: false },
+    pages: [{ path: "", label: "Home" }],
+    thumbnail: "/previews/tarnbeck.jpg",
+  },
+  {
+    slug: "saltmarsh",
+    name: "Saltmarsh",
+    tagline: "Cinematic photograph hero with one word cropped by the bottom edge",
+    description:
+      "Nine houses on the Suffolk shore, told with one full-bleed photograph, an italic line, a thin grid of rules and the name set so large the viewport crops it. The picture opens with a slow push and the word parallaxes against it on scroll.",
+    category: "real-estate",
+    industry: "Residential development",
+    tags: ["photography", "typography", "editorial", "coastal", "hero", "parallax"],
+    bestFor:
+      "Developments, hotels and destinations with one photograph strong enough to carry the whole first screen.",
+    status: "draft",
+    addedAt: "2026-09-14",
+    theme: { fonts: "Anton / Instrument Serif / Inter Tight", accent: "#1f2a44", supportsDarkMode: false },
+    pages: [{ path: "", label: "Home" }],
+    thumbnail: "/previews/saltmarsh.jpg",
+  },
+  {
+    slug: "ottoline",
+    name: "Ottoline",
+    tagline: "Colour-field hero: ornate serif wordmark, script flourish and a drifting watermark",
+    description:
+      "A Grasse perfumer on a single aubergine field — the name in a black Bodoni with a script flourish beneath, two spaced words either side, a bevelled frame, and the name again as a vast script watermark drifting behind. A warm bloom follows the cursor. Type only, no photography.",
+    category: "ecommerce",
+    industry: "Perfumer",
+    tags: ["typography", "serif", "script", "colour-field", "luxury", "hero", "no-assets"],
+    bestFor:
+      "Fragrance, jewellery and heritage brands that want a first screen with the presence of packaging and no photography budget.",
+    status: "draft",
+    addedAt: "2026-09-14",
+    theme: { fonts: "Bodoni Moda / Pinyon Script / IBM Plex Mono", accent: "#c39a72", supportsDarkMode: false },
+    pages: [{ path: "", label: "Home" }],
+    thumbnail: "/previews/ottoline.jpg",
+  },
+  {
+    slug: "skerry",
+    name: "Skerry",
+    tagline: "WebGL glass hero: a refracting form over a slow, grainy two-colour gradient",
+    description:
+      "A design studio in Leith and Lisbon behind a single piece of glass — a transmissive form floats and refracts a shader gradient that breathes on noise, with chromatic fringing at its edges and a pool of light under the cursor. Wide grotesk headline, mono labels. Generated entirely in the browser, no image files.",
+    category: "agency",
+    industry: "Design studio",
+    tags: ["webgl", "shader", "glass", "3d", "studio", "hero", "no-assets"],
+    bestFor:
+      "Studios and software brands that want the current award-site look without commissioning 3D or photography.",
+    status: "draft",
+    addedAt: "2026-09-14",
+    theme: { fonts: "Archivo / IBM Plex Mono", accent: "#3b60c5", supportsDarkMode: false },
+    pages: [{ path: "", label: "Home" }],
+    thumbnail: "/previews/skerry.jpg",
   },
 ];
 
