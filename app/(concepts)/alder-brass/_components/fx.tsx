@@ -118,7 +118,7 @@ export function MapRoute({ className }: { className?: string }) {
         initial={{ pathLength: reduced ? 1 : 0, opacity: 0 }}
         whileInView={{ pathLength: 1, opacity: 1 }}
         viewport={VIEWPORT}
-        transition={{ pathLength: { duration: reduced ? 0 : 1.8, delay: 0.5, ease: "easeInOut" }, opacity: { duration: 0.3, delay: 0.5 } }}
+        transition={{ pathLength: { duration: reduced ? 0 : 1.8, delay: 2.0, ease: "easeInOut" }, opacity: { duration: 0.3, delay: 2.0 } }}
       />
       <motion.circle
         cx="35"
@@ -129,7 +129,7 @@ export function MapRoute({ className }: { className?: string }) {
         whileInView={{ opacity: 1, transform: "scale(1)" }}
         viewport={VIEWPORT}
         style={{ transformOrigin: "35px 38px" }}
-        transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 16, delay: 2.2 }}
+        transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 16, delay: 3.7 }}
       />
     </svg>
   );
