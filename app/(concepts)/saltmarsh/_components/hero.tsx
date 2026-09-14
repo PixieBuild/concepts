@@ -51,6 +51,7 @@ export function Hero() {
       </motion.div>
 
       <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_top,rgba(15,23,34,0.55),rgba(15,23,34,0)_45%)]" />
+      <div aria-hidden className="absolute inset-x-0 top-0 h-[28%] bg-[linear-gradient(to_bottom,rgba(15,23,34,0.5),rgba(15,23,34,0))]" />
       <div aria-hidden className="grain absolute inset-0 opacity-70" />
 
       {/* Thin vertical rules, drawn in after the photograph. */}
@@ -82,12 +83,12 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: shown }}
         transition={at(1.5)}
-        className="italic-serif absolute top-[42%] left-6 max-w-[22ch] text-[clamp(1.1rem,1.7vw,1.5rem)] leading-snug text-foreground/90 sm:left-10"
+        className="italic-serif absolute top-[42%] left-6 max-w-[22ch] text-[clamp(1.1rem,1.7vw,1.5rem)] leading-snug text-foreground/95 [text-shadow:0_1px_18px_rgba(15,23,34,0.45)] sm:left-10"
       >
         {LINE}
       </motion.p>
 
-      <motion.dl initial={{ opacity: 0 }} animate={{ opacity: shown }} transition={at(1.9)} className="label absolute top-[42%] right-6 hidden flex-col gap-2 text-right text-foreground/70 sm:right-10 sm:flex">
+      <motion.dl initial={{ opacity: 0 }} animate={{ opacity: shown }} transition={at(1.9)} className="label absolute top-[calc(42%+7.5rem)] left-6 hidden flex-col gap-2 text-foreground/75 [text-shadow:0_1px_14px_rgba(15,23,34,0.5)] sm:left-10 sm:flex">
         {META.map((m) => (
           <dd key={m}>{m}</dd>
         ))}
