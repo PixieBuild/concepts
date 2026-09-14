@@ -24,25 +24,6 @@ export function Wordmark({ className }: { className?: string }) {
 
 export const LETTERS = ["A", "L", "D", "E", "R", " ", "&", " ", "B", "R", "A", "S", "S"];
 
-// One span per letter, the same markup the masthead's h1 uses, so a copy of the
-// wordmark set this way has identical glyph positions: kerning across spans is
-// the same in both, and a hand-off between them cannot shift a letter.
-export function WordmarkLetters({ className }: { className?: string }) {
-  return (
-    <span
-      aria-hidden
-      className={cn("flex justify-center font-heading tracking-[0.16em] uppercase [padding-left:0.16em]", className)}
-      style={{ lineHeight: 1 }}
-    >
-      {LETTERS.map((letter, index) => (
-        <span key={index} className={letter === "&" ? "tracking-normal italic text-(--brass)" : undefined}>
-          {letter === " " ? "\u00a0" : letter}
-        </span>
-      ))}
-    </span>
-  );
-}
-
 export function Divider({ index = 0, className }: { index?: number; className?: string }) {
   const src = IMAGES.dividers[index % IMAGES.dividers.length];
   return (
