@@ -46,3 +46,9 @@ next-env.d.ts
 
 # Paid source imagery for concepts; kept locally, never committed.
 /assets
+
+# Screen recordings of concept heroes for social posts; never committed.
+/public/capture
+
+# macOS folder metadata.
+.DS_Store

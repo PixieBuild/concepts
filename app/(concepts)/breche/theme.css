@@ -1,0 +1,78 @@
+/* Scoped to `:root.theme-<slug>` so it outranks the `:root` defaults in
+   globals.css regardless of stylesheet order. */
+
+:root.theme-breche {
+  --radius: 0;
+  --font-heading: var(--font-sans);
+
+  /* Granite and old snow, read off the massif rather than a warm paper palette. */
+  --background: #e8eaea;
+  --foreground: #12181d;
+  --card: #dfe3e4;
+  --card-foreground: #12181d;
+  --popover: #dfe3e4;
+  --popover-foreground: #12181d;
+  --primary: #12181d;
+  --primary-foreground: #e8eaea;
+  --secondary: #d6dbdd;
+  --secondary-foreground: #12181d;
+  --muted: #d6dbdd;
+  --muted-foreground: #5d6b76;
+  --accent: #d6dbdd;
+  --accent-foreground: #12181d;
+  --destructive: #b3391f;
+  --border: color-mix(in srgb, #12181d 18%, transparent);
+  --input: color-mix(in srgb, #12181d 24%, transparent);
+  --ring: #12181d;
+
+  --snow: #e8eaea;
+  --ink: #12181d;
+  --granite: #5d6b76;
+  --glacier: #9fb6c4;
+  /* Used only where the subject means hazard: the avalanche scale and turn-back notes. */
+  --hazard: #c8471f;
+}
+
+/* One family, three widths: the logic of a map legend. */
+.theme-breche .w-expanded {
+  font-stretch: 125%;
+  font-variation-settings: "wdth" 125;
+}
+
+.theme-breche .w-condensed {
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+  letter-spacing: 0.01em;
+}
+
+.theme-breche .data {
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.theme-breche .rule {
+  border-color: color-mix(in srgb, #12181d 16%, transparent);
+}
+
+/* The profile is drawn in a 1400-unit viewBox; its type scales with the box, so the
+   small screens need bigger units, not smaller. */
+.theme-breche .profile-axis {
+  font-size: 19px;
+}
+
+.theme-breche .profile-place {
+  font-size: 19px;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 640px) {
+  .theme-breche .profile-axis {
+    font-size: 40px;
+  }
+
+  .theme-breche .profile-place {
+    font-size: 36px;
+  }
+}

@@ -1,0 +1,39 @@
+/* Scoped to `:root.theme-<slug>` so it outranks the `:root` defaults in
+   globals.css regardless of stylesheet order. */
+
+:root.theme-cuvette {
+  --radius: 0;
+  --font-heading: var(--font-display);
+
+  --background: #ebe4d9;
+  --foreground: #1c1a17;
+  --card: #f3ede4;
+  --card-foreground: #1c1a17;
+  --popover: #f3ede4;
+  --popover-foreground: #1c1a17;
+  --primary: #1c1a17;
+  --primary-foreground: #f3ede4;
+  --secondary: #e2d9cc;
+  --secondary-foreground: #1c1a17;
+  --muted: #e2d9cc;
+  --muted-foreground: #6f675c;
+  --accent: #e2d9cc;
+  --accent-foreground: #1c1a17;
+  --destructive: #b4432d;
+  --border: color-mix(in srgb, #1c1a17 16%, transparent);
+  --input: color-mix(in srgb, #1c1a17 22%, transparent);
+  --ring: #1c1a17;
+}
+
+.theme-cuvette .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.theme-cuvette .grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}

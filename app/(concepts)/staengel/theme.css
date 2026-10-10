@@ -1,0 +1,28 @@
+/* Scoped to `:root.theme-<slug>` so it outranks the `:root` defaults in
+   globals.css regardless of stylesheet order. */
+
+:root.theme-staengel {
+  --radius: 0;
+  --font-heading: var(--font-display);
+
+  --background: #dfe5cc;
+  --foreground: #1f2618;
+  --card: #d4dbbf;
+  --card-foreground: #1f2618;
+  --popover: #d4dbbf;
+  --popover-foreground: #1f2618;
+  --primary: #1f2618;
+  --primary-foreground: #dfe5cc;
+  --secondary: #d4dbbf;
+  --secondary-foreground: #1f2618;
+  --muted: #d4dbbf;
+  --muted-foreground: #5c6650;
+  --accent: #d4dbbf;
+  --accent-foreground: #1f2618;
+  --destructive: #c23b1e;
+  --border: color-mix(in srgb, #1f2618 20%, transparent);
+  --input: color-mix(in srgb, #1f2618 24%, transparent);
+  --ring: #e4572e;
+
+  --poppy: #e4572e;
+}
