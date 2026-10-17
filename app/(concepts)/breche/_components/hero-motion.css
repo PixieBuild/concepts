@@ -1,0 +1,108 @@
+@keyframes breche-rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+/* Scale only: the ring is already centred by the translate property, which composes with this. */
+@keyframes breche-pulse {
+  from {
+    transform: scale(0.5);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes breche-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes breche-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@layer components {
+  /* CSS, not Motion, so the headline rises on first paint without waiting for hydration. */
+  .theme-breche .hero-rise {
+    animation: breche-rise 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+    will-change: transform;
+  }
+
+  .theme-breche .hero-enter {
+    animation: breche-enter 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    will-change: transform;
+  }
+
+  /* The call to action and the instruments arrive with the mountain, not before it. */
+  .theme-breche [data-scene="loading"] .hero-wait {
+    animation-play-state: paused;
+  }
+
+  @media (max-height: 480px) {
+    .theme-breche .hero-readout {
+      font-size: clamp(1.75rem, 10svh, 2.5rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-breche .hero-rise,
+    .theme-breche .hero-enter {
+      animation: none;
+    }
+  }
+
+  /* The opening sky, painted before the scene loads so the terrain fades in over it rather than over ink. */
+  .theme-breche .hero-sky {
+    background: linear-gradient(to bottom, #13264a 0%, #1f3256 38%, #59627f 62%, #8d8796 74%, #4b5068 88%, #2a3044 100%);
+  }
+
+  .theme-breche .hero-summit {
+    font-size: clamp(4rem, min(13vw, 17svh), 10.5rem);
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    font-stretch: 62%;
+    font-variant-numeric: tabular-nums;
+    margin-inline-start: -0.04em;
+  }
+
+  .theme-breche .hero-handoff {
+    font-size: clamp(2.375rem, min(6vw, 8.5svh), 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.015em;
+    font-weight: 300;
+    font-stretch: 62%;
+    text-wrap: balance;
+    margin-inline-start: -0.036em;
+  }
+
+  /* Full-bleed and placed on the text column's left edge, so the pool stays under the opening type and never ends on a hard line. */
+  .theme-breche .hero-pool {
+    background: radial-gradient(ellipse min(64vw, 60rem) 48% at calc(max(0px, 50vw - 52rem) + 22rem) 50%, rgba(15, 23, 36, 0.56), rgba(15, 23, 36, 0));
+  }
+
+  @media (max-width: 639px) {
+    .theme-breche .hero-pool {
+      background: radial-gradient(ellipse 110vw 34% at 30% 32%, rgba(15, 23, 36, 0.5), rgba(15, 23, 36, 0));
+    }
+  }
+}

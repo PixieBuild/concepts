@@ -1,420 +1,619 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Line } from "@react-three/drei";
-import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
+import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import type { MotionValue } from "motion/react";
 import {
-  AdditiveBlending,
   BackSide,
-  BufferAttribute,
-  CatmullRomCurve3,
   Color,
-  MathUtils,
-  NeutralToneMapping,
+  DataTexture,
+  DirectionalLight,
   DoubleSide,
-  PlaneGeometry,
+  FogExp2,
+  HemisphereLight,
+  MathUtils,
+  Mesh,
+  MeshStandardMaterial,
+  NeutralToneMapping,
+  ObjectSpaceNormalMap,
+  PCFShadowMap,
+  PerspectiveCamera,
   ShaderMaterial,
+  type BufferGeometry,
+  Vector2,
   Vector3,
-  type Group,
+  setConsoleFunction,
+  type IUniform,
 } from "three";
 
-import { ROUTE, TERRAIN } from "../_lib/content";
+import { CHAPTERS, chapterAt, routeAt, type Chapter, type Light, type Moment } from "../_lib/chapters";
+import { TERRAIN } from "../_lib/content";
+import { cn } from "@/lib/utils";
+import { detailTexture, heightAt, loadField, massifGeometry, surfaceTexture, toWorld, worldY, type Field } from "./terrain-field";
+import { LetteringLayer, labelState, placeLabels } from "./terrain-labels";
+import { RouteLines, buildRoute, type RouteHandle, type RoutePath } from "./terrain-route";
+import {
+  CLOUD_FRAGMENT,
+  CLOUD_VERTEX,
+  MASSIF_COLOUR,
+  MASSIF_EDGE,
+  MASSIF_FRAGMENT_PARS,
+  MASSIF_LIGHT,
+  MASSIF_NORMAL,
+  MASSIF_VERTEX,
+  MASSIF_VERTEX_PARS,
+  SKY_FRAGMENT,
+  SKY_VERTEX,
+} from "./terrain-shaders";
 
-const SEGMENTS = { wide: 448, tall: 224 };
-const SNOW_LINE = 1450;
-const ROCK = new Color("#5b6675");
-const SCREE = new Color("#78828f");
-const SNOW = new Color("#f2f7ff");
-const GLACIER = new Color("#c2dcf2");
-// Snow in shadow is deep blue, never black — it still collects the whole sky.
-const SHADOW = new Color("#4c586e");
-const SUNLIGHT = new Color("#ffe8dc");
-const CLOUD_LEVEL = 1950;
-// Matches the key light, so the baked relief and the lit surface agree.
-const SUN = { x: -0.66, y: 0.2, z: 0.72 };
+const CLOUD_LEVEL = 1900;
+const SHADOWS = { enabled: true, type: PCFShadowMap, autoUpdate: false };
+const GL = { antialias: true, toneMapping: NeutralToneMapping, powerPreference: "high-performance" as const };
+/** Device pixels the canvas may fill: retina and 1440p screens trade a little sharpness for a steady frame rate. */
+const PIXEL_BUDGET = 2.2e6;
+/** Seconds the massif takes to rise out of the haze on arrival, while the camera settles in. */
+const ARRIVAL = 2.2;
+/** cos(0.25°): the shadow map is only redrawn once the sun has moved further than this. */
+const SUN_STEP = Math.cos(MathUtils.degToRad(0.25));
 
-const smooth = (v: number) => v * v * (3 - 2 * v);
-const between = (v: number, from: number, to: number) => Math.min(1, Math.max(0, (v - from) / (to - from)));
+// R3F 9 still creates a THREE.Clock, which three 0.186 reports as deprecated on every mount.
+setConsoleFunction((type: "log" | "warn" | "error", message: string, ...params: unknown[]) => {
+  if (message.startsWith("THREE.Clock:")) return;
+  console[type](message, ...params);
+});
 
-// Metres above sea level become world units: kilometres, overstated like a relief model.
-const toWorld = (lat: number, lon: number, altitude: number) => {
-  const x = ((lon - TERRAIN.west) / (TERRAIN.east - TERRAIN.west) - 0.5) * TERRAIN.span;
-  const z = -((lat - TERRAIN.south) / (TERRAIN.north - TERRAIN.south) - 0.5) * TERRAIN.span;
-  const y = (altitude / 1000) * TERRAIN.relief;
-  return new Vector3(x, y, z);
-};
+type Assets = { field: Field; surface: DataTexture; detail: DataTexture; geometry: BufferGeometry };
 
-type Heights = { data: Float32Array; size: number };
+const breathe = () => new Promise((resolve) => setTimeout(resolve, 0));
 
-function blur(field: Float32Array, size: number) {
-  const pass = (input: Float32Array, horizontal: boolean) => {
-    const output = new Float32Array(input.length);
-    for (let y = 0; y < size; y++) {
-      for (let x = 0; x < size; x++) {
-        const at = (dx: number, dy: number) => {
-          const sx = Math.min(size - 1, Math.max(0, x + dx));
-          const sy = Math.min(size - 1, Math.max(0, y + dy));
-          return input[sy * size + sx];
-        };
-        const a = horizontal ? at(-1, 0) : at(0, -1);
-        const b = input[y * size + x];
-        const c = horizontal ? at(1, 0) : at(0, 1);
-        output[y * size + x] = (a + 2 * b + c) / 4;
-      }
-    }
-    return output;
-  };
-  // Two full separable rounds: one is not enough to stop per-texel DEM noise
-  // becoming visible sawtooth once the mesh samples it near 1:1.
-  let out = field;
-  for (let i = 0; i < 3; i++) out = pass(pass(out, true), false);
-  return out;
-}
-
-function useHeights() {
-  const [heights, setHeights] = useState<Heights | null>(null);
+// Everything is ready before the Canvas mounts: anything suspending inside it after the first
+// commit makes R3F force-lose the WebGL context. Each step yields, so none blocks a scroll.
+function useAssets(segments: number) {
+  const [assets, setAssets] = useState<Assets | null>(null);
   useEffect(() => {
     let cancelled = false;
-    const image = new window.Image();
-    image.crossOrigin = "anonymous";
-    image.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = image.width;
-      canvas.height = image.height;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-      ctx.drawImage(image, 0, 0);
-      const { data } = ctx.getImageData(0, 0, image.width, image.height);
-      const out = new Float32Array(image.width * image.height);
-      for (let i = 0; i < out.length; i++) {
-        const encoded = (data[i * 4] * 256 + data[i * 4 + 1]) / 65535;
-        out[i] = TERRAIN.min + encoded * (TERRAIN.max - TERRAIN.min);
-      }
-      if (!cancelled) setHeights({ data: blur(out, image.width), size: image.width });
-    };
-    image.src = TERRAIN.file;
+    (async () => {
+      const field = await loadField().catch(() => null);
+      if (!field) return;
+      await breathe();
+      const surface = surfaceTexture(field);
+      await breathe();
+      const detail = detailTexture(field);
+      await breathe();
+      const geometry = massifGeometry(field, segments);
+      await breathe();
+      if (cancelled) return;
+      setAssets({ field, surface, detail, geometry });
+    })();
     return () => {
       cancelled = true;
     };
-  }, []);
-  return heights;
+  }, [segments]);
+  return assets;
 }
 
-function Sky() {
-  const material = useMemo(
-    () =>
-      new ShaderMaterial({
-        side: BackSide,
-        depthWrite: false,
-        fog: false,
-        uniforms: {
-          high: { value: new Color("#17253f") },
-          low: { value: new Color("#6b6480") },
-          glow: { value: new Color("#8fa8cf") },
-        },
-        vertexShader: `
-          varying vec3 vWorld;
-          void main() {
-            vWorld = (modelMatrix * vec4(position, 1.0)).xyz;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-          }
-        `,
-        fragmentShader: `
-          varying vec3 vWorld;
-          uniform vec3 high;
-          uniform vec3 low;
-          uniform vec3 glow;
-          void main() {
-            float h = clamp(normalize(vWorld).y * 1.35 + 0.12, 0.0, 1.0);
-            vec3 sky = mix(low, high, smoothstep(-0.04, 0.32, h));
-            float sun = pow(clamp(1.0 - distance(normalize(vWorld), normalize(vec3(-0.66, 0.2, 0.72))), 0.0, 1.0), 5.0);
-            gl_FragColor = vec4(mix(sky, glow, sun * 0.92), 1.0);
-          }
-        `,
-      }),
-    [],
-  );
-  return <mesh material={material} frustumCulled={false}><sphereGeometry args={[150, 48, 24]} /></mesh>;
+/** Mesh detail is chosen once from the screen's longest side in device pixels, so rotating never rebuilds it. */
+function pickSegments() {
+  const pixels = Math.max(window.screen.width, window.screen.height) * Math.min(2, window.devicePixelRatio || 1);
+  return pixels > 1500 ? 448 : 320;
 }
 
-function Massif({ heights, segments }: { heights: Heights; segments: number }) {
-  const geometry = useMemo(() => {
-    const plane = new PlaneGeometry(TERRAIN.span, TERRAIN.span, segments, segments);
-    plane.rotateX(-Math.PI / 2);
-    const position = plane.attributes.position as BufferAttribute;
-    const colour = new Float32Array(position.count * 3);
-    const tint = new Color();
+type Parsed = {
+  top: Color;
+  horizon: Color;
+  glow: Color;
+  glowStrength: number;
+  band: number;
+  wisps: number;
+  sun: Vector3;
+  sunColour: Color;
+  sunIntensity: number;
+  sunline: number;
+  hemiSky: Color;
+  hemiGround: Color;
+  hemiIntensity: number;
+  fog: Color;
+  fogDensity: number;
+  cloudLit: Color;
+  cloudShade: Color;
+  cover: number;
+  stars: number;
+};
 
-    const sample = (u: number, v: number) => {
-      const x = Math.min(heights.size - 1, Math.max(0, u * (heights.size - 1)));
-      const y = Math.min(heights.size - 1, Math.max(0, v * (heights.size - 1)));
-      const x0 = Math.floor(x);
-      const y0 = Math.floor(y);
-      const x1 = Math.min(heights.size - 1, x0 + 1);
-      const y1 = Math.min(heights.size - 1, y0 + 1);
-      const fx = x - x0;
-      const fy = y - y0;
-      const a = heights.data[y0 * heights.size + x0];
-      const b = heights.data[y0 * heights.size + x1];
-      const c = heights.data[y1 * heights.size + x0];
-      const d = heights.data[y1 * heights.size + x1];
-      return MathUtils.lerp(MathUtils.lerp(a, b, fx), MathUtils.lerp(c, d, fx), fy);
+function sunVector(azimuth: number, elevation: number, out = new Vector3()) {
+  const a = MathUtils.degToRad(azimuth);
+  const e = MathUtils.degToRad(elevation);
+  return out.set(Math.sin(a) * Math.cos(e), Math.sin(e), -Math.cos(a) * Math.cos(e));
+}
+
+const parse = (light: Light): Parsed => ({
+  top: new Color(light.sky.top),
+  horizon: new Color(light.sky.horizon),
+  glow: new Color(light.sky.glow),
+  glowStrength: light.sky.glowStrength,
+  band: light.sky.band,
+  wisps: light.sky.wisps,
+  sun: sunVector(light.sun.azimuth, light.sun.elevation),
+  sunColour: new Color(light.sun.colour),
+  sunIntensity: light.sun.intensity,
+  sunline: light.sunline,
+  hemiSky: new Color(light.hemi.sky),
+  hemiGround: new Color(light.hemi.ground),
+  hemiIntensity: light.hemi.intensity,
+  fog: new Color(light.fog.colour),
+  fogDensity: light.fog.density,
+  cloudLit: new Color(light.cloud.lit),
+  cloudShade: new Color(light.cloud.shade),
+  cover: light.cloud.cover,
+  stars: light.stars,
+});
+
+const blank = (): Parsed => parse(CHAPTERS[0].light);
+const PARSED = new Map<Light, Parsed>();
+const parsed = (light: Light) => {
+  let value = PARSED.get(light);
+  if (!value) PARSED.set(light, (value = parse(light)));
+  return value;
+};
+
+function mixParsed(a: Parsed, b: Parsed, t: number, out: Parsed) {
+  const n = (x: number, y: number) => x + (y - x) * t;
+  out.top.lerpColors(a.top, b.top, t);
+  out.horizon.lerpColors(a.horizon, b.horizon, t);
+  out.glow.lerpColors(a.glow, b.glow, t);
+  out.glowStrength = n(a.glowStrength, b.glowStrength);
+  out.band = n(a.band, b.band);
+  out.wisps = n(a.wisps, b.wisps);
+  out.sun.lerpVectors(a.sun, b.sun, t).normalize();
+  out.sunColour.lerpColors(a.sunColour, b.sunColour, t);
+  out.sunIntensity = n(a.sunIntensity, b.sunIntensity);
+  out.sunline = n(a.sunline, b.sunline);
+  out.hemiSky.lerpColors(a.hemiSky, b.hemiSky, t);
+  out.hemiGround.lerpColors(a.hemiGround, b.hemiGround, t);
+  out.hemiIntensity = n(a.hemiIntensity, b.hemiIntensity);
+  out.fog.lerpColors(a.fog, b.fog, t);
+  out.fogDensity = n(a.fogDensity, b.fogDensity);
+  out.cloudLit.lerpColors(a.cloudLit, b.cloudLit, t);
+  out.cloudShade.lerpColors(a.cloudShade, b.cloudShade, t);
+  out.cover = n(a.cover, b.cover);
+  out.stars = n(a.stars, b.stars);
+  return out;
+}
+
+function lightAt(m: Moment, out: Parsed) {
+  const from = CHAPTERS[m.from];
+  const to = CHAPTERS[m.to];
+  if (m.from === m.to) return mixParsed(parsed(from.light), parsed(from.lightEnd ?? from.light), m.drift, out);
+  return mixParsed(parsed(from.lightEnd ?? from.light), parsed(to.light), m.t, out);
+}
+
+type Pose = { target: Vector3; heading: number; pitch: number; distance: number; fov: number; fx: number; fy: number };
+const pose = (): Pose => ({ target: new Vector3(), heading: 0, pitch: 0, distance: 0, fov: 40, fx: 0, fy: 0 });
+
+function poseOf(chapter: Chapter, drift: number, tall: boolean, out: Pose) {
+  const { shot } = chapter;
+  toWorld(shot.at[0], shot.at[1], shot.at[2], out.target);
+  out.heading = shot.heading + chapter.drift.heading * drift;
+  out.pitch = shot.pitch + chapter.drift.pitch * drift;
+  out.distance = (tall ? shot.tall.distance : shot.distance) + chapter.drift.distance * drift;
+  out.fov = tall ? shot.tall.fov : shot.fov;
+  [out.fx, out.fy] = tall ? shot.tall.frame : shot.frame;
+  return out;
+}
+
+function mixPose(a: Pose, b: Pose, t: number, out: Pose) {
+  out.target.lerpVectors(a.target, b.target, t);
+  const turn = ((((b.heading - a.heading) % 360) + 540) % 360) - 180;
+  out.heading = a.heading + turn * t;
+  out.pitch = a.pitch + (b.pitch - a.pitch) * t;
+  out.distance = Math.exp(Math.log(a.distance) + (Math.log(b.distance) - Math.log(a.distance)) * t);
+  out.fov = a.fov + (b.fov - a.fov) * t;
+  out.fx = a.fx + (b.fx - a.fx) * t;
+  out.fy = a.fy + (b.fy - a.fy) * t;
+  return out;
+}
+
+function Massif({ geometry, surface, uniforms }: { geometry: BufferGeometry; surface: DataTexture; uniforms: Record<string, IUniform> }) {
+  const material = useMemo(() => {
+    const surfaceMaterial = new MeshStandardMaterial({
+      normalMap: surface,
+      normalMapType: ObjectSpaceNormalMap,
+      roughness: 0.93,
+      metalness: 0,
+    });
+    surfaceMaterial.onBeforeCompile = (shader) => {
+      Object.assign(shader.uniforms, uniforms);
+      shader.vertexShader = shader.vertexShader.replace("#include <common>", MASSIF_VERTEX_PARS).replace("#include <begin_vertex>", MASSIF_VERTEX);
+      shader.fragmentShader = shader.fragmentShader
+        .replace("#include <common>", MASSIF_FRAGMENT_PARS)
+        .replace("#include <color_fragment>", MASSIF_COLOUR)
+        .replace("#include <normal_fragment_maps>", MASSIF_NORMAL)
+        .replace("#include <aomap_fragment>", MASSIF_LIGHT)
+        .replace("#include <fog_fragment>", MASSIF_EDGE);
     };
+    surfaceMaterial.customProgramCacheKey = () => "breche-massif";
+    return surfaceMaterial;
+  }, [surface, uniforms]);
 
-    for (let i = 0; i < position.count; i++) {
-      const x = position.getX(i);
-      const z = position.getZ(i);
-      const u = x / TERRAIN.span + 0.5;
-      const v = z / TERRAIN.span + 0.5;
-      const metres = sample(u, v);
-      position.setY(i, (metres / 1000) * TERRAIN.relief);
-
-      const step = 3.4 / segments;
-      const cell = (TERRAIN.span / segments) * 1000;
-      const gx = (sample(u + step, v) - sample(u - step, v)) / (2 * cell);
-      const gy = (sample(u, v + step) - sample(u, v - step)) / (2 * cell);
-      const slope = Math.hypot(gx, gy);
-      const length = Math.hypot(-gx, 1, -gy);
-      const lambert = Math.max(0, (-gx * SUN.x + SUN.y - gy * SUN.z) / length);
-
-      // Snow settles on the tops but slides off anything steep; the rest is rock, and
-      // the flat high ground reads as glacier.
-      const holds = smooth(between(metres, SNOW_LINE - 600, SNOW_LINE + 700)) * (1 - smooth(between(slope, 1.6, 3.6)));
-      const ice = smooth(between(metres, 2600, 3500)) * (1 - smooth(between(slope, 0.15, 0.7)));
-      tint.copy(ROCK).lerp(SCREE, between(metres, 900, 2300)).lerp(SNOW, holds).lerp(GLACIER, ice * 0.6);
-      // Shade goes deep blue; the sun adds only a touch, since the key light is warm already.
-      tint.lerp(SHADOW, 0.26 * Math.pow(1 - lambert, 1.1));
-      tint.lerp(SUNLIGHT, 0.1 * Math.pow(lambert, 2.4));
-      tint.multiplyScalar(0.8 + 0.4 * lambert);
-      // Fine grain, so the DEM's terraces break into snow texture instead of flat bands.
-      const seed = Math.sin(x * 12.9898 + z * 78.233) * 43758.5453;
-      tint.multiplyScalar(0.955 + 0.09 * (seed - Math.floor(seed)));
-      colour[i * 3] = tint.r;
-      colour[i * 3 + 1] = tint.g;
-      colour[i * 3 + 2] = tint.b;
-    }
-
-    plane.setAttribute("color", new BufferAttribute(colour, 3));
-    plane.computeVertexNormals();
-    return plane;
-  }, [heights, segments]);
-
-  return (
-    <mesh geometry={geometry} castShadow receiveShadow>
-      <meshStandardMaterial vertexColors roughness={0.86} metalness={0} />
-    </mesh>
+  useEffect(
+    () => () => {
+      geometry.dispose();
+      material.dispose();
+    },
+    [geometry, material],
   );
+
+  return <mesh geometry={geometry} material={material} castShadow receiveShadow />;
 }
 
-function RouteLine({ progress }: { progress: MotionValue<number> }) {
-  const drawn = useRef<Group>(null);
-  const points = useMemo(() => {
-    const anchors = ROUTE.map((w) => toWorld(w.lat, w.lon, w.altitude + 60));
-    return new CatmullRomCurve3(anchors, false, "catmullrom", 0.4).getPoints(220);
-  }, []);
-
-  useFrame(() => {
-    const group = drawn.current;
-    if (!group) return;
-    const shown = smooth(between(progress.get(), 0.18, 0.72));
-    group.scale.setScalar(shown > 0 ? 1 : 0.0001);
-    group.visible = shown > 0.01;
-  });
-
-  return (
-    <group ref={drawn}>
-      <Line points={points} color="#e2552c" lineWidth={2.4} transparent opacity={0.95} />
-    </group>
-  );
-}
-
-const CLOUD_VERTEX = `
-  varying vec2 vUv;
-  void main() {
-    vUv = uv;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  }
-`;
-
-const CLOUD_FRAGMENT = `
-  varying vec2 vUv;
-  uniform float time;
-  float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-  float noise(vec2 p) {
-    vec2 i = floor(p); vec2 f = fract(p);
-    vec2 u = f * f * (3.0 - 2.0 * f);
-    return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
-               mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y);
-  }
-  float fbm(vec2 p) {
-    float v = 0.0; float a = 0.5;
-    for (int i = 0; i < 5; i++) { v += a * noise(p); p *= 2.02; a *= 0.5; }
-    return v;
-  }
-  void main() {
-    vec2 p = vUv * 7.0 + vec2(time * 0.012, time * 0.007);
-    float body = fbm(p) * 0.75 + fbm(p * 2.3 + 4.0) * 0.25;
-    float edge = smoothstep(0.08, 0.34, min(min(vUv.x, 1.0 - vUv.x), min(vUv.y, 1.0 - vUv.y)));
-    float alpha = smoothstep(0.42, 0.78, body) * edge;
-    gl_FragColor = vec4(mix(vec3(0.06, 0.09, 0.15), vec3(0.42, 0.39, 0.44), body), alpha * 0.82);
-  }
-`;
-
-function CloudSea() {
-  const material = useRef<ShaderMaterial>(null);
-  const uniforms = useMemo(() => ({ time: { value: 0 } }), []);
-
-  useFrame((_, dt) => {
-    const cloud = material.current;
-    if (!cloud) return;
-    cloud.uniforms.time.value += dt;
-  });
-
-  return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, (CLOUD_LEVEL / 1000) * TERRAIN.relief, 0]}>
-      <planeGeometry args={[TERRAIN.span * 1.6, TERRAIN.span * 1.6, 1, 1]} />
-      <shaderMaterial
-        ref={material}
-        uniforms={uniforms}
-        vertexShader={CLOUD_VERTEX}
-        fragmentShader={CLOUD_FRAGMENT}
-        transparent
-        depthWrite={false}
-        side={DoubleSide}
-      />
-    </mesh>
-  );
-}
-
-function SunGlow() {
+function Sky({ uniforms, follow }: { uniforms: Record<string, IUniform>; follow: RefObject<Mesh | null> }) {
   const material = useMemo(
-    () =>
-      new ShaderMaterial({
-        transparent: true,
-        depthWrite: false,
-        blending: AdditiveBlending,
-        uniforms: { tint: { value: new Color("#9db9e8") } },
-        vertexShader: `
-          varying vec2 vUv;
-          void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }
-        `,
-        fragmentShader: `
-          varying vec2 vUv;
-          uniform vec3 tint;
-          void main() {
-            float d = distance(vUv, vec2(0.5));
-            float core = smoothstep(0.5, 0.0, d);
-            gl_FragColor = vec4(tint, pow(core, 2.4) * 0.45);
-          }
-        `,
-      }),
-    [],
+    () => new ShaderMaterial({ side: BackSide, depthWrite: false, fog: false, toneMapped: false, uniforms, vertexShader: SKY_VERTEX, fragmentShader: SKY_FRAGMENT }),
+    [uniforms],
   );
+  useEffect(() => () => material.dispose(), [material]);
   return (
-    <mesh material={material} position={[-62, 20, 70]}>
-      <planeGeometry args={[52, 52, 1, 1]} />
+    <mesh ref={follow} material={material} frustumCulled={false} renderOrder={-1}>
+      <sphereGeometry args={[150, 48, 24]} />
     </mesh>
   );
 }
 
-function Rig({ progress, tall }: { progress: MotionValue<number>; tall: boolean }) {
-  const eye = useRef<Vector3 | null>(null);
-  const aim = useRef(new Vector3());
-  const summit = useMemo(() => toWorld(ROUTE[ROUTE.length - 1].lat, ROUTE[ROUTE.length - 1].lon, ROUTE[ROUTE.length - 1].altitude), []);
-  const hut = useMemo(() => toWorld(ROUTE[3].lat, ROUTE[3].lon, ROUTE[3].altitude), []);
-  const valley = useMemo(() => toWorld(ROUTE[0].lat, ROUTE[0].lon, ROUTE[0].altitude), []);
+function Clouds({ surface, uniforms }: { surface: DataTexture; uniforms: Record<string, IUniform> }) {
+  const layers = useMemo(
+    () =>
+      [0, 1].map((layer) => {
+        const level = CLOUD_LEVEL + layer * 90;
+        return new ShaderMaterial({
+          transparent: true,
+          depthWrite: false,
+          side: DoubleSide,
+          fog: true,
+          toneMapped: false,
+          vertexShader: CLOUD_VERTEX,
+          fragmentShader: CLOUD_FRAGMENT,
+          uniforms: {
+            ...uniforms,
+            fogColor: { value: new Color() },
+            fogDensity: { value: 0 },
+            fogNear: { value: 1 },
+            fogFar: { value: 1000 },
+            uSurface: { value: surface },
+            uSpan: { value: TERRAIN.span },
+            uLevel: { value: (level - TERRAIN.min) / (TERRAIN.max - TERRAIN.min) },
+            uSeed: { value: layer * 7.3 },
+          },
+        });
+      }),
+    [surface, uniforms],
+  );
+  useEffect(() => () => layers.forEach((material) => material.dispose()), [layers]);
 
-  const shots = useMemo(() => {
-    const lift = tall ? 1.35 : 1;
-    return [
-      { eye: new Vector3(-13 * lift, 13.5 * lift, 16 * lift), look: new Vector3(0, 3.4, 0) },
-      { eye: new Vector3(valley.x - 6.4, valley.y + 7.4, valley.z + 9.6), look: new Vector3(hut.x, hut.y + 0.9, hut.z) },
-      { eye: new Vector3(hut.x - 5.2, hut.y + 4.4, hut.z + 7), look: new Vector3(summit.x, summit.y - 0.3, summit.z) },
-      { eye: new Vector3(summit.x + 5.4, summit.y + 4.2, summit.z + 7.2), look: new Vector3(summit.x - 0.6, summit.y - 1.4, summit.z - 1.2) },
-    ];
-  }, [tall, summit, hut, valley]);
-
-  useFrame(({ camera, pointer }, dt) => {
-    const p = Math.min(1, Math.max(0, progress.get()));
-    const scaled = p * (shots.length - 1);
-    const index = Math.min(shots.length - 2, Math.floor(scaled));
-    const t = smooth(scaled - index);
-    const from = shots[index];
-    const to = shots[index + 1];
-
-    const targetEye = new Vector3().lerpVectors(from.eye, to.eye, t);
-    targetEye.x += pointer.x * 0.9;
-    targetEye.y += pointer.y * 0.4;
-    const targetAim = new Vector3().lerpVectors(from.look, to.look, t);
-
-    if (!eye.current) {
-      eye.current = targetEye.clone();
-      aim.current.copy(targetAim);
-    }
-    const k = 1 - Math.exp(-dt * 3.2);
-    eye.current.lerp(targetEye, k);
-    aim.current.lerp(targetAim, k);
-    camera.position.copy(eye.current);
-    camera.lookAt(aim.current);
-  });
-
-  return null;
+  return (
+    <>
+      {layers.map((material, layer) => (
+        <mesh key={layer} material={material} rotation={[-Math.PI / 2, 0, 0]} position={[0, worldY(CLOUD_LEVEL + layer * 90), 0]} renderOrder={1}>
+          <planeGeometry args={[TERRAIN.span * 1.9, TERRAIN.span * 1.9, 1, 1]} />
+        </mesh>
+      ))}
+    </>
+  );
 }
 
-export function Terrain({ progress }: { progress: MotionValue<number> }) {
-  const heights = useHeights();
-  const [tall, setTall] = useState(false);
+type Work = ReturnType<typeof makeWork>;
+
+function makeWork(field: Field) {
+  return {
+    moment: { from: 0, to: 0, t: 0, drift: 0 } as Moment,
+    light: blank(),
+    a: pose(),
+    b: pose(),
+    shot: pose(),
+    eye: new Vector3(),
+    forward: new Vector3(),
+    tip: new Vector3(),
+    lastSun: new Vector3(),
+    sinceShadow: 0,
+    pointer: { x: 0, y: 0, tx: 0, ty: 0 },
+    labels: labelState(field),
+    shown: -1,
+    cutAt: -1,
+    first: true,
+    arrivedAt: -1,
+  };
+}
+
+function makeUniforms(snowLine: number, detail: DataTexture) {
+  return {
+    massif: {
+      uDetail: { value: detail },
+      uSnowLine: { value: snowLine },
+      uRelief: { value: TERRAIN.relief },
+      uSunline: { value: new Vector2(-2000, -1000) },
+      uForest: { value: new Color("#2e352f") },
+      uMeadow: { value: new Color("#55574b") },
+      uScree: { value: new Color("#727478") },
+      uRock: { value: new Color("#666a71") },
+      uSnow: { value: new Color("#f4f7fb") },
+      uGlacier: { value: new Color("#a9d3ea") },
+    },
+    sky: {
+      uTop: { value: new Color() },
+      uHorizon: { value: new Color() },
+      uFog: { value: new Color() },
+      uGlow: { value: new Color() },
+      uGlowStrength: { value: 0 },
+      uBand: { value: 0.24 },
+      uSun: { value: new Vector3(0, 1, 0) },
+      uSunColour: { value: new Color() },
+      uStars: { value: 0 },
+      uWisps: { value: 0 },
+    },
+    cloud: {
+      uTime: { value: 0 },
+      uCover: { value: 0.3 },
+      uLit: { value: new Color() },
+      uShade: { value: new Color() },
+    },
+  };
+}
+
+type WorldProps = {
+  assets: Assets;
+  snowLine: number;
+  path: RoutePath;
+  progress: MotionValue<number>;
+  reduced: boolean;
+  parallax: boolean;
+  lineWidth: number;
+  shadowSize: number;
+  marks: RefObject<(HTMLElement | null)[]>;
+  dip: RefObject<HTMLDivElement | null>;
+  onCompiled: () => void;
+  onFirstFrame: () => void;
+};
+
+/** One clock for the whole scene: camera, light, route and lettering all read the same moment. */
+function World({ assets, snowLine, path, progress, reduced, parallax, lineWidth, shadowSize, marks, dip, onCompiled, onFirstFrame }: WorldProps) {
+  const { field, surface, detail, geometry } = assets;
+  const { gl, scene, camera } = useThree();
+  const uniforms = useMemo(() => makeUniforms(snowLine, detail), [snowLine, detail]);
+  const live = useRef(uniforms);
+  const work = useRef<Work>(useMemo(() => makeWork(field), [field]));
+  const sky = useRef<Mesh>(null);
+  const fog = useRef<FogExp2>(null);
+  const sun = useRef<DirectionalLight>(null);
+  const hemi = useRef<HemisphereLight>(null);
+  const route = useRef<RouteHandle>(null);
+
+  // Shaders compile off the main thread where the driver allows it; the loop starts once they are linked.
+  const whenCompiled = useRef(onCompiled);
+  useEffect(() => {
+    let live = true;
+    if (!gl.extensions.has("KHR_parallel_shader_compile")) whenCompiled.current();
+    else gl.compileAsync(scene, camera).catch(() => {}).then(() => live && whenCompiled.current());
+    return () => {
+      live = false;
+    };
+  }, [gl, scene, camera]);
 
   useEffect(() => {
-    const check = () => setTall(window.innerWidth < window.innerHeight);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
+    if (!parallax) return;
+    const move = (event: PointerEvent) => {
+      work.current.pointer.tx = (event.clientX / window.innerWidth) * 2 - 1;
+      work.current.pointer.ty = (event.clientY / window.innerHeight) * 2 - 1;
+    };
+    window.addEventListener("pointermove", move, { passive: true });
+    return () => window.removeEventListener("pointermove", move);
+  }, [parallax]);
 
-  if (!heights) return null;
+  useFrame((state, dt) => {
+    const { camera, size, clock, gl } = state;
+    const w = work.current;
+    const u = live.current;
+    const p = Math.min(1, Math.max(0, progress.get()));
+    const m = chapterAt(p, w.moment);
+
+    // Reduced motion cuts between held shots behind a short dip to ink instead of flying.
+    if (reduced) {
+      const nearest = m.t < 0.5 ? m.from : m.to;
+      if (w.shown === -1) w.shown = nearest;
+      if (nearest !== w.shown && w.cutAt < 0) {
+        w.cutAt = clock.elapsedTime;
+        dip.current?.animate([{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }], { duration: 250, easing: "ease-in-out" });
+      }
+      if (w.cutAt >= 0 && clock.elapsedTime - w.cutAt > 0.125) {
+        w.shown = nearest;
+        w.cutAt = -1;
+      }
+      const inHold = m.from === m.to && m.from === w.shown;
+      m.drift = inHold ? m.drift : nearest > w.shown ? 0 : 1;
+      m.from = w.shown;
+      m.to = w.shown;
+      m.t = 0;
+    }
+
+    const tall = size.width < size.height;
+    // Short, wide screens (a phone on its side) push the subject lower and further off, under the caption.
+    const squeeze = MathUtils.clamp((size.width / size.height - 1.65) / 0.55, 0, 1);
+    const shot = reduced
+      ? poseOf(CHAPTERS[m.from], 0, tall, w.shot)
+      : mixPose(poseOf(CHAPTERS[m.from], m.from === m.to ? m.drift : 1, tall, w.a), poseOf(CHAPTERS[m.to], 0, tall, w.b), m.t, w.shot);
+
+    if (w.arrivedAt < 0) w.arrivedAt = clock.elapsedTime;
+    const arrival = reduced ? 1 : MathUtils.smootherstep(clock.elapsedTime - w.arrivedAt, 0, ARRIVAL);
+    shot.distance *= 1 + 0.14 * (1 - arrival);
+    shot.pitch += 1.2 * (1 - arrival);
+
+    shot.fy -= 0.24 * squeeze;
+    shot.distance *= 1 + 0.12 * squeeze;
+    // Short desktop windows lower the opening skyline so the buttons stay on sky.
+    if (size.width >= 1024) shot.fy -= 0.1 * MathUtils.clamp((760 - size.height) / 110, 0, 1) * (m.from === 0 ? 1 - m.t : 0);
+
+    const pointer = w.pointer;
+    const follow = 1 - Math.exp(-dt * 2.5);
+    pointer.x += (pointer.tx - pointer.x) * follow;
+    pointer.y += (pointer.ty - pointer.y) * follow;
+    const heading = MathUtils.degToRad(shot.heading + (parallax ? pointer.x * 1.4 : 0));
+    const pitch = MathUtils.degToRad(shot.pitch + (parallax ? pointer.y * 0.7 : 0));
+    w.forward.set(Math.sin(heading) * Math.cos(pitch), -Math.sin(pitch), -Math.cos(heading) * Math.cos(pitch));
+    w.eye.copy(shot.target).addScaledVector(w.forward, -shot.distance);
+    const ground = worldY(heightAt(field, w.eye.x, w.eye.z)) + 0.45;
+    if (w.eye.y < ground) w.eye.y = ground;
+
+    const lens = camera as PerspectiveCamera;
+    lens.position.copy(w.eye);
+    lens.lookAt(shot.target);
+    lens.fov = shot.fov;
+    lens.updateProjectionMatrix();
+    // Shifts the principal point, so the subject sits low and off-centre with sky left for the type.
+    lens.projectionMatrix.elements[8] = -shot.fx;
+    lens.projectionMatrix.elements[9] = -shot.fy;
+    lens.projectionMatrixInverse.copy(lens.projectionMatrix).invert();
+    lens.updateMatrixWorld();
+
+    const light = lightAt(m, w.light);
+    u.sky.uTop.value.copy(light.top);
+    u.sky.uHorizon.value.copy(light.horizon);
+    u.sky.uFog.value.copy(light.fog);
+    u.sky.uGlow.value.copy(light.glow);
+    u.sky.uGlowStrength.value = light.glowStrength;
+    u.sky.uBand.value = light.band;
+    u.sky.uSun.value.copy(light.sun);
+    u.sky.uStars.value = light.stars;
+    u.sky.uSunColour.value.copy(light.sunColour);
+    u.sky.uWisps.value = light.wisps;
+    sky.current?.position.copy(lens.position);
+    if (fog.current) {
+      fog.current.color.copy(light.fog);
+      fog.current.density = MathUtils.lerp(light.fogDensity * 6, light.fogDensity, arrival);
+    }
+    u.massif.uSunline.value.set(light.sunline - 250, light.sunline + 150);
+    u.cloud.uLit.value.copy(light.cloudLit);
+    u.cloud.uShade.value.copy(light.cloudShade);
+    u.cloud.uCover.value = light.cover;
+    if (!reduced) u.cloud.uTime.value += dt;
+
+    if (sun.current) {
+      sun.current.position.copy(light.sun).multiplyScalar(40);
+      sun.current.color.copy(light.sunColour);
+      sun.current.intensity = light.sunIntensity;
+      w.sinceShadow++;
+      // During a flight the shadows refresh less often; the sun only moves between chapters.
+      if (w.first || (w.sinceShadow >= (m.from === m.to ? 3 : 10) && w.lastSun.dot(light.sun) < SUN_STEP)) {
+        gl.shadowMap.needsUpdate = true;
+        w.lastSun.copy(light.sun);
+        w.sinceShadow = 0;
+      }
+    }
+    if (hemi.current) {
+      hemi.current.color.copy(light.hemiSky);
+      hemi.current.groundColor.copy(light.hemiGround);
+      hemi.current.intensity = light.hemiIntensity;
+    }
+
+    const r = routeAt(m);
+    route.current?.draw(r, w.tip);
+    const onRoute = CHAPTERS[m.from].waypoint !== null || CHAPTERS[m.to].waypoint !== null;
+    const climbing = p > 0.06 && onRoute && (m.from !== m.to || CHAPTERS[m.from].waypoint !== null);
+    // The opening frame carries the page's own type, so the spot heights only arrive with the climb.
+    const lettering = (m.from === 0 ? m.t : 1) * (1 - (CHAPTERS[m.to].id === "handoff" ? m.t || 1 : 0));
+    placeLabels(marks.current, w.labels, field, lens, size, r, w.tip, climbing ? 1 : 0, lettering, dt);
+
+    if (w.first) {
+      w.first = false;
+      onFirstFrame();
+    }
+  });
 
   return (
-    <Canvas
-      shadows="percentage"
-      dpr={[1, 1.6]}
-      camera={{ fov: 42, near: 0.1, far: 220, position: [-13, 13.5, 16] }}
-      gl={{ antialias: true, toneMapping: NeutralToneMapping }}
-      className="!absolute !inset-0"
-    >
-      <color attach="background" args={["#070c14"]} />
-      {/* Haze is lighter than the terrain, never darker — distance must wash out, not black out. */}
-      <fogExp2 attach="fog" args={["#5a6b8a", 0.012]} />
-      <Sky />
-      <ambientLight intensity={0.45} color="#b6c6dc" />
-      <hemisphereLight args={["#93a6c0", "#4b5466", 0.95]} />
+    <>
+      <color attach="background" args={["#0f1724"]} />
+      <fogExp2 ref={fog} attach="fog" args={["#6f86a3", 0.016]} />
+      <Sky uniforms={uniforms.sky} follow={sky} />
+      <hemisphereLight ref={hemi} args={["#9fb2d6", "#3a4256", 0.75]} />
       <directionalLight
-        position={[-19, 5.6, 20.4]}
-        intensity={2.2}
-        color="#ffeede"
+        ref={sun}
+        intensity={2.5}
         castShadow
-        shadow-mapSize={[1024, 1024]}
-        shadow-bias={-0.0012}
-        shadow-normalBias={0.06}
-        shadow-camera-left={-18}
-        shadow-camera-right={18}
-        shadow-camera-top={18}
-        shadow-camera-bottom={-18}
+        shadow-mapSize={[shadowSize, shadowSize]}
+        shadow-bias={-0.0004}
+        shadow-normalBias={0.05}
+        shadow-radius={3}
+        shadow-camera-left={-20}
+        shadow-camera-right={20}
+        shadow-camera-top={20}
+        shadow-camera-bottom={-20}
         shadow-camera-near={1}
         shadow-camera-far={90}
       />
-      <directionalLight position={[14, 6, -10]} intensity={0.3} color="#3d5f96" />
-      <SunGlow />
-      <Massif heights={heights} segments={tall ? SEGMENTS.tall : SEGMENTS.wide} />
-      <CloudSea />
-      <RouteLine progress={progress} />
-      <Rig progress={progress} tall={tall} />
-      <EffectComposer>
-        <Bloom luminanceThreshold={0.7} luminanceSmoothing={0.3} intensity={0.4} mipmapBlur />
-        <Vignette offset={0.32} darkness={0.22} />
-      </EffectComposer>
-    </Canvas>
+      <Massif geometry={geometry} surface={surface} uniforms={uniforms.massif} />
+      <Clouds surface={surface} uniforms={uniforms.cloud} />
+      <RouteLines ref={route} path={path} width={lineWidth} />
+    </>
+  );
+}
+
+type TerrainProps = { snowLine: number; progress: MotionValue<number>; reduced: boolean; running: boolean; onReady: () => void };
+
+export function Terrain({ snowLine, progress, reduced, running, onReady }: TerrainProps) {
+  const [segments] = useState(pickSegments);
+  const assets = useAssets(segments);
+  const [compiled, setCompiled] = useState(false);
+  const [parallax] = useState(() => !reduced && window.matchMedia("(pointer: fine)").matches);
+  const [lineWidth] = useState(() => (window.innerWidth < 640 ? 3.6 : 3.2));
+  const [view] = useState(() => {
+    const area = window.innerWidth * window.innerHeight;
+    return {
+      dpr: Math.max(0.8, Math.min(1.75, window.devicePixelRatio || 1, Math.sqrt(PIXEL_BUDGET / area))),
+      shadowSize: area > 2.3e6 ? 1024 : 2048,
+    };
+  });
+  const [ready, setReady] = useState(false);
+  const marks = useRef<(HTMLElement | null)[]>([]);
+  const dip = useRef<HTMLDivElement>(null);
+  const path = useMemo(() => (assets ? buildRoute(assets.field) : null), [assets]);
+
+  useEffect(
+    () => () => {
+      assets?.surface.dispose();
+      assets?.detail.dispose();
+    },
+    [assets],
+  );
+
+  return (
+    <div className={cn("absolute inset-0 transition-opacity duration-700 ease-out", ready ? "opacity-100" : "opacity-0")}>
+      {assets && path && (
+        <Canvas
+          shadows={SHADOWS}
+          dpr={view.dpr}
+          frameloop={running && compiled ? "always" : "never"}
+          gl={GL}
+          camera={{ fov: 34, near: 0.05, far: 240, position: [0, 20, 30] }}
+          className="absolute! inset-0!"
+        >
+          <World
+            assets={assets}
+            snowLine={snowLine}
+            path={path}
+            progress={progress}
+            reduced={reduced}
+            parallax={parallax}
+            lineWidth={lineWidth}
+            shadowSize={view.shadowSize}
+            marks={marks}
+            dip={dip}
+            onCompiled={() => setCompiled(true)}
+            onFirstFrame={() => {
+              setReady(true);
+              onReady();
+            }}
+          />
+        </Canvas>
+      )}
+      <LetteringLayer marks={marks} />
+      <div ref={dip} aria-hidden className="pointer-events-none absolute inset-0 bg-(--ink) opacity-0" />
+    </div>
   );
 }

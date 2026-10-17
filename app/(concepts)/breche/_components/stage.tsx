@@ -1,148 +1,266 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { preload } from "react-dom";
+import { motion, useInView, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "motion/react";
 
-import { COMPANY, HERO, ROUTE, TERMS } from "../_lib/content";
+import "./hero-motion.css";
+import { CHAPTERS, INK_FROM, OPENING_END, altitudeAt, captionAt, chapterAt, type Moment } from "../_lib/chapters";
+import { COMPANY, HERO, ROUTE, TERRAIN } from "../_lib/content";
+import { between, metres, smooth, telHref } from "../_lib/format";
+import { onAnchorClick } from "../_lib/scroll";
 import { TerrainClient } from "./terrain.client";
 
-const OUT = [0.22, 1, 0.36, 1] as const;
-const between = (v: number, from: number, to: number) => Math.min(1, Math.max(0, (v - from) / (to - from)));
-const metres = (value: number) => `${String(Math.round(value)).replace(/\B(?=(\d{3})+(?!\d))/g, " ")} m`;
-
-// The camera walks the route between 18% and 72% of the track; the readout follows it.
-const altitudeAt = (p: number) => {
-  const walked = between(p, 0.18, 0.72) * (ROUTE.length - 1);
-  const index = Math.min(ROUTE.length - 2, Math.floor(walked));
-  const t = walked - index;
-  return ROUTE[index].altitude + (ROUTE[index + 1].altitude - ROUTE[index].altitude) * t;
+const FLOOR = 1000;
+const TOP = ROUTE[ROUTE.length - 1].altitude;
+const share = (altitude: number) => (altitude - FLOOR) / (TOP - FLOOR);
+const SUMMIT = ROUTE[ROUTE.length - 1];
+const POSTCARD = {
+  at: `${SUMMIT.at} · Mont Blanc, from the north`,
+  kicker: "The same dome you will point at from the office window.",
 };
+const HANDOFF = {
+  line: "Half of this job is knowing when to turn round.",
+  cue: "Back down to the office",
+};
+const POSTCARD_INDEX = CHAPTERS.findIndex((chapter) => chapter.id === "postcard");
+const HANDOFF_INDEX = CHAPTERS.length - 1;
+/** The page's own copy waits this long for the first terrain frame before entering regardless. */
+const SCENE_WAIT = 3500;
 
-export function Stage() {
+/** The hero's type and instruments share the page's centred column, so they line up with the header and every section. */
+const shell = "pointer-events-none absolute inset-0 mx-auto max-w-[104rem]";
+const gutters = "inset-x-6 sm:inset-x-10 lg:inset-x-14";
+const textBlock = `absolute ${gutters} top-[clamp(5rem,16svh,11rem)]`;
+/** Between the top bar and the instrument band; on a phone, the sky above the massif. */
+const openingSpace = `absolute ${gutters} top-18 bottom-[46svh] flex flex-col sm:top-[clamp(5rem,12svh,9rem)] sm:bottom-[clamp(5rem,12svh,9rem)] [@media(max-height:480px)]:bottom-14`;
+const band = "absolute inset-x-6 bottom-6 sm:right-20 sm:left-10 sm:bottom-[clamp(1.75rem,6svh,3.5rem)] lg:left-14 min-[1800px]:right-14";
+/** Captions sit on open sky that brightens through the dawn chapters; an ink halo keeps every glyph's edge. */
+const halo = "[text-shadow:0_0_2px_rgba(15,23,36,0.6),0_0_18px_rgba(15,23,36,0.7)]";
+
+function Caption({ chapter }: { chapter: number }) {
+  const { id, waypoint } = CHAPTERS[chapter];
+  if (id === "postcard") {
+    return (
+      <div className={`max-w-136 ${halo}`}>
+        <p className="data flex items-center gap-3 text-white">
+          <span aria-hidden className="tick" />
+          {POSTCARD.at}
+        </p>
+        <p className="hero-summit mt-4 text-white">{metres(SUMMIT.altitude)}</p>
+        <p className="body mt-4 max-w-[36ch] text-white [@media(max-height:480px)]:hidden">{POSTCARD.kicker}</p>
+      </div>
+    );
+  }
+  if (waypoint === null) return null;
+  const stop = ROUTE[waypoint];
+  return (
+    <div className={`max-w-136 ${halo}`}>
+      <p className="data flex items-center gap-3 text-white">
+        <span aria-hidden className="tick" />
+        {stop.at}
+      </p>
+      <p className="display-3 mt-3 text-white">{stop.place}</p>
+      <p className="body mt-3 max-w-[40ch] text-white [@media(max-height:480px)]:hidden">{stop.note}</p>
+    </div>
+  );
+}
+
+export function Stage({ snowLine }: { snowLine: number }) {
+  preload(TERRAIN.file, { as: "fetch", crossOrigin: "anonymous" });
+
   const track = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
-  const [step, setStep] = useState(0);
-  const { scrollYProgress: p } = useScroll({ target: track, offset: ["start start", "end end"] });
+  const reduced = useReducedMotion() ?? false;
+  const running = useInView(track);
+  const { scrollYProgress: p } = useScroll({
+    target: track,
+    offset: ["start start", "end end"],
+  });
+  const [moment] = useState<Moment>(() => ({ from: 0, to: 0, t: 0, drift: 0 }));
+  const [caption, setCaption] = useState(0);
+  const [openingLive, setOpeningLive] = useState(true);
+  const [sceneReady, setSceneReady] = useState(false);
 
-  const openingOpacity = useTransform(p, (v) => 1 - between(v, 0.08, 0.2));
-  const openingShift = useTransform(p, (v) => `translateY(${-40 * between(v, 0.08, 0.22)}px)`);
-  const captionOpacity = useTransform(p, (v) => between(v, 0.2, 0.28) * (1 - between(v, 0.78, 0.88)));
-  const readout = useTransform(p, (v) => metres(altitudeAt(v)));
-  const rail = useTransform(p, (v) => `scaleY(${between(v, 0.18, 0.72)})`);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setSceneReady(true), SCENE_WAIT);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  // Under reduced motion the camera cuts to the nearest held shot, so the instruments read that shot too.
+  const shown = (v: number) => {
+    const m = chapterAt(v, moment);
+    if (!reduced) return m;
+    const nearest = m.t < 0.5 ? m.from : m.to;
+    m.from = nearest;
+    m.to = nearest;
+    m.t = 0;
+    return m;
+  };
+  const visible = (v: number, index: number) => {
+    const c = captionAt(chapterAt(v, moment));
+    return c.chapter === index ? c.opacity : 0;
+  };
+
+  const openingOpacity = useTransform(p, (v) => 1 - between(v, CHAPTERS[0].hold[1], OPENING_END));
+  const openingShift = useTransform(p, (v) => `translateY(${(-32 * between(v, CHAPTERS[0].hold[1], OPENING_END)).toFixed(2)}px)`);
+  const promptOpacity = useTransform(p, (v) => 1 - between(v, 0.002, 0.02));
+  const captionOpacity = useTransform(p, (v) => {
+    const c = captionAt(chapterAt(v, moment));
+    return c.chapter === HANDOFF_INDEX ? 0 : c.opacity;
+  });
+  const captionShift = useTransform(captionOpacity, (o) => `translateY(${((1 - o) * 12).toFixed(2)}px)`);
+  const handoffOpacity = useTransform(p, (v) => visible(v, HANDOFF_INDEX));
+  const handoffShift = useTransform(handoffOpacity, (o) => `translateY(${((1 - o) * 18).toFixed(2)}px)`);
+  // Past the summit the ink rises and the altimeter runs back down to the office, where the page continues.
+  const altitude = useTransform(p, (v) => {
+    const high = altitudeAt(shown(v));
+    return high + (COMPANY.geo.altitude - high) * smooth(between(v, INK_FROM, 1));
+  });
+  const readout = useTransform(altitude, (a) => metres(a));
+  const readoutOpacity = useTransform(p, (v) => 1 - visible(v, POSTCARD_INDEX));
+  const railUp = useTransform(altitude, (a) => `scaleY(${share(a).toFixed(4)})`);
+  const railAcross = useTransform(altitude, (a) => `scaleX(${share(a).toFixed(4)})`);
+  const ink = useTransform(p, (v) => between(v, INK_FROM, 0.97));
 
   useMotionValueEvent(p, "change", (v) => {
-    const walked = Math.round(between(v, 0.18, 0.72) * (ROUTE.length - 1));
-    setStep((current) => (current === walked ? current : walked));
+    const next = captionAt(chapterAt(v, moment)).chapter;
+    setCaption((current) => (current === next ? current : next));
+    setOpeningLive(v < OPENING_END);
   });
 
-  const waypoint = ROUTE[step];
+  const [lead, ...rest] = HERO.lead.split(" ");
+  const handoffLive = caption === HANDOFF_INDEX;
 
   return (
-    <section ref={track} className="relative h-[400svh] bg-[#070c14]">
-      <div className="sticky top-0 h-svh overflow-hidden">
-        <TerrainClient progress={p} />
+    <section ref={track} aria-labelledby="climb-title" className="relative h-[500svh] bg-(--ink)">
+      <div data-scene={sceneReady ? "ready" : "loading"} className="hero-sky sticky top-0 h-svh overflow-hidden">
+        <TerrainClient snowLine={snowLine} progress={p} reduced={reduced} running={running} onReady={() => setSceneReady(true)} />
 
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(185deg,rgba(7,12,20,0.7)_0%,rgba(7,12,20,0.44)_40%,rgba(7,12,20,0.12)_70%,rgba(7,12,20,0)_100%)] lg:bg-[linear-gradient(100deg,rgba(7,12,20,0.9)_0%,rgba(7,12,20,0.64)_30%,rgba(7,12,20,0.2)_56%,rgba(7,12,20,0)_78%)]" />
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(130%_100%_at_50%_45%,transparent_55%,rgba(15,23,36,0.42)_100%)]" />
 
-        {/* The slanted veil clears the foot of the screen, where the caption and altimeter sit on small viewports. */}
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-[48svh] bg-[linear-gradient(to_top,rgba(7,12,20,0.86)_0%,rgba(7,12,20,0.48)_45%,rgba(7,12,20,0)_100%)] lg:hidden" />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[clamp(10rem,32svh,22rem)] bg-[linear-gradient(to_top,rgba(15,23,36,0.62),rgba(15,23,36,0.28)_45%,rgba(15,23,36,0))]"
+        />
+        <motion.div aria-hidden style={{ opacity: openingOpacity }} className="hero-pool pointer-events-none absolute inset-0" />
 
         <motion.div
-          style={{ opacity: openingOpacity, transform: openingShift }}
-          className="absolute inset-x-6 top-1/2 max-w-[46rem] -translate-y-1/2 sm:inset-x-10 lg:inset-x-14"
-        >
-          <motion.h1
-            initial={{ opacity: 0, transform: "translateY(18px)" }}
-            animate={{ opacity: 1, transform: "translateY(0px)" }}
-            transition={{ duration: reduced ? 0 : 1.1, delay: reduced ? 0 : 0.35, ease: OUT }}
-            className="flex flex-col"
-          >
-            <span className="w-expanded text-[clamp(3.1rem,7.2vw,7.6rem)] leading-[0.9] font-black tracking-[-0.038em] text-white">
-              {HERO.lead}
-            </span>
-            <span className="w-condensed mt-2 text-[clamp(1.7rem,3.5vw,3.6rem)] leading-[1] font-light tracking-[-0.01em] text-(--glacier)">
-              {HERO.trail}
-            </span>
-          </motion.h1>
+          aria-hidden
+          style={{ opacity: ink }}
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,var(--ink)_0%,var(--ink)_30%,rgba(15,23,36,0.82)_46%,rgba(15,23,36,0.35)_64%,rgba(15,23,36,0.1)_100%)]"
+        />
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: reduced ? 0 : 1, delay: reduced ? 0 : 0.5, ease: OUT }}
-            className="data mt-5 flex items-center gap-3 text-[0.82rem] text-white/60"
-          >
-            <span aria-hidden className="h-px w-8 bg-(--hazard)" />
-            {HERO.place}
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: reduced ? 0 : 1, delay: reduced ? 0 : 0.6, ease: OUT }}
-            className="mt-7 max-w-[44ch] text-[1.06rem] leading-[1.6] text-white/75"
-          >
-            {HERO.standfirst}
-          </motion.p>
+        <div className={shell}>
+          <div className={openingSpace}>
+            <motion.div style={{ opacity: openingOpacity, transform: openingShift }} className="pointer-events-auto my-auto max-w-184">
+              <h1 id="climb-title" className="text-white">
+                <span className="display-1 block">
+                  <span className="mt-[-0.1em] block overflow-hidden pt-[0.1em]">
+                    <span className="hero-rise block">{lead}</span>
+                  </span>{" "}
+                  <span className="mt-[-0.1em] block overflow-hidden pt-[0.1em]">
+                    <span className="hero-rise block [animation-delay:90ms]">{rest.join(" ")}</span>
+                  </span>
+                </span>{" "}
+                <span className="display-1-trail mt-2 block overflow-hidden pb-[0.08em] text-(--glacier)">
+                  <span className="hero-rise block [animation-delay:220ms]">{HERO.trail}</span>
+                </span>
+              </h1>
+              <p className="lead hero-enter mt-5 max-w-[30ch] text-white [animation-delay:560ms] sm:mt-7 [@media(max-height:560px)]:hidden">{HERO.standfirst}</p>
+              <div className="hero-enter hero-wait mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 [animation-delay:200ms] [@media(max-height:480px)]:mt-5">
+                <a
+                  href={telHref(COMPANY.phone)}
+                  tabIndex={openingLive ? 0 : -1}
+                  className="inline-flex min-h-12 items-center bg-(--signal) px-6 text-[1rem] font-medium text-white transition-colors hover:bg-white hover:text-(--ink)"
+                >
+                  {HERO.primary}
+                </a>
+                <a
+                  href="#objectives"
+                  onClick={onAnchorClick}
+                  tabIndex={openingLive ? 0 : -1}
+                  className="inline-flex min-h-11 items-center border-b border-white/70 text-[1rem] text-white transition-colors hover:border-(--signal)"
+                >
+                  {HERO.secondary}
+                </a>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div aria-hidden={caption === 0 || handoffLive} style={{ opacity: captionOpacity, transform: captionShift }} className={textBlock}>
+            <Caption chapter={caption} />
+          </motion.div>
+
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: reduced ? 0 : 1, delay: reduced ? 0 : 0.8, ease: OUT }}
-            className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-3"
+            aria-hidden={!handoffLive}
+            style={{ opacity: handoffOpacity, transform: handoffShift }}
+            className={`absolute ${gutters} bottom-24 sm:bottom-[calc(clamp(1.75rem,6svh,3.5rem)-0.75rem)] ${handoffLive ? "pointer-events-auto" : ""}`}
           >
+            <p className="hero-handoff max-w-[17ch] text-white">{HANDOFF.line}</p>
             <a
-              href={`tel:${COMPANY.phone.replace(/\s/g, "")}`}
-              className="bg-(--hazard) px-7 py-4 text-[0.98rem] font-medium text-white transition-colors hover:bg-white hover:text-(--ink)"
+              href="#after-hero"
+              onClick={onAnchorClick}
+              tabIndex={handoffLive ? 0 : -1}
+              className="data group mt-6 inline-flex min-h-11 items-center gap-3 text-white/85 transition-colors hover:text-white sm:mt-8"
             >
-              {HERO.primary}
-            </a>
-            <a href="#objectives" className="border-b border-white/70 pb-1 text-[0.98rem] text-white">
-              {HERO.secondary}
+              <span aria-hidden className="tick transition-[width] duration-300 group-hover:w-8" />
+              {HANDOFF.cue} · {metres(COMPANY.geo.altitude)}
+              <span aria-hidden>↓</span>
             </a>
           </motion.div>
 
-          <motion.dl
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: reduced ? 0 : 1, delay: reduced ? 0 : 1, ease: OUT }}
-            className="mt-12 hidden gap-x-10 border-t border-white/15 pt-6 sm:flex"
-          >
-            {TERMS.slice(0, 3).map((term) => (
-              <div key={term.label}>
-                <dt className="data text-[1.45rem] leading-none font-semibold text-white">
-                  {term.value}
-                  {term.unit && <span className="w-condensed ml-1.5 text-[0.78rem] font-medium text-white/55">{term.unit}</span>}
-                </dt>
-                <dd className="w-condensed mt-2 max-w-[18ch] text-[0.82rem] leading-snug text-white/55">{term.label}</dd>
+          <div aria-hidden className={band}>
+            <div className="hero-enter hero-wait flex items-baseline justify-between gap-6 [animation-delay:500ms] sm:items-end">
+              <motion.p style={{ opacity: promptOpacity }} className="label flex items-end gap-3 text-white [@media(max-height:480px)]:invisible">
+                <span className="relative mb-0.5 h-4 w-px overflow-hidden bg-white/25 sm:h-10">
+                  <span className="absolute inset-0 bg-white motion-safe:animate-[breche-cue_1.8s_ease-in-out_infinite]" />
+                </span>
+                Scroll to climb
+              </motion.p>
+
+              <div className="flex items-end gap-6">
+                <motion.div style={{ opacity: readoutOpacity }} className="text-right">
+                  <motion.p className="readout hero-readout text-white">{readout}</motion.p>
+                  <p className="label mt-2 hidden text-white sm:block [@media(max-height:480px)]:hidden">Altitude on the Goûter route</p>
+                </motion.div>
+                <div className="relative hidden h-[clamp(7rem,28svh,15rem)] w-px bg-white/30 sm:block [@media(max-height:480px)]:hidden">
+                  <motion.span style={{ transform: railUp }} className="absolute inset-0 origin-bottom bg-(--signal)" />
+                  {ROUTE.map((stop) => (
+                    <span
+                      key={stop.place}
+                      className="absolute -left-1.5 h-px w-3 bg-white/80"
+                      style={{
+                        bottom: `${(share(stop.altitude) * 100).toFixed(2)}%`,
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
-            ))}
-          </motion.dl>
-        </motion.div>
+            </div>
 
-        <motion.div style={{ opacity: captionOpacity }} className="absolute inset-x-6 bottom-28 max-w-[34rem] sm:inset-x-10 sm:bottom-12 lg:inset-x-14">
-          <p className="data text-[0.92rem] text-(--hazard)">{waypoint.at}</p>
-          <p className="w-expanded mt-2 text-[clamp(1.4rem,2.4vw,2.1rem)] leading-[1.08] font-semibold text-white">{waypoint.place}</p>
-          <p className="mt-3 max-w-[46ch] text-[1rem] leading-relaxed text-white/70">{waypoint.note}</p>
-        </motion.div>
-
-        <motion.div
-          style={{ opacity: openingOpacity }}
-          className="absolute inset-x-0 bottom-9 hidden justify-center lg:flex"
-        >
-          <span className="w-condensed flex flex-col items-center gap-3 text-[0.78rem] text-white/55">
-            Scroll to climb
-            <span aria-hidden className="h-10 w-px bg-white/30" />
-          </span>
-        </motion.div>
-
-        <div className="absolute right-6 bottom-8 flex items-end gap-5 text-right sm:right-10 sm:bottom-10 lg:right-14">
-          <div>
-            <motion.p className="data text-[clamp(1.9rem,3.6vw,3.2rem)] leading-[0.85] font-semibold text-white">{readout}</motion.p>
-            <p className="w-condensed mt-2 text-[0.85rem] text-white/55">Mont Blanc by the Goûter</p>
-          </div>
-          <div className="relative hidden h-[22vh] w-px bg-white/20 sm:block">
-            <motion.span style={{ transform: rail }} className="absolute inset-0 origin-bottom bg-(--hazard)" />
+            <div className="hero-enter hero-wait relative mt-4 h-px bg-white/30 [animation-delay:500ms] sm:hidden">
+              <motion.span style={{ transform: railAcross }} className="absolute inset-0 origin-left bg-(--signal)" />
+              {ROUTE.map((stop) => (
+                <span
+                  key={stop.place}
+                  className="absolute -top-1.5 h-3 w-px bg-white/80"
+                  style={{
+                    left: `${(share(stop.altitude) * 100).toFixed(2)}%`,
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
+
+      <ol className="sr-only">
+        {ROUTE.map((stop) => (
+          <li key={stop.place}>
+            {stop.at}: {stop.place}, {metres(stop.altitude)}. {stop.note}
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }

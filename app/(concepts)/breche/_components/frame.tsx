@@ -3,32 +3,35 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { IMAGE_BASE, type Slot } from "../_lib/content";
 
-// A photograph's place in the layout. Until the file arrives the slot shows the brief it
-// was commissioned against, so nothing shifts when the picture lands.
+/** A photograph cropped to its box, held on its own average colour until it loads. */
 export function Frame({
   slot,
   className,
   sizes,
-  priority,
-  quiet,
+  edge,
+  eager,
 }: {
   slot: Slot;
   className?: string;
   sizes: string;
-  priority?: boolean;
-  /** Hide the written brief where the layout puts its own words over the picture. */
-  quiet?: boolean;
+  edge?: boolean;
+  eager?: boolean;
 }) {
   return (
-    <div className={cn("relative overflow-hidden bg-(--glacier)", className)}>
-      {slot.src ? (
-        <Image src={`${IMAGE_BASE}/${slot.src}`} alt={slot.alt} fill sizes={sizes} priority={priority} className="object-cover" />
-      ) : (
-        <div role="img" aria-label={slot.alt} className="absolute inset-0 flex flex-col justify-between p-4" style={{ backgroundColor: slot.tone }}>
-          <span className="w-condensed text-[0.7rem] tracking-[0.04em] text-white/70">{slot.id}.webp</span>
-          {!quiet && <span className="w-condensed max-w-[30ch] text-[0.82rem] leading-snug text-white/85">{slot.alt}</span>}
-        </div>
-      )}
+    <div
+      className={cn("relative overflow-hidden", edge && "after:pointer-events-none after:absolute after:inset-0 after:ring-1 after:ring-black/8 after:ring-inset", className)}
+      style={{ backgroundColor: slot.tone }}
+    >
+      <Image
+        src={`${IMAGE_BASE}/${slot.src}`}
+        alt={slot.alt}
+        fill
+        sizes={sizes}
+        loading={eager ? "eager" : undefined}
+        fetchPriority={eager ? "low" : undefined}
+        className="object-cover"
+        style={{ objectPosition: slot.focus }}
+      />
     </div>
   );
 }

@@ -122,17 +122,17 @@ export const CONCEPTS: Concept[] = [
   {
     slug: "breche",
     name: "Brèche",
-    tagline: "The Mont Blanc massif rendered live from elevation data, flown as you scroll",
+    tagline: "Climb Mont Blanc by scrolling: the massif rendered live from elevation data",
     description:
-      "A one-page site for a Chamonix guiding company, built around the mountain itself: the massif is rendered live in the browser from public elevation tiles and lit like a winter dawn, with the Goûter route drawn on it in real coordinates. Scrolling flies the camera from a wide view of the range down the route to the summit while the altimeter climbs and each stage explains itself. The page then alternates dark and light — a blue-hour office panel, objectives in a staggered grid with French alpine grades, a dated conditions bulletin carrying a real avalanche-scale badge, and twelve guide portraits. One typeface at three widths, granite and hazard red.",
+      "A one-page site for a Chamonix guiding company, built around the mountain itself. The massif is rendered live from public elevation data, and scrolling climbs the Goûter route stage by stage: the camera, the altimeter, the light and a route drawn in real coordinates run on one clock, from late morning through a night at the hut to a gold summit over a cloud sea. Below it, ink and snow sections alternate: the office and its terms, six objectives over a relief map with a route sheet each, a conditions bulletin written for the season, twelve guides, and an enquiry form that offers only the weeks an objective is in season.",
     category: "hospitality",
     industry: "Mountain guides",
-    tags: ["landing-page", "marketing-site", "3d", "webgl", "terrain", "scroll-driven", "outdoor", "photography", "dark"],
+    tags: ["landing-page", "3d", "webgl", "terrain", "scroll-driven", "outdoor", "enquiry-form", "photography", "editorial"],
     bestFor:
       "Experience operators who sell expertise and judgement rather than stock: mountain and ski guides, dive and sailing schools, climbing and expedition outfits, safari and wilderness lodges, and specialist tour operators. One page, one enquiry, no catalogue to maintain.",
     status: "ready",
     addedAt: "2026-09-15",
-    theme: { fonts: "Archivo, three widths", accent: "#c8471f", supportsDarkMode: false },
+    theme: { fonts: "Archivo, expanded to compressed widths", accent: "#c8471f", supportsDarkMode: false },
     pages: [{ path: "", label: "Landing page" }],
     thumbnail: "/previews/breche.jpg",
   },
