@@ -193,24 +193,6 @@ export const CONCERNS_QUERY = /* GraphQL */ `
   }
 `;
 
-/** For a real checkout later: Shopify's own cart, which hands back a hosted `checkoutUrl`. */
-export const CART_CREATE_MUTATION = /* GraphQL */ `
-  mutation CuvetteCartCreate($lines: [CartLineInput!]!, $note: String) {
-    cartCreate(input: { lines: $lines, note: $note }) {
-      cart { id checkoutUrl totalQuantity cost { totalAmount { amount currencyCode } } }
-      userErrors { field message }
-    }
-  }
-`;
-
-export type CartLineInput = { merchandiseId: string; quantity: number; sellingPlanId?: string };
-export type CartCreateResponse = {
-  cartCreate: {
-    cart: { id: string; checkoutUrl: string; totalQuantity: number; cost: { totalAmount: Money } } | null;
-    userErrors: { field: string[] | null; message: string }[];
-  };
-};
-
 export function storeCredentials(): { domain: string; token: string } | null {
   const domain = process.env.SHOPIFY_STORE_DOMAIN?.trim();
   const token = process.env.SHOPIFY_STOREFRONT_TOKEN?.trim();
@@ -258,12 +240,4 @@ export async function storefront<T>(query: string, variables: Record<string, unk
   // A field the token can't read (a missing scope, a metafield without storefront access) nulls that field only.
   if (errors) console.warn(`[cuvette catalog] Storefront API returned partial data: ${errors}`);
   return body.data;
-}
-
-/** Shopify's hosted checkout for these variant lines. Not wired in: the demo checkout stays on the site. */
-export async function createCart(lines: CartLineInput[], note?: string) {
-  const data = await storefront<CartCreateResponse>(CART_CREATE_MUTATION, { lines, note }, { cache: "no-store" });
-  const { cart, userErrors } = data.cartCreate;
-  if (!cart) throw new Error(userErrors.map((e) => e.message).join("; ") || "cartCreate returned no cart");
-  return cart;
 }

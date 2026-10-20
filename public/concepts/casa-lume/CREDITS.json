@@ -1,12 +1,5 @@
 [
   {
-    "file": "bar.webp",
-    "photographer": "Declan Sun",
-    "profile": "https://unsplash.com/@declansun",
-    "photo": "https://unsplash.com/photos/a-bar-filled-with-lots-of-bottles-and-glasses-IstwV4SguAI",
-    "license": "Unsplash License"
-  },
-  {
     "file": "bathing-platform.webp",
     "photographer": "Unsplash contributor",
     "profile": "https://unsplash.com",
@@ -28,36 +21,8 @@
     "license": "Unsplash License"
   },
   {
-    "file": "dining-terrace.webp",
-    "photographer": "Erim Berk Benli",
-    "profile": "https://unsplash.com/@erimbenli",
-    "photo": "https://unsplash.com/photos/wooden-chairs-and-table-on-a-balcony-overlooking-the-ocean-eZ2FwUavp-M",
-    "license": "Unsplash License"
-  },
-  {
-    "file": "headland-path.webp",
-    "photographer": "Ian Schneider",
-    "profile": "https://unsplash.com/@goian",
-    "photo": "https://unsplash.com/photos/ocean-view-during-daytime-XJfHMPJ0e-g",
-    "license": "Unsplash License"
-  },
-  {
-    "file": "house-terraces.webp",
-    "photographer": "Thomas K",
-    "profile": "https://unsplash.com/@thomasthomask",
-    "photo": "https://unsplash.com/photos/stone-archway-overlooks-coastal-town-and-harbor-9iucvHSubXI",
-    "license": "Unsplash License"
-  },
-  {
     "file": "mark.png",
     "note": "Casa Lume monogram, cut from the supplied logo lockup"
-  },
-  {
-    "file": "pool.webp",
-    "photographer": "雙 film",
-    "profile": "https://unsplash.com/@film002",
-    "photo": "https://unsplash.com/photos/infinity-pool-overlooking-the-ocean-on-a-clear-day-8hWJ1lAASVY",
-    "license": "Unsplash License"
   },
   {
     "file": "room-garden-bath.webp",
@@ -81,13 +46,6 @@
     "license": "Unsplash License"
   },
   {
-    "file": "room-garden.webp",
-    "photographer": "Martina Jorden",
-    "profile": "https://unsplash.com/@martinaj",
-    "photo": "https://unsplash.com/photos/a-patio-area-with-a-tiled-floor-and-potted-trees-hJlrZg8aL_A",
-    "license": "Unsplash License"
-  },
-  {
     "file": "room-olive-terraces.webp",
     "photographer": "Flor Saurina",
     "profile": "https://unsplash.com/@saurinaf",
@@ -102,20 +60,6 @@
     "license": "Unsplash License"
   },
   {
-    "file": "room-olive.webp",
-    "photographer": "Andrea Davis",
-    "profile": "https://unsplash.com/@andreaedavis",
-    "photo": "https://unsplash.com/photos/a-bedroom-with-white-walls-and-a-white-bed-NOj1YFKJf4Y",
-    "license": "Unsplash License"
-  },
-  {
-    "file": "room-seaview.webp",
-    "photographer": "zero take",
-    "profile": "https://unsplash.com/@zerotake",
-    "photo": "https://unsplash.com/photos/blue-sea-under-blue-sky-during-daytime-MT0jTVolo7s",
-    "license": "Unsplash License"
-  },
-  {
     "file": "room-signature-pool.webp",
     "photographer": "Vasilis Caravitis",
     "profile": "https://unsplash.com/@epicuros",
@@ -127,20 +71,6 @@
     "photographer": "Katsia Jazwinska",
     "profile": "https://unsplash.com/@katsiajazwinska",
     "photo": "https://unsplash.com/photos/beige-curtain-cTA8m7VwejE",
-    "license": "Unsplash License"
-  },
-  {
-    "file": "room-signature.webp",
-    "photographer": "Margo Evardson",
-    "profile": "https://unsplash.com/@stadinstudio",
-    "photo": "https://unsplash.com/photos/two-wooden-chairs-on-a-patio-overlooking-the-blue-ocean-Vak2leYI_dU",
-    "license": "Unsplash License"
-  },
-  {
-    "file": "spa.webp",
-    "photographer": "visualsofdana",
-    "profile": "https://unsplash.com/@visualsofdana",
-    "photo": "https://unsplash.com/photos/black-and-white-abstract-painting-on-wall-IfsRTQu6Djk",
     "license": "Unsplash License"
   },
   {

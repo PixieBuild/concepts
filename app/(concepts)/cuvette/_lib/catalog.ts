@@ -150,11 +150,6 @@ export async function getProduct(handle: string): Promise<Product | null> {
   return resolveSet(product, new Map(singles.map((p) => [p.slug, p])));
 }
 
-export async function getProducts(handles: Slug[]): Promise<Product[]> {
-  const all = await loadCatalog();
-  return handles.flatMap((h) => all.find((p) => p.slug === h) ?? []);
-}
-
 /** The home stage's switcher: products tagged `hero`, by `cuvette.hero_order`, at most four; each needs a bottle. */
 export async function heroProducts(): Promise<Product[]> {
   return (await listProducts({ tag: HERO_TAG }))

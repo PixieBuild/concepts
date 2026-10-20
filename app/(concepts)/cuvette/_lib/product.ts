@@ -182,10 +182,6 @@ export function priceOf(product: Pick<ProductCard, "sizes">): number {
   return product.sizes[0]?.price ?? 0;
 }
 
-export function subscribePrice(product: Pick<ProductCard, "sizes" | "subscribe">): number {
-  return Math.round(priceOf(product) * (1 - product.subscribe.discount));
-}
-
 /** The one rating function: the visible summary and the JSON-LD both read it. */
 export function rating(product: Pick<ProductCard, "histogram">): Rating {
   const count = product.histogram.reduce((sum, n) => sum + n, 0);

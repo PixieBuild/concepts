@@ -5,8 +5,6 @@ import {
   motion,
   useInView,
   useReducedMotion,
-  useScroll,
-  useTransform,
 } from "motion/react";
 
 import { cn } from "@/lib/utils";
@@ -146,35 +144,5 @@ export function RevealImage({
         {children}
       </motion.div>
     </motion.div>
-  );
-}
-
-export function Parallax({
-  children,
-  className,
-  amount = 7,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  amount?: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(
-    scrollYProgress,
-    [0, 1],
-    reduced ? ["0%", "0%"] : [`-${amount}%`, `${amount}%`],
-  );
-
-  return (
-    <div ref={ref} className={cn("relative overflow-hidden", className)}>
-      <motion.div style={{ y }} className="absolute inset-0 scale-[1.16] will-change-transform">
-        {children}
-      </motion.div>
-    </div>
   );
 }

@@ -1,5 +1,4 @@
 export const BRAND = "Alder & Brass";
-export const EST = 2009;
 export const PHONE_DISPLAY = "(503) 555-0142";
 export const PHONE_HREF = "tel:+15035550142";
 export const EMAIL = "hello@alderandbrass.coffee";
