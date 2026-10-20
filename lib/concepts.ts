@@ -173,18 +173,27 @@ export const CONCEPTS: Concept[] = [
   {
     slug: "cuvette",
     name: "Cuvette",
-    tagline: "3D skincare homepage: a serum bottle staged like a product photograph, directed by scroll",
+    tagline: "Skincare shop built on one path-traced bottle, composited per product and ready for Shopify",
     description:
-      "A clinical skincare brand whose homepage is one rendered set — a glass dropper bottle on a stone plinth against plaster, with window light falling across it. Scrolling moves the camera from the full set to the label, lifts the dropper out to let a drop fall, then pulls back to clinical results; choosing a serum turns the bottle to its new label and colour. Below it sit the product range, a set offer, a customer quote and a full shop footer.",
+      "A Porto serum brand with four single-active serums and a morning set. The hero is one path-traced bottle scrubbed frame by frame as you scroll, with each product's label and serum colour composited live from its data, so a new Shopify product gets its own bottle without a render. Around it sit a products page with filters, product pages with a rendered gallery and editorial reviews, a routine builder, a bag with a set upsell and samples, and a three-step checkout that ends on a demo payment and a confirmation.",
     category: "ecommerce",
     industry: "Skincare brand",
-    tags: ["3d", "webgl", "product", "skincare", "beauty", "scroll-driven", "ecommerce", "light"],
+    tags: ["3d", "path-traced", "product", "skincare", "beauty", "scroll-driven", "ecommerce", "shopify", "cart", "checkout", "dark"],
     bestFor:
-      "Skincare, cosmetics, fragrance and drinks brands selling a small range of bottled products online.",
+      "Skincare, cosmetics, fragrance and drinks brands selling a small range of bottled products online, where the product page and the checkout have to feel as considered as the hero.",
     status: "draft",
     addedAt: "2026-09-15",
-    theme: { fonts: "Instrument Serif / Geist / Geist Mono", accent: "#e3962c", supportsDarkMode: false },
-    pages: [{ path: "", label: "Home" }],
+    theme: { fonts: "Mona Sans, expanded / Fragment Mono", accent: "#f3a948", supportsDarkMode: false },
+    pages: [
+      { path: "", label: "Home" },
+      { path: "/shop", label: "Shop" },
+      { path: "/vitamin-c", label: "Vitamin C" },
+      { path: "/hyaluronic", label: "Hyaluronic" },
+      { path: "/niacinamide", label: "Niacinamide" },
+      { path: "/retinal", label: "Retinal" },
+      { path: "/morning-set", label: "Morning set" },
+      { path: "/checkout", label: "Checkout" },
+    ],
     thumbnail: "/previews/cuvette.jpg",
   },
 ];

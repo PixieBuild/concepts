@@ -1,39 +1,245 @@
-/* Scoped to `:root.theme-<slug>` so it outranks the `:root` defaults in
-   globals.css regardless of stylesheet order. */
+/* Same order as Tailwind's, declared here because this file loads first: a lone
+   `@layer components` would otherwise rank below base and lose to preflight. */
+@layer theme, base, components, utilities;
 
 :root.theme-cuvette {
-  --radius: 0;
-  --font-heading: var(--font-display);
+  --radius: 2px;
+  --font-heading: var(--font-sans);
 
-  --background: #ebe4d9;
-  --foreground: #1c1a17;
-  --card: #f3ede4;
-  --card-foreground: #1c1a17;
-  --popover: #f3ede4;
-  --popover-foreground: #1c1a17;
-  --primary: #1c1a17;
-  --primary-foreground: #f3ede4;
-  --secondary: #e2d9cc;
-  --secondary-foreground: #1c1a17;
-  --muted: #e2d9cc;
-  --muted-foreground: #6f675c;
-  --accent: #e2d9cc;
-  --accent-foreground: #1c1a17;
-  --destructive: #b4432d;
-  --border: color-mix(in srgb, #1c1a17 16%, transparent);
-  --input: color-mix(in srgb, #1c1a17 22%, transparent);
-  --ring: #1c1a17;
+  --background: #0e0f10;
+  --foreground: #ebebe8;
+  --card: #16181a;
+  --card-foreground: #ebebe8;
+  --popover: #e8e9e6;
+  --popover-foreground: #0e0f10;
+  --primary: #ebebe8;
+  --primary-foreground: #0e0f10;
+  --secondary: #1e2123;
+  --secondary-foreground: #ebebe8;
+  --muted: #1e2123;
+  --muted-foreground: #9a9ea2;
+  --accent: #25292c;
+  --accent-foreground: #ebebe8;
+  --destructive: #ff5a5f;
+  --border: color-mix(in srgb, #ebebe8 13%, transparent);
+  --input: color-mix(in srgb, #ebebe8 38%, transparent);
+  --ring: #ebebe8;
+
+  --paper: #e8e9e6;
+  --paper-2: #dcddd9;
+  --ink: #0e0f10;
+  --ink-muted: #55595d;
+  --paper-line: color-mix(in srgb, #0e0f10 14%, transparent);
+  --paper-field: color-mix(in srgb, #0e0f10 46%, transparent);
+
+  /* Bands stay bright everywhere; --vc/--ha/--ni are text inks and switch on paper. */
+  --vc-band: #f3a948;
+  --ha-band: #93c1f0;
+  --ni-band: #a9d68b;
+  --vc: var(--vc-band);
+  --ha: var(--ha-band);
+  --ni: var(--ni-band);
+
+  --gutter: 1rem;
+
+  color-scheme: dark;
+  background-color: var(--background);
 }
 
-.theme-cuvette .eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  line-height: 1.3;
+/* One page edge for the header, footer and every page: same steps as sm and 2xl. */
+@media (min-width: 40rem) {
+  :root.theme-cuvette {
+    --gutter: 2.5rem;
+  }
 }
 
-.theme-cuvette .grain {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
+@media (min-width: 96rem) {
+  :root.theme-cuvette {
+    --gutter: 4rem;
+  }
+}
+
+/* Paper: everything you act on. Popups re-scope the tokens so shadcn parts read ink-on-paper. */
+.theme-cuvette :is(.paper, [data-slot="sheet-content"], [data-slot="dialog-content"], [data-slot="popover-content"], [data-slot="select-content"], [data-sonner-toast]) {
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-2);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-2);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--paper-2);
+  --accent-foreground: var(--ink);
+  --destructive: #b42318;
+  --border: var(--paper-line);
+  --input: var(--paper-field);
+  --ring: var(--ink);
+  --vc: #8a4a00;
+  --ha: #1b5894;
+  --ni: #376518;
+
+  color-scheme: light;
+}
+
+.theme-cuvette .paper {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Opt back into the dark set inside a popup, e.g. the gallery lightbox. */
+.theme-cuvette .darkroom {
+  --background: #0e0f10;
+  --foreground: #ebebe8;
+  --popover: #0e0f10;
+  --popover-foreground: #ebebe8;
+  --primary: #ebebe8;
+  --primary-foreground: #0e0f10;
+  --muted: #1e2123;
+  --muted-foreground: #9a9ea2;
+  --accent: #25292c;
+  --accent-foreground: #ebebe8;
+  --border: color-mix(in srgb, #ebebe8 13%, transparent);
+  --input: color-mix(in srgb, #ebebe8 38%, transparent);
+  --ring: #ebebe8;
+  --vc: var(--vc-band);
+  --ha: var(--ha-band);
+  --ni: var(--ni-band);
+
+  color-scheme: dark;
+}
+
+/* The dark page dims behind a paper drawer; no blur, which would read as a glass bar. */
+.theme-cuvette :is([data-slot="sheet-overlay"], [data-slot="dialog-overlay"]) {
+  background-color: rgb(0 0 0 / 0.6);
+  backdrop-filter: none;
+}
+
+@layer base {
+  .theme-cuvette body {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+
+  .theme-cuvette ::selection {
+    background-color: var(--vc-band);
+    color: #0e0f10;
+  }
+
+  /* Tailwind 4's preflight leaves buttons on the arrow cursor. */
+  .theme-cuvette :is(button, [role="button"], [role="tab"], [role="radio"], [role="checkbox"], [role="switch"], [role="option"], [role="menuitem"], summary, label[for], select, input:is([type="checkbox"], [type="radio"], [type="submit"], [type="button"], [type="reset"])) {
+    cursor: pointer;
+  }
+
+  .theme-cuvette :is(button, [role="button"], [role="tab"], [role="radio"], [role="checkbox"], [role="switch"], [role="option"], [role="menuitem"], select, input):is(:disabled, [aria-disabled="true"], [data-disabled]) {
+    cursor: not-allowed;
+  }
+
+  .theme-cuvette :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* The page edge the header sits on. Full-bleed, like the stage it overlays. */
+  .theme-cuvette .shell {
+    width: 100%;
+    padding-inline: var(--gutter);
+  }
+
+  .theme-cuvette :is(.label, .eyebrow) {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .theme-cuvette .wordmark {
+    font-size: 1.0625rem;
+    font-weight: 450;
+    font-stretch: 125%;
+    line-height: 1;
+    letter-spacing: 0.34em;
+    margin-inline-end: -0.34em;
+    text-transform: uppercase;
+  }
+
+  /* Display pulls back by its side bearing so the ink lines up with body text. */
+  .theme-cuvette .display {
+    font-size: clamp(2.5rem, 1.93rem + 2.44vw, 5.25rem);
+    font-weight: 300;
+    font-stretch: 125%;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+    margin-inline-start: -0.04em;
+  }
+
+  .theme-cuvette .heading {
+    font-size: clamp(1.875rem, 1.48rem + 1.69vw, 3.5rem);
+    font-weight: 300;
+    font-stretch: 125%;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+    margin-inline-start: -0.03em;
+  }
+
+  .theme-cuvette .title {
+    font-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.875rem);
+    font-weight: 400;
+    font-stretch: 112%;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .theme-cuvette .product-name {
+    font-weight: 500;
+    font-stretch: 112%;
+    letter-spacing: -0.01em;
+  }
+
+  .theme-cuvette .lead {
+    font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+    line-height: 1.5;
+  }
+
+  /* Strength numerals. Lining figures only: Mona Sans' tabular zero is slashed. */
+  .theme-cuvette :is(.figure, .figure-xl, .figure-hero) {
+    font-weight: 200;
+    font-stretch: 125%;
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    margin-inline-start: -0.05em;
+  }
+
+  .theme-cuvette .figure {
+    font-size: clamp(2.75rem, 2.2rem + 1.5vw, 3.75rem);
+  }
+
+  .theme-cuvette .figure-xl {
+    font-size: clamp(4.5rem, 3.1rem + 3.8vw, 7rem);
+  }
+
+  .theme-cuvette .figure-hero {
+    font-size: clamp(6rem, 3.6rem + 6.5vw, 10.5rem);
+  }
+
+  .theme-cuvette .link {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+    transition: text-decoration-color 200ms ease;
+  }
+
+  .theme-cuvette .link:hover {
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  }
 }

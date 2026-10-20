@@ -1,0 +1,655 @@
+{
+ "units": "Live-scene units, y up, 1 unit \u2248 26 mm. Blender maps (x, y, z) -> (x, -z, y).",
+ "chapters": {
+  "wide": [
+   {
+    "eye": [
+     0,
+     1.72,
+     11.6
+    ],
+    "look": [
+     0,
+     1.72,
+     0
+    ],
+    "fov": 26,
+    "shift": [
+     0.1,
+     0.03
+    ]
+   },
+   {
+    "eye": [
+     0,
+     0.95,
+     3.7
+    ],
+    "look": [
+     0,
+     0.93,
+     0
+    ],
+    "fov": 26,
+    "shift": [
+     0.14,
+     0
+    ]
+   },
+   {
+    "eye": [
+     0.55,
+     2.1,
+     11
+    ],
+    "look": [
+     0.55,
+     1.95,
+     0
+    ],
+    "fov": 26,
+    "shift": [
+     0.14,
+     0.02
+    ]
+   },
+   {
+    "eye": [
+     3.6,
+     0.85,
+     10
+    ],
+    "look": [
+     0.55,
+     1.4,
+     0.2
+    ],
+    "fov": 26,
+    "shift": [
+     0.16,
+     0
+    ]
+   }
+  ],
+  "tall": [
+   {
+    "eye": [
+     0,
+     1.62,
+     11.8
+    ],
+    "look": [
+     0,
+     1.62,
+     0
+    ],
+    "fov": 30,
+    "shift": [
+     0,
+     -0.02
+    ]
+   },
+   {
+    "eye": [
+     0,
+     0.95,
+     4.6
+    ],
+    "look": [
+     0,
+     0.93,
+     0
+    ],
+    "fov": 30,
+    "shift": [
+     0,
+     0
+    ]
+   },
+   {
+    "eye": [
+     0.5,
+     2,
+     12.6
+    ],
+    "look": [
+     0.5,
+     1.9,
+     0
+    ],
+    "fov": 30,
+    "shift": [
+     0,
+     0
+    ]
+   },
+   {
+    "eye": [
+     2.9,
+     0.8,
+     10.6
+    ],
+    "look": [
+     0.5,
+     1.45,
+     0.2
+    ],
+    "fov": 30,
+    "shift": [
+     0,
+     0
+    ]
+   }
+  ]
+ },
+ "chapter_progress": [
+  0,
+  0.3333333333333333,
+  0.6666666666666666,
+  1
+ ],
+ "hero": {
+  "frames": 240,
+  "size": 2400,
+  "path": "wide",
+  "hfov": [
+   49.56897693578778,
+   49.56897693578778,
+   49.56897693578778,
+   49.56897693578778
+  ],
+  "crops": {
+   "desktop": {
+    "x": 0,
+    "y": 0.25,
+    "w": 0.8,
+    "h": 0.5,
+    "aspect": "16:10",
+    "note": "Bottle axis at 62.5% across; the live wide chapters put it at 60\u201366%."
+   },
+   "phone": {
+    "x": 0.275,
+    "y": 0.1,
+    "w": 0.45,
+    "h": 0.8,
+    "aspect": "9:16",
+    "note": "Centred on the bottle axis; 1080x1920 from a 2400 square."
+   }
+  }
+ },
+ "stills": {
+  "hero-wide": {
+   "layout": "single",
+   "progress": 0,
+   "turn": 0,
+   "eye": [
+    0,
+    1.72,
+    11.6
+   ],
+   "look": [
+    0,
+    1.72,
+    0
+   ],
+   "fov": 26,
+   "shift": [
+    0.1,
+    0.03
+   ],
+   "size": [
+    2880,
+    1620
+   ]
+  },
+  "hero-tall": {
+   "layout": "single",
+   "progress": 0,
+   "turn": 0,
+   "eye": [
+    0,
+    1.62,
+    11.8
+   ],
+   "look": [
+    0,
+    1.62,
+    0
+   ],
+   "fov": 30,
+   "shift": [
+    0,
+    -0.02
+   ],
+   "size": [
+    1170,
+    2080
+   ]
+  },
+  "pack": {
+   "layout": "single",
+   "progress": 0,
+   "turn": 0,
+   "eye": [
+    0,
+    1.62,
+    10.6
+   ],
+   "look": [
+    0,
+    1.62,
+    0
+   ],
+   "fov": 26,
+   "shift": [
+    0,
+    -0.01
+   ],
+   "size": [
+    2000,
+    2500
+   ]
+  },
+  "three-quarter": {
+   "layout": "single",
+   "progress": 0,
+   "turn": 0.05,
+   "eye": [
+    2.3,
+    1.7,
+    10.2
+   ],
+   "look": [
+    0.1,
+    1.55,
+    0
+   ],
+   "fov": 26,
+   "shift": [
+    0,
+    0
+   ],
+   "size": [
+    2000,
+    2500
+   ]
+  },
+  "label": {
+   "layout": "single",
+   "progress": 0,
+   "turn": 0,
+   "eye": [
+    0,
+    0.95,
+    3.25
+   ],
+   "look": [
+    0,
+    0.93,
+    0
+   ],
+   "fov": 24,
+   "shift": [
+    0,
+    0
+   ],
+   "size": [
+    2000,
+    2500
+   ],
+   "focus": {
+    "at": [
+     0,
+     0.93,
+     0.63
+    ],
+    "range": 0.4,
+    "bokeh": 5
+   }
+  },
+  "label-wide": {
+   "layout": "single",
+   "progress": 0,
+   "turn": 0,
+   "eye": [
+    0,
+    0.98,
+    3.4
+   ],
+   "look": [
+    0,
+    0.95,
+    0
+   ],
+   "fov": 24,
+   "shift": [
+    0.2,
+    0
+   ],
+   "size": [
+    2880,
+    1620
+   ],
+   "focus": {
+    "at": [
+     0,
+     0.95,
+     0.63
+    ],
+    "range": 0.4,
+    "bokeh": 5
+   }
+  },
+  "drop": {
+   "layout": "single",
+   "progress": 0.675,
+   "turn": 0,
+   "eye": [
+    0.5,
+    2.3,
+    15.8
+   ],
+   "look": [
+    0.5,
+    2.05,
+    0.2
+   ],
+   "fov": 18,
+   "shift": [
+    0,
+    0
+   ],
+   "size": [
+    2000,
+    2500
+   ]
+  },
+  "drop-stone": {
+   "layout": "single",
+   "progress": 0.96,
+   "turn": 0,
+   "eye": [
+    1.62,
+    0.4,
+    2.25
+   ],
+   "look": [
+    1,
+    0.08,
+    0.28
+   ],
+   "fov": 26,
+   "shift": [
+    0,
+    0
+   ],
+   "size": [
+    2000,
+    2500
+   ],
+   "focus": {
+    "at": [
+     1,
+     0.01,
+     0.34
+    ],
+    "range": 0.3,
+    "bokeh": 9
+   }
+  },
+  "group": {
+   "layout": "trio",
+   "progress": 0,
+   "turn": 0,
+   "eye": [
+    0,
+    2.3,
+    13.0
+   ],
+   "look": [
+    0,
+    1.2,
+    0
+   ],
+   "fov": 23,
+   "shift": [
+    0,
+    0
+   ],
+   "size": [
+    2000,
+    2500
+   ]
+  },
+  "group-wide": {
+   "layout": "trio",
+   "progress": 0,
+   "turn": 0,
+   "eye": [
+    0,
+    2.6,
+    14.2
+   ],
+   "look": [
+    0,
+    1.45,
+    0
+   ],
+   "fov": 26,
+   "shift": [
+    0,
+    0.02
+   ],
+   "size": [
+    2880,
+    1620
+   ]
+  },
+  "set": {
+   "layout": "pair",
+   "progress": 0,
+   "turn": 0,
+   "eye": [
+    0,
+    2.4,
+    12.6
+   ],
+   "look": [
+    0,
+    1.5,
+    0
+   ],
+   "fov": 26,
+   "shift": [
+    0,
+    0
+   ],
+   "size": [
+    2000,
+    2500
+   ]
+  }
+ },
+ "dropper": {
+  "tilt": -0.05,
+  "lift": 3.9,
+  "lower": 2.43,
+  "drop": 0.058,
+  "hang": [
+   0.98,
+   0,
+   0.34
+  ],
+  "phases": {
+   "lift": [
+    0.4,
+    0.515
+   ],
+   "shift": [
+    0.515,
+    0.56
+   ],
+   "lower": [
+    0.56,
+    0.62
+   ],
+   "raise": [
+    0.8,
+    0.845
+   ],
+   "back": [
+    0.845,
+    0.875
+   ],
+   "seat": [
+    0.875,
+    0.94
+   ]
+  },
+  "drop_phases": {
+   "grow": [
+    0.62,
+    0.66
+   ],
+   "fall": [
+    0.69,
+    0.72
+   ],
+   "spread": [
+    0.72,
+    0.77
+   ]
+  },
+  "bead": {
+   "radius": 0.095,
+   "rise": 0.33
+  },
+  "collar": [
+   [
+    0.236,
+    2.4
+   ],
+   [
+    0.236,
+    2.305
+   ],
+   [
+    0.27,
+    2.3
+   ],
+   [
+    0.288,
+    2.306
+   ],
+   [
+    0.295,
+    2.322
+   ],
+   [
+    0.295,
+    2.36
+   ],
+   [
+    0.289,
+    2.366
+   ],
+   [
+    0.295,
+    2.372
+   ],
+   [
+    0.295,
+    2.6
+   ],
+   [
+    0.289,
+    2.606
+   ],
+   [
+    0.295,
+    2.612
+   ],
+   [
+    0.295,
+    2.648
+   ],
+   [
+    0.288,
+    2.664
+   ],
+   [
+    0.27,
+    2.67
+   ],
+   [
+    0.2,
+    2.67
+   ]
+  ],
+  "note": "Held from above the frame: the dropper rises straight out through the top edge, crosses while out of shot and comes down from the top to hang with its tip 1.8 above the stone, collar and bulb cropped by the frame, so it reads as hand-held. The drop falls to the stone and spreads into a bead."
+ },
+ "label": {
+  "arc": 2.3,
+  "radius": 0.626,
+  "height": 1.05,
+  "y": 0.9
+ },
+ "places": {
+  "single": [
+   {
+    "x": 0,
+    "z": 0,
+    "index": 0,
+    "turn": 0
+   }
+  ],
+  "pair": [
+   {
+    "x": -0.8,
+    "z": 0.12,
+    "index": 0,
+    "turn": 0.1
+   },
+   {
+    "x": 0.8,
+    "z": -0.22,
+    "index": 1,
+    "turn": -0.08
+   }
+  ],
+  "trio": [
+   {
+    "x": -1.34,
+    "z": -0.2,
+    "index": 0,
+    "turn": 0.17
+   },
+   {
+    "x": 0,
+    "z": 0.1,
+    "index": 1,
+    "turn": 0
+   },
+   {
+    "x": 1.34,
+    "z": -0.12,
+    "index": 2,
+    "turn": -0.17
+   }
+  ]
+ },
+ "plinth": {
+  "single": 3.3,
+  "pair": 4.3,
+  "trio": 5.2,
+  "height": 3,
+  "depth": 2.2,
+  "z": -0.15
+ },
+ "wall": {
+  "width": 30,
+  "height": 16,
+  "y": 4,
+  "z": -2.4
+ }
+}

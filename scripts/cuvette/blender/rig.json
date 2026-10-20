@@ -1,0 +1,334 @@
+{
+ "note": "Darkroom light rig in live-scene units (x right, y up, z toward camera). camera/diffuse/glossy/transmission are Cycles ray visibilities.",
+ "world": 0.0006,
+ "lights": [
+  {
+   "name": "key",
+   "type": "SPOT",
+   "at": [
+    -5.4,
+    6.4,
+    1.8
+   ],
+   "aim": [
+    0.25,
+    0.3,
+    -0.2
+   ],
+   "energy": 2600,
+   "spot": 19,
+   "blend": 1.0,
+   "soft": 0.28,
+   "glossy": false
+  },
+  {
+   "name": "rim-left",
+   "type": "AREA",
+   "at": [
+    -2.3,
+    1.7,
+    -3.0
+   ],
+   "aim": [
+    0,
+    1.3,
+    0
+   ],
+   "size": [
+    0.35,
+    4.2
+   ],
+   "energy": 150,
+   "diffuse": false
+  },
+  {
+   "name": "rim-right",
+   "type": "AREA",
+   "at": [
+    2.3,
+    1.7,
+    -2.9
+   ],
+   "aim": [
+    0,
+    1.3,
+    0
+   ],
+   "size": [
+    0.25,
+    4.2
+   ],
+   "energy": 110,
+   "diffuse": false
+  },
+  {
+   "name": "top",
+   "type": "AREA",
+   "at": [
+    0.3,
+    5.2,
+    -0.8
+   ],
+   "aim": [
+    0,
+    2.6,
+    0
+   ],
+   "size": [
+    1.6,
+    0.9
+   ],
+   "energy": 60,
+   "diffuse": false
+  },
+  {
+   "name": "fill",
+   "type": "AREA",
+   "at": [
+    6.5,
+    2.4,
+    8.0
+   ],
+   "aim": [
+    0,
+    1.0,
+    0
+   ],
+   "size": [
+    5,
+    5
+   ],
+   "energy": 10,
+   "glossy": false
+  },
+  {
+   "name": "halo",
+   "type": "AREA",
+   "at": [
+    0.45,
+    2.5,
+    -1.05
+   ],
+   "aim": [
+    0.45,
+    2.7,
+    -2.4
+   ],
+   "size": [
+    1.1,
+    1.4
+   ],
+   "energy": 34,
+   "glossy": false,
+   "transmission": false,
+   "note": "A small soft source hidden behind the bottle, washing the plaster: the pool falls off by distance, so it has no edge, and the serum refracts it."
+  },
+  {
+   "name": "kicker",
+   "type": "AREA",
+   "at": [
+    -1.8,
+    4.8,
+    -1.3
+   ],
+   "aim": [
+    0,
+    2.95,
+    0
+   ],
+   "size": [
+    0.9,
+    1.4
+   ],
+   "energy": 110,
+   "diffuse": false,
+   "transmission": false,
+   "note": "Satin highlight on the teat's dome and waist."
+  },
+  {
+   "name": "edge",
+   "type": "AREA",
+   "at": [
+    0,
+    7.0,
+    2.4
+   ],
+   "aim": [
+    0,
+    0,
+    0.9
+   ],
+   "size": [
+    9,
+    0.6
+   ],
+   "energy": 320,
+   "diffuse": false,
+   "transmission": false,
+   "note": "A thin line of light along the plinth's front bevel."
+  },
+  {
+   "name": "bounce",
+   "type": "AREA",
+   "at": [
+    0,
+    -1.4,
+    7.0
+   ],
+   "aim": [
+    0,
+    -1.4,
+    0
+   ],
+   "size": [
+    9,
+    1.2
+   ],
+   "energy": 30,
+   "glossy": false,
+   "transmission": false,
+   "note": "A low white card lifting the plinth's front face off black."
+  },
+  {
+   "name": "bulb-rim",
+   "type": "AREA",
+   "at": [
+    -1.5,
+    3.15,
+    -1.7
+   ],
+   "aim": [
+    0,
+    2.95,
+    0
+   ],
+   "size": [
+    0.25,
+    1.1
+   ],
+   "energy": 70,
+   "diffuse": false,
+   "transmission": false,
+   "note": "A thin strip that draws the teat's left edge and waist out of the dark."
+  },
+  {
+   "name": "strip-body",
+   "type": "SOFTBOX",
+   "at": [
+    3.7,
+    1.5,
+    3.4
+   ],
+   "aim": [
+    0,
+    1.0,
+    0
+   ],
+   "size": [
+    1.3,
+    4.6
+   ],
+   "diffuse": false,
+   "transmission": false,
+   "note": "A tall, narrow softbox about 35 degrees camera-right: one soft vertical specular line down the body, over the print. Its face falls off across and along it (look.softbox).",
+   "strength": 4.9
+  },
+  {
+   "name": "strip-edge",
+   "type": "SOFTBOX",
+   "at": [
+    -4.8,
+    1.9,
+    -0.9
+   ],
+   "aim": [
+    0,
+    1.6,
+    0
+   ],
+   "size": [
+    0.9,
+    4.6
+   ],
+   "diffuse": false,
+   "note": "A strip about 100 degrees camera-left: thin bright edge lines on the bottle and down the glass pipette. Its face falls off across and along it (look.softbox), so the line rolls off rather than clipping.",
+   "strength": 15.3
+  },
+  {
+   "name": "caustic",
+   "type": "SPOT",
+   "at": [
+    -1.5,
+    2.45,
+    -2.15
+   ],
+   "aim": [
+    0.05,
+    0.55,
+    0
+   ],
+   "energy": 520,
+   "spot": 30,
+   "blend": 0.35,
+   "soft": 0.02,
+   "note": "A hard, narrow spot behind and above the bottle (about 30 degrees up): the serum throws its tinted caustic onto the stone in front of the base."
+  }
+ ],
+ "glow": {
+  "distance": 1.9,
+  "width": 2.6,
+  "height": 2.8,
+  "y": 0.9,
+  "centre": [
+   0.5,
+   0.507
+  ],
+  "sigma": [
+   0.14423076923076922,
+   0.19642857142857145
+  ],
+  "strength": 0.7,
+  "note": "Physical pool: centred 0.92 up, sigma 0.38 across and 0.55 high; the card itself is transparent wherever the pool dies, so it has no edge."
+ },
+ "print_card": {
+  "from": [
+   1.0,
+   1.4,
+   8.5
+  ],
+  "strength": 2.0,
+  "note": "A flagged card lighting the print alone: applied in the label layer's sleeve shader as light from this direction, falling off with the curve."
+ },
+ "dose": {
+  "note": "Added for the dose only: a backlight card behind the hanging drop, seen only through the drop and pipette, and a small strip linked to the drops for one clean highlight.",
+  "card": {
+   "size": [
+    1.0,
+    1.6
+   ],
+   "behind": 1.3,
+   "rise": 0.25,
+   "centre": [
+    0.5,
+    0.42
+   ],
+   "sigma": [
+    0.2,
+    0.26
+   ],
+   "strength": 1.4
+  },
+  "light": {
+   "size": [
+    0.16,
+    0.45
+   ],
+   "energy": 5.0,
+   "offset": [
+    1.1,
+    1.2,
+    1.8
+   ]
+  }
+ }
+}

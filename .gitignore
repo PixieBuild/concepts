@@ -52,3 +52,4 @@ next-env.d.ts
 
 # macOS folder metadata.
 .DS_Store
+__pycache__/

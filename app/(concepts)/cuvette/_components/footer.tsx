@@ -1,48 +1,96 @@
-import { BRAND, ORIGIN } from "../_lib/content";
+import Link from "next/link";
 
-const COLUMNS = [
-  { title: "Shop", links: ["Vitamin C 15%", "Hyaluronic 2%", "Niacinamide 10%", "The morning set"] },
-  { title: "Learn", links: ["The actives", "Routine finder", "Clinical results", "Journal"] },
-  { title: "Help", links: ["Delivery", "Returns", "Contact", "Stockists"] },
-];
+import { listProducts } from "../_lib/catalog";
+import { BRAND, COMPANY } from "../_lib/content";
+import { productHref } from "../_lib/product";
+import { HelpButton, HelpSheets } from "./help-sheets";
 
-export function Footer() {
+// The merchant's first few by `cuvette.position`; the shop page lists the rest.
+const FOOTER_MAX = 4;
+import { Newsletter } from "./newsletter";
+
+export async function Footer() {
+  const [local, domain] = COMPANY.email.split("@");
+  const products = await listProducts();
   return (
-    <footer className="border-t border-border px-6 pt-16 pb-10 sm:px-10">
-      <div className="grid gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-5">
-          <p className="font-heading text-[clamp(2.1rem,3.4vw,3.3rem)] leading-[1.02]">
-            Notes on actives, <em>once a month.</em>
-          </p>
-          <form className="mt-7 flex max-w-md border-b border-foreground">
-            <label htmlFor="cuvette-email" className="sr-only">
-              Email address
-            </label>
-            <input id="cuvette-email" type="email" placeholder="Email address" className="min-w-0 flex-1 bg-transparent py-3 outline-none placeholder:text-muted-foreground" />
-            <button type="button" className="py-3 text-[0.92rem]">
-              Subscribe
-            </button>
-          </form>
-        </div>
-        <nav aria-label="Footer" className="grid grid-cols-2 gap-8 text-[0.93rem] sm:grid-cols-3 lg:col-span-6 lg:col-start-7">
-          {COLUMNS.map((column) => (
-            <div key={column.title}>
-              <p className="eyebrow text-muted-foreground">{column.title}</p>
-              <ul className="mt-4 space-y-2.5">
-                {column.links.map((link) => (
-                  <li key={link}>
-                    <a href="#">{link}</a>
+    <footer className="border-t border-border">
+      <div className="shell pt-16 pb-10 sm:pb-20 lg:pt-20">
+        <div className="grid gap-14 md:grid-cols-12 md:gap-10">
+          <div className="md:col-span-12 lg:col-span-5">
+            <Newsletter />
+          </div>
+          <div className="grid grid-cols-2 gap-8 md:contents">
+            <nav
+              aria-label="Shop"
+              className="md:col-span-4 lg:col-span-3 lg:col-start-8"
+            >
+              <h2 className="label text-muted-foreground">Shop</h2>
+              <ul className="mt-3">
+                {products.slice(0, FOOTER_MAX).map((p) => (
+                  <li key={p.slug}>
+                    <Link
+                      href={productHref(p.slug)}
+                      className="inline-flex min-h-11 items-center transition-colors hover:text-muted-foreground"
+                    >
+                      {p.title}
+                    </Link>
                   </li>
                 ))}
+                <li>
+                  <Link
+                    href="/cuvette/shop"
+                    className="link inline-flex min-h-11 items-center text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    All {products.length} products
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+            <div className="md:col-span-4 lg:col-span-2">
+              <h2 className="label text-muted-foreground">Help</h2>
+              <ul className="mt-3">
+                <li>
+                  <HelpButton
+                    topic="delivery"
+                    className="transition-colors hover:text-muted-foreground"
+                  >
+                    Delivery &amp; returns
+                  </HelpButton>
+                </li>
+                <li>
+                  <HelpButton
+                    topic="contact"
+                    className="transition-colors hover:text-muted-foreground"
+                  >
+                    Contact
+                  </HelpButton>
+                </li>
+                <li>
+                  <a
+                    href={`mailto:${COMPANY.email}`}
+                    className="inline-block py-2.5 text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {local}@<wbr />
+                    {domain}
+                  </a>
+                </li>
               </ul>
             </div>
-          ))}
-        </nav>
+          </div>
+        </div>
+
+        <div className="label mt-16 flex flex-col gap-3 border-t border-border pt-6 text-muted-foreground lg:mt-24 lg:flex-row lg:items-center lg:justify-between">
+          <p>
+            <span className="text-foreground">{BRAND}</span> · {COMPANY.legal} ·{" "}
+            {COMPANY.city}, {COMPANY.country}
+          </p>
+          <p>
+            Prices in EUR incl. VAT · Demo shop: no orders are fulfilled · ©
+            2026
+          </p>
+        </div>
       </div>
-      <div className="mt-20 flex flex-wrap items-end justify-between gap-6">
-        <p className="font-heading text-[clamp(5rem,17vw,17rem)] leading-[0.78]">{BRAND}</p>
-        <p className="font-mono text-[0.7rem] tracking-[0.08em] text-muted-foreground uppercase">{ORIGIN} · © 2026</p>
-      </div>
+      <HelpSheets />
     </footer>
   );
 }

@@ -1,0 +1,954 @@
+{
+  "data": {
+    "products": {
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": null
+      },
+      "nodes": [
+        {
+          "id": "gid://shopify/Product/8800100000001",
+          "handle": "vitamin-c",
+          "title": "Vitamin C 15%",
+          "description": "L-ascorbic acid with ferulic acid and vitamin E. Brightens dull skin and fades dark marks. Mornings, before SPF.",
+          "descriptionHtml": "<p>L-ascorbic acid with ferulic acid and vitamin E.</p><p>Brightens dull skin and fades dark marks. Mornings, before SPF.</p>",
+          "productType": "Serum",
+          "vendor": "Cuvette",
+          "tags": [
+            "hero",
+            "serum",
+            "morning"
+          ],
+          "availableForSale": true,
+          "createdAt": "2026-03-02T10:00:00Z",
+          "updatedAt": "2026-10-17T09:00:00Z",
+          "seo": {
+            "title": "Vitamin C 15% Serum",
+            "description": null
+          },
+          "priceRange": {
+            "minVariantPrice": {
+              "amount": "34.0",
+              "currencyCode": "EUR"
+            },
+            "maxVariantPrice": {
+              "amount": "34.0",
+              "currencyCode": "EUR"
+            }
+          },
+          "featuredImage": null,
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/8800100001001",
+                "title": "30 ml",
+                "sku": "CV-15C",
+                "availableForSale": true,
+                "price": {
+                  "amount": "34.0",
+                  "currencyCode": "EUR"
+                },
+                "compareAtPrice": null,
+                "selectedOptions": [
+                  {
+                    "name": "Size",
+                    "value": "30 ml"
+                  }
+                ]
+              }
+            ]
+          },
+          "media": {
+            "nodes": []
+          },
+          "metafields": [
+            {
+              "namespace": "cuvette",
+              "key": "strength",
+              "type": "single_line_text_field",
+              "value": "15%",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "active",
+              "type": "single_line_text_field",
+              "value": "L-ascorbic acid",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "size_ml",
+              "type": "number_integer",
+              "value": "30",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "ph",
+              "type": "single_line_text_field",
+              "value": "3.2",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "pao",
+              "type": "single_line_text_field",
+              "value": "3M",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "lot",
+              "type": "single_line_text_field",
+              "value": "2610-14",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "filled",
+              "type": "date",
+              "value": "2026-10-14",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "liquid_colour",
+              "type": "color",
+              "value": "#f8b048",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "liquid_density",
+              "type": "number_decimal",
+              "value": "1.05",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "label_accent",
+              "type": "color",
+              "value": "#f3a948",
+              "references": null
+            },
+            null,
+            {
+              "namespace": "cuvette",
+              "key": "ink_on_paper",
+              "type": "color",
+              "value": "#8a4a00",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "editorial",
+              "type": "json",
+              "value": "{\"descriptor\":\"L-ascorbic acid with ferulic acid and vitamin E\",\"benefit\":\"Brightens dull skin and fades dark marks. Mornings, before SPF.\",\"job\":\"Brighten\",\"jobs\":[\"Brighten\",\"Fade marks\"],\"concerns\":[\"Dull or marked\"],\"keywords\":[\"vitamin c\",\"ascorbic\",\"l-ascorbic\",\"ferulic\",\"vitamin e\",\"tocopherol\",\"dull\",\"dark marks\",\"marks\",\"pigmentation\",\"brighten\",\"glow\",\"antioxidant\",\"uneven tone\"],\"texture\":\"Water-light\",\"dose\":\"3 drops\",\"when\":[\"AM\"],\"actives\":[{\"name\":\"L-ascorbic acid\",\"amount\":\"15%\",\"does\":\"Brightens and fades marks\"},{\"name\":\"Vitamin E (tocopherol)\",\"amount\":\"1%\",\"does\":\"Stabilises the vitamin C\"},{\"name\":\"Ferulic acid\",\"amount\":\"0.5%\",\"does\":\"Extends its antioxidant life\"}],\"inci\":[\"Aqua\",\"Ascorbic Acid\",\"Ethoxydiglycol\",\"Propanediol\",\"Glycerin\",\"Tocopherol\",\"Laureth-23\",\"Ferulic Acid\",\"Panthenol\",\"Sodium Hyaluronate\",\"Sodium Hydroxide\",\"Disodium EDTA\",\"Phenoxyethanol\",\"Ethylhexylglycerin\"],\"formulaNote\":\"Held at pH 3.2, the level where L-ascorbic acid stays stable and gets through the skin. A slight tingle in the first week is normal.\",\"howTo\":{\"headline\":\"Three drops, every morning.\",\"steps\":[\"Cleanse, then pat dry.\",\"Three drops, pressed into face and neck.\",\"Let it settle, then SPF.\"],\"layering\":\"Morning step 2: after cleansing, before Hyaluronic, always under SPF.\",\"avoid\":\"On sensitive skin, don't use it in the same step as Niacinamide. Use Niacinamide at night instead.\"},\"storage\":{\"headline\":\"Pale gold when filled. Deeper amber as it ages.\",\"body\":\"Vitamin C oxidises in air and light. Keep the cap on and the bottle out of the bathroom window, and finish it within three months of opening. A light amber is fine. If it turns brown, it has stopped working.\",\"strip\":[{\"day\":1,\"label\":\"Filled\",\"colour\":\"#f8c472\"},{\"day\":30,\"label\":\"Normal\",\"colour\":\"#f2ad4c\"},{\"day\":60,\"label\":\"Still working\",\"colour\":\"#e0912f\"},{\"day\":90,\"label\":\"Finish it\",\"colour\":\"#bf6f1c\"},{\"day\":120,\"label\":\"Replace\",\"colour\":\"#8a4a12\"}]},\"study\":{\"n\":32,\"ages\":\"24–58\",\"skin\":\"All skin types, incl. sensitive\",\"use\":\"Twice daily\",\"weeks\":4,\"measure\":\"Self-assessed questionnaire\",\"year\":2026,\"results\":[{\"value\":91,\"label\":\"said skin looked brighter\"},{\"value\":84,\"label\":\"saw dark marks fade\"},{\"value\":96,\"label\":\"would buy it again\"}],\"note\":\"Independent consumer study run in Porto, 2026. Self-assessed; not a clinical trial. Individual results vary.\"},\"costs\":[{\"label\":\"Formula\",\"cents\":520},{\"label\":\"Glass, dropper and carton\",\"cents\":310},{\"label\":\"Filling in Porto\",\"cents\":240},{\"label\":\"Delivery\",\"cents\":410},{\"label\":\"Team\",\"cents\":620}],\"endOfLife\":[{\"part\":\"Bottle\",\"material\":\"Clear glass, 30% recycled\",\"bin\":\"Glass bank\"},{\"part\":\"Collar\",\"material\":\"Stainless steel\",\"bin\":\"Metal recycling\"},{\"part\":\"Bulb\",\"material\":\"Natural rubber\",\"bin\":\"General waste\"},{\"part\":\"Carton\",\"material\":\"FSC board, no lamination\",\"bin\":\"Paper recycling\"}],\"histogram\":[951,218,64,29,22],\"next\":\"hyaluronic\",\"gallery\":[{\"shot\":\"pack\",\"caption\":\"On the plinth\"},{\"shot\":\"three-quarter\",\"caption\":\"Three-quarter\"},{\"shot\":\"label\",\"caption\":\"Printed on the glass\"},{\"shot\":\"drop\",\"caption\":\"One drop\"},{\"shot\":\"drop-stone\",\"caption\":\"On the stone\"}],\"subscribe\":{\"weeks\":8,\"discount\":0.1},\"reviews\":[{\"id\":\"vc-01\",\"name\":\"Inês M.\",\"city\":\"Lisbon\",\"skin\":\"Combination\",\"age\":\"35–44\",\"concern\":\"Dull or marked\",\"rating\":5,\"title\":\"One bottle, one job\",\"body\":\"I stopped buying serums with twelve ingredients. One bottle, one job, and my skin has never looked this even.\",\"date\":\"2026-09-28\",\"usedFor\":\"Used 10 weeks\",\"helpful\":41,\"verified\":true,\"home\":true},{\"id\":\"vc-02\",\"name\":\"Lucía R.\",\"city\":\"Valencia\",\"skin\":\"Normal\",\"age\":\"25–34\",\"concern\":\"Dull or marked\",\"rating\":5,\"title\":\"The marks from last winter are gone\",\"body\":\"Two old spots on my cheek from a bad breakout have faded to almost nothing. It tingles for a few seconds and then you forget it is there.\",\"date\":\"2026-10-06\",\"usedFor\":\"Used 8 weeks\",\"helpful\":27,\"verified\":true},{\"id\":\"vc-03\",\"name\":\"Claire D.\",\"city\":\"Lyon\",\"skin\":\"Sensitive\",\"age\":\"35–44\",\"concern\":\"Redness\",\"rating\":3,\"title\":\"Works, but it stings\",\"body\":\"My skin does look brighter, but the first five or six mornings it stung enough that I nearly gave up. Better now, still not pleasant.\",\"date\":\"2026-08-19\",\"usedFor\":\"Used 6 weeks\",\"helpful\":33,\"verified\":true,\"reply\":{\"by\":\"Marta\",\"role\":\"formulation\",\"body\":\"Thank you, Claire. At pH 3.2 a short tingle is expected, and on sensitive skin it can be more. Try alternate mornings for two weeks, and put Hyaluronic on first so the vitamin C goes onto a cushion. If it still stings after that, write to us and we'll refund it.\"},\"home\":true},{\"id\":\"vc-04\",\"name\":\"Jonas W.\",\"city\":\"Hamburg\",\"skin\":\"Oily\",\"age\":\"25–34\",\"concern\":\"Dull or marked\",\"rating\":4,\"title\":\"Not greasy at all\",\"body\":\"Watery, sinks in under a minute, no film under sunscreen. One star off because the dropper is short once you're below a third.\",\"date\":\"2026-09-02\",\"usedFor\":\"Used 5 weeks\",\"helpful\":12,\"verified\":true,\"home\":true},{\"id\":\"vc-05\",\"name\":\"Zofia K.\",\"city\":\"Kraków\",\"skin\":\"Dry\",\"age\":\"45–54\",\"concern\":\"Dull or marked\",\"rating\":5,\"title\":\"Glow without anything shiny\",\"body\":\"I use it under a heavy cream and it doesn't pill. My skin looks awake in the morning, which at 49 is the whole point.\",\"date\":\"2026-07-14\",\"usedFor\":\"Used 12 weeks\",\"helpful\":19,\"verified\":true},{\"id\":\"vc-06\",\"name\":\"Pedro A.\",\"city\":\"Porto\",\"skin\":\"Combination\",\"age\":\"35–44\",\"concern\":\"Dull or marked\",\"rating\":4,\"title\":\"Honest label, good serum\",\"body\":\"Nice to know exactly what's in it and when it was filled. Mine was nine days old when it arrived. Brighter, less tired-looking.\",\"date\":\"2026-10-11\",\"usedFor\":\"Used 4 weeks\",\"helpful\":8,\"verified\":true},{\"id\":\"vc-07\",\"name\":\"Élodie B.\",\"city\":\"Paris\",\"skin\":\"Normal\",\"age\":\"25–34\",\"concern\":\"Dull or marked\",\"rating\":2,\"title\":\"Turned darker faster than I hoped\",\"body\":\"By week seven it had gone a deep amber because I kept it by the window. My fault, but I'd like a darker bottle.\",\"date\":\"2026-08-30\",\"usedFor\":\"Used 7 weeks\",\"helpful\":22,\"verified\":true},{\"id\":\"vc-08\",\"name\":\"Marta S.\",\"city\":\"Madrid\",\"skin\":\"Oily\",\"age\":\"18–24\",\"concern\":\"Breakouts\",\"rating\":5,\"title\":\"Post-acne marks finally fading\",\"body\":\"Red marks left over from breakouts fade much faster now. Didn't break me out, which is my test for anything new.\",\"date\":\"2026-06-21\",\"usedFor\":\"Used 10 weeks\",\"helpful\":15,\"verified\":true},{\"id\":\"vc-09\",\"name\":\"Katarzyna N.\",\"city\":\"Warsaw\",\"skin\":\"Sensitive\",\"age\":\"35–44\",\"concern\":\"Redness\",\"rating\":4,\"title\":\"Alternate mornings works for me\",\"body\":\"Every day was too much for my skin. Every other morning, after Hyaluronic, is fine and I still see the difference.\",\"date\":\"2026-09-17\",\"usedFor\":\"Used 6 weeks\",\"helpful\":11,\"verified\":true},{\"id\":\"vc-10\",\"name\":\"Felix H.\",\"city\":\"Munich\",\"skin\":\"Normal\",\"age\":\"45–54\",\"concern\":\"Dull or marked\",\"rating\":5,\"title\":\"Replaced two products\",\"body\":\"I was using a vitamin C and a separate antioxidant serum. This one does both jobs, and costs less than either.\",\"date\":\"2026-07-03\",\"usedFor\":\"Used 14 weeks\",\"helpful\":6,\"verified\":true},{\"id\":\"vc-11\",\"name\":\"Ana F.\",\"city\":\"Braga\",\"skin\":\"Dry\",\"age\":\"55–64\",\"concern\":\"Dull or marked\",\"rating\":3,\"title\":\"Slow to see results\",\"body\":\"Took longer than four weeks for me to notice anything. It does work, but be patient if your skin is mature and dry.\",\"date\":\"2026-10-01\",\"usedFor\":\"Used 9 weeks\",\"helpful\":9,\"verified\":true}],\"inciLead\":{\"lines\":[\"Ascorbic Acid\"],\"amounts\":{\"Ascorbic Acid\":\"15%\",\"Tocopherol\":\"1%\",\"Ferulic Acid\":\"0.5%\"}}}",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "routine",
+              "type": "json",
+              "value": "{\"am\":{\"step\":2,\"dose\":\"3 drops\",\"note\":\"Pressed into face and neck.\",\"sensitive\":{\"step\":3,\"note\":\"Every other morning for the first two weeks.\"}},\"damp\":false,\"sensitiveSafe\":false,\"pairsWith\":[{\"handle\":\"hyaluronic\",\"when\":[\"AM\",\"PM\"]}],\"note\":\"Brighten in the morning, hydrate morning and night.\",\"sensitiveNote\":\"On sensitive skin, Hyaluronic goes first and Vitamin C starts on alternate mornings.\"}",
+              "references": null
+            },
+            null,
+            {
+              "namespace": "cuvette",
+              "key": "hero_order",
+              "type": "number_integer",
+              "value": "1",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "position",
+              "type": "number_integer",
+              "value": "1",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "features",
+              "type": "list.single_line_text_field",
+              "value": "[\"colour-clock\",\"label-chart\"]",
+              "references": null
+            }
+          ]
+        },
+        {
+          "id": "gid://shopify/Product/8800100000002",
+          "handle": "hyaluronic",
+          "title": "Hyaluronic 2%",
+          "description": "Five weights of hyaluronic acid with vitamin B5. Holds water in the skin all day. Morning and night, on damp skin.",
+          "descriptionHtml": "<p>Five weights of hyaluronic acid with vitamin B5.</p><p>Holds water in the skin all day. Morning and night, on damp skin.</p>",
+          "productType": "Serum",
+          "vendor": "Cuvette",
+          "tags": [
+            "hero",
+            "serum",
+            "morning",
+            "night"
+          ],
+          "availableForSale": true,
+          "createdAt": "2026-03-02T10:05:00Z",
+          "updatedAt": "2026-10-17T09:00:00Z",
+          "seo": {
+            "title": "Hyaluronic Acid 2% Serum",
+            "description": null
+          },
+          "priceRange": {
+            "minVariantPrice": {
+              "amount": "26.0",
+              "currencyCode": "EUR"
+            },
+            "maxVariantPrice": {
+              "amount": "26.0",
+              "currencyCode": "EUR"
+            }
+          },
+          "featuredImage": null,
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/8800100001002",
+                "title": "30 ml",
+                "sku": "CV-02H",
+                "availableForSale": true,
+                "price": {
+                  "amount": "26.0",
+                  "currencyCode": "EUR"
+                },
+                "compareAtPrice": null,
+                "selectedOptions": [
+                  {
+                    "name": "Size",
+                    "value": "30 ml"
+                  }
+                ]
+              }
+            ]
+          },
+          "media": {
+            "nodes": []
+          },
+          "metafields": [
+            {
+              "namespace": "cuvette",
+              "key": "strength",
+              "type": "single_line_text_field",
+              "value": "2%",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "active",
+              "type": "single_line_text_field",
+              "value": "Hyaluronic acid",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "size_ml",
+              "type": "number_integer",
+              "value": "30",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "ph",
+              "type": "single_line_text_field",
+              "value": "6.0",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "pao",
+              "type": "single_line_text_field",
+              "value": "6M",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "lot",
+              "type": "single_line_text_field",
+              "value": "2610-09",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "filled",
+              "type": "date",
+              "value": "2026-10-09",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "liquid_colour",
+              "type": "color",
+              "value": "#eef3f6",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "liquid_density",
+              "type": "number_decimal",
+              "value": "0.05",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "label_accent",
+              "type": "color",
+              "value": "#93c1f0",
+              "references": null
+            },
+            null,
+            {
+              "namespace": "cuvette",
+              "key": "ink_on_paper",
+              "type": "color",
+              "value": "#1b5894",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "editorial",
+              "type": "json",
+              "value": "{\"descriptor\":\"Five weights of hyaluronic acid with vitamin B5\",\"benefit\":\"Holds water in the skin all day. Morning and night, on damp skin.\",\"job\":\"Hydrate\",\"jobs\":[\"Hydrate\",\"Plump\"],\"concerns\":[\"Tight or dehydrated\"],\"keywords\":[\"hyaluronic\",\"hyaluronate\",\"ha\",\"b5\",\"panthenol\",\"vitamin b5\",\"dehydrated\",\"dry\",\"tight\",\"tightness\",\"hydrate\",\"hydration\",\"plump\",\"fine lines\"],\"texture\":\"Fluid gel\",\"dose\":\"3 drops\",\"when\":[\"AM\",\"PM\"],\"actives\":[{\"name\":\"Hyaluronic acid, five weights\",\"amount\":\"2%\",\"does\":\"Holds water at the surface and below it\"},{\"name\":\"Panthenol (vitamin B5)\",\"amount\":\"1%\",\"does\":\"Softens and supports the barrier\"},{\"name\":\"Glycerin\",\"amount\":\"3%\",\"does\":\"Draws water in\"}],\"inci\":[\"Aqua\",\"Glycerin\",\"Sodium Hyaluronate\",\"Panthenol\",\"Pentylene Glycol\",\"Hydrolyzed Sodium Hyaluronate\",\"Sodium Acetylated Hyaluronate\",\"Hydrolyzed Hyaluronic Acid\",\"Sodium Hyaluronate Crosspolymer\",\"Sodium Phytate\",\"Citric Acid\",\"Phenoxyethanol\",\"Ethylhexylglycerin\"],\"formulaNote\":\"Five weights: about 1.5, 0.8, 0.3 and 0.05 MDa, plus a crosspolymer that sits on the surface. The big ones hold water on top; the small ones go further in.\",\"howTo\":{\"headline\":\"On damp skin, morning and night.\",\"steps\":[\"Leave your face damp after cleansing.\",\"Three drops in the morning, two at night.\",\"Seal it in with moisturiser.\"],\"layering\":\"Morning step 3, after Vitamin C. Night step 2, before Niacinamide or moisturiser.\",\"avoid\":\"Don't put it on bone-dry skin in a dry room: with nothing to draw from, it can feel tight.\"},\"study\":{\"n\":30,\"ages\":\"22–61\",\"skin\":\"Dry, normal and combination\",\"use\":\"Twice daily\",\"weeks\":2,\"measure\":\"Self-assessed questionnaire\",\"year\":2026,\"results\":[{\"value\":93,\"label\":\"said skin felt hydrated all day\"},{\"value\":87,\"label\":\"felt less tightness\"},{\"value\":90,\"label\":\"would buy it again\"}],\"note\":\"Independent consumer study run in Porto, 2026. Self-assessed; not a clinical trial. Individual results vary.\"},\"costs\":[{\"label\":\"Formula\",\"cents\":290},{\"label\":\"Glass, dropper and carton\",\"cents\":310},{\"label\":\"Filling in Porto\",\"cents\":240},{\"label\":\"Delivery\",\"cents\":410},{\"label\":\"Team\",\"cents\":520}],\"endOfLife\":[{\"part\":\"Bottle\",\"material\":\"Clear glass, 30% recycled\",\"bin\":\"Glass bank\"},{\"part\":\"Collar\",\"material\":\"Stainless steel\",\"bin\":\"Metal recycling\"},{\"part\":\"Bulb\",\"material\":\"Natural rubber\",\"bin\":\"General waste\"},{\"part\":\"Carton\",\"material\":\"FSC board, no lamination\",\"bin\":\"Paper recycling\"}],\"histogram\":[640,158,38,14,12],\"next\":\"niacinamide\",\"gallery\":[{\"shot\":\"pack\",\"caption\":\"On the plinth\"},{\"shot\":\"three-quarter\",\"caption\":\"Three-quarter\"},{\"shot\":\"label\",\"caption\":\"Printed on the glass\"},{\"shot\":\"drop\",\"caption\":\"One drop\"},{\"shot\":\"drop-stone\",\"caption\":\"On the stone\"}],\"subscribe\":{\"weeks\":8,\"discount\":0.1},\"reviews\":[{\"id\":\"ha-01\",\"name\":\"Sofia L.\",\"city\":\"Coimbra\",\"skin\":\"Dry\",\"age\":\"35–44\",\"concern\":\"Tight or dehydrated\",\"rating\":5,\"title\":\"No more tight cheeks by noon\",\"body\":\"Damp skin, three drops, moisturiser on top. My cheeks used to feel tight by lunchtime and now they don't.\",\"date\":\"2026-09-21\",\"usedFor\":\"Used 8 weeks\",\"helpful\":24,\"verified\":true,\"home\":true},{\"id\":\"ha-02\",\"name\":\"Javier M.\",\"city\":\"Seville\",\"skin\":\"Oily\",\"age\":\"25–34\",\"concern\":\"Tight or dehydrated\",\"rating\":4,\"title\":\"Light enough for oily skin\",\"body\":\"I thought my skin didn't need hydration because it's oily. Turns out it was dehydrated. Less shine by evening now.\",\"date\":\"2026-08-08\",\"usedFor\":\"Used 6 weeks\",\"helpful\":14,\"verified\":true},{\"id\":\"ha-03\",\"name\":\"Hélène P.\",\"city\":\"Bordeaux\",\"skin\":\"Normal\",\"age\":\"45–54\",\"concern\":\"Fine lines\",\"rating\":5,\"title\":\"Plumper in a week\",\"body\":\"The fine lines under my eyes look softer. Not gone, softer. It has a slight slip and no stickiness.\",\"date\":\"2026-07-26\",\"usedFor\":\"Used 9 weeks\",\"helpful\":18,\"verified\":true},{\"id\":\"ha-04\",\"name\":\"Anke S.\",\"city\":\"Berlin\",\"skin\":\"Dry\",\"age\":\"55–64\",\"concern\":\"Tight or dehydrated\",\"rating\":3,\"title\":\"Needs a rich cream on top\",\"body\":\"On its own it did very little in my heated flat. With a thick cream over it, much better. Read the instructions, I didn't.\",\"date\":\"2026-10-03\",\"usedFor\":\"Used 4 weeks\",\"helpful\":20,\"verified\":true,\"reply\":{\"by\":\"Marta\",\"role\":\"formulation\",\"body\":\"Thanks, Anke. You've found the key step: hyaluronic acid holds water, so in dry indoor air it needs damp skin underneath and a moisturiser on top to keep that water in. Glad it's working now.\"},\"home\":true},{\"id\":\"ha-05\",\"name\":\"Tomasz G.\",\"city\":\"Gdańsk\",\"skin\":\"Combination\",\"age\":\"25–34\",\"concern\":\"Tight or dehydrated\",\"rating\":5,\"title\":\"Good after shaving\",\"body\":\"Two drops after shaving and the sting is gone. Bought a second bottle for the gym bag.\",\"date\":\"2026-09-09\",\"usedFor\":\"Used 7 weeks\",\"helpful\":9,\"verified\":true},{\"id\":\"ha-06\",\"name\":\"Carmen V.\",\"city\":\"Barcelona\",\"skin\":\"Sensitive\",\"age\":\"35–44\",\"concern\":\"Redness\",\"rating\":5,\"title\":\"Calm, no reaction\",\"body\":\"My skin reacts to almost everything. Nothing here, not even the first day. I put it under the Vitamin C to soften the tingle.\",\"date\":\"2026-06-30\",\"usedFor\":\"Used 14 weeks\",\"helpful\":13,\"verified\":true},{\"id\":\"ha-07\",\"name\":\"Julien T.\",\"city\":\"Marseille\",\"skin\":\"Normal\",\"age\":\"18–24\",\"concern\":\"Tight or dehydrated\",\"rating\":2,\"title\":\"I don't feel much difference\",\"body\":\"It's pleasant to use, but honestly my skin feels about the same as before. Maybe I didn't need it.\",\"date\":\"2026-08-22\",\"usedFor\":\"Used 5 weeks\",\"helpful\":7,\"verified\":true},{\"id\":\"ha-08\",\"name\":\"Rita C.\",\"city\":\"Lisbon\",\"skin\":\"Combination\",\"age\":\"45–54\",\"concern\":\"Fine lines\",\"rating\":4,\"title\":\"Makes foundation sit better\",\"body\":\"Under foundation it stops the patchy look on my cheeks. Would be five stars with a pump instead of a dropper.\",\"date\":\"2026-10-09\",\"usedFor\":\"Used 6 weeks\",\"helpful\":5,\"verified\":true},{\"id\":\"ha-09\",\"name\":\"Magdalena W.\",\"city\":\"Wrocław\",\"skin\":\"Dry\",\"age\":\"25–34\",\"concern\":\"Tight or dehydrated\",\"rating\":5,\"title\":\"Winter rescue\",\"body\":\"Started it in a Polish winter and my skin stopped flaking around the nose within ten days.\",\"date\":\"2026-07-11\",\"usedFor\":\"Used 16 weeks\",\"helpful\":10,\"verified\":true},{\"id\":\"ha-10\",\"name\":\"Lukas B.\",\"city\":\"Leipzig\",\"skin\":\"Oily\",\"age\":\"35–44\",\"concern\":\"Tight or dehydrated\",\"rating\":4,\"title\":\"Does what it says\",\"body\":\"Simple, works, no smell. I'd like a bigger size for the price per litre.\",\"date\":\"2026-09-29\",\"usedFor\":\"Used 8 weeks\",\"helpful\":3,\"verified\":true}],\"inciLead\":{\"lines\":[\"Sodium Hyaluronate\",\"Hydrolyzed Sodium Hyaluronate\",\"Sodium Acetylated Hyaluronate\",\"Hydrolyzed Hyaluronic Acid\",\"Sodium Hyaluronate Crosspolymer\"],\"amounts\":{\"Sodium Hyaluronate\":\"2% across five\",\"Glycerin\":\"3%\",\"Panthenol\":\"1%\"}}}",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "routine",
+              "type": "json",
+              "value": "{\"am\":{\"step\":3,\"dose\":\"3 drops\",\"note\":\"On damp skin, before anything dries.\",\"sensitive\":{\"step\":1,\"note\":\"First, so anything stronger goes onto a cushion.\"}},\"pm\":{\"step\":2,\"dose\":\"2 drops\",\"note\":\"On damp skin.\"},\"damp\":true,\"sensitiveSafe\":true,\"pairsWith\":[],\"note\":\"One bottle is enough. Hydrate twice a day and seal it in.\",\"sensitiveNote\":\"Nothing changes for sensitive skin: it is the gentlest in the range.\"}",
+              "references": null
+            },
+            null,
+            {
+              "namespace": "cuvette",
+              "key": "hero_order",
+              "type": "number_integer",
+              "value": "2",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "position",
+              "type": "number_integer",
+              "value": "2",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "features",
+              "type": "list.single_line_text_field",
+              "value": "[\"label-chart\",\"lot\"]",
+              "references": null
+            }
+          ]
+        },
+        {
+          "id": "gid://shopify/Product/8800100000003",
+          "handle": "niacinamide",
+          "title": "Niacinamide 10%",
+          "description": "Niacinamide with 1% zinc PCA. Calms redness and tightens the look of pores. Morning and night.",
+          "descriptionHtml": "<p>Niacinamide with 1% zinc PCA.</p><p>Calms redness and tightens the look of pores. Morning and night.</p>",
+          "productType": "Serum",
+          "vendor": "Cuvette",
+          "tags": [
+            "hero",
+            "serum",
+            "morning",
+            "night"
+          ],
+          "availableForSale": true,
+          "createdAt": "2026-03-02T10:10:00Z",
+          "updatedAt": "2026-10-17T09:00:00Z",
+          "seo": {
+            "title": "Niacinamide 10% + Zinc Serum",
+            "description": null
+          },
+          "priceRange": {
+            "minVariantPrice": {
+              "amount": "24.0",
+              "currencyCode": "EUR"
+            },
+            "maxVariantPrice": {
+              "amount": "24.0",
+              "currencyCode": "EUR"
+            }
+          },
+          "featuredImage": null,
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/8800100001003",
+                "title": "30 ml",
+                "sku": "CV-10N",
+                "availableForSale": true,
+                "price": {
+                  "amount": "24.0",
+                  "currencyCode": "EUR"
+                },
+                "compareAtPrice": null,
+                "selectedOptions": [
+                  {
+                    "name": "Size",
+                    "value": "30 ml"
+                  }
+                ]
+              }
+            ]
+          },
+          "media": {
+            "nodes": []
+          },
+          "metafields": [
+            {
+              "namespace": "cuvette",
+              "key": "strength",
+              "type": "single_line_text_field",
+              "value": "10%",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "active",
+              "type": "single_line_text_field",
+              "value": "Niacinamide",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "size_ml",
+              "type": "number_integer",
+              "value": "30",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "ph",
+              "type": "single_line_text_field",
+              "value": "5.8",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "pao",
+              "type": "single_line_text_field",
+              "value": "6M",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "lot",
+              "type": "single_line_text_field",
+              "value": "2610-02",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "filled",
+              "type": "date",
+              "value": "2026-10-02",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "liquid_colour",
+              "type": "color",
+              "value": "#efe6c8",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "liquid_density",
+              "type": "number_decimal",
+              "value": "0.22",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "label_accent",
+              "type": "color",
+              "value": "#a9d68b",
+              "references": null
+            },
+            null,
+            {
+              "namespace": "cuvette",
+              "key": "ink_on_paper",
+              "type": "color",
+              "value": "#376518",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "editorial",
+              "type": "json",
+              "value": "{\"descriptor\":\"Niacinamide with 1% zinc PCA\",\"benefit\":\"Calms redness and tightens the look of pores. Morning and night.\",\"job\":\"Calm\",\"jobs\":[\"Calm\",\"Refine pores\"],\"concerns\":[\"Red or oily\"],\"keywords\":[\"niacinamide\",\"vitamin b3\",\"b3\",\"zinc\",\"zinc pca\",\"allantoin\",\"pores\",\"redness\",\"red\",\"oily\",\"shine\",\"breakouts\",\"blemishes\",\"calm\",\"sebum\"],\"texture\":\"Light serum\",\"dose\":\"4 drops\",\"when\":[\"AM\",\"PM\"],\"actives\":[{\"name\":\"Niacinamide (vitamin B3)\",\"amount\":\"10%\",\"does\":\"Calms redness and evens tone\"},{\"name\":\"Zinc PCA\",\"amount\":\"1%\",\"does\":\"Keeps shine and pores in check\"},{\"name\":\"Allantoin\",\"amount\":\"0.2%\",\"does\":\"Soothes\"}],\"inci\":[\"Aqua\",\"Niacinamide\",\"Propanediol\",\"Glycerin\",\"Zinc PCA\",\"Pentylene Glycol\",\"Xanthan Gum\",\"Allantoin\",\"Sodium Phytate\",\"Citric Acid\",\"Phenoxyethanol\",\"Ethylhexylglycerin\"],\"formulaNote\":\"10% is where the studies on redness and pores sit. We stopped there: higher strengths flush some skins without doing more.\",\"howTo\":{\"headline\":\"Four drops, morning and night.\",\"steps\":[\"Cleanse, then pat dry.\",\"Four drops, pressed over the T-zone first.\",\"Moisturiser, and SPF in the morning.\"],\"layering\":\"Night step 2. Mornings too, if you're not using Vitamin C.\",\"avoid\":\"It works with everything else. Wait a minute before moisturiser, or it can pill under heavy creams.\"},\"study\":{\"n\":31,\"ages\":\"19–52\",\"skin\":\"Oily, combination and sensitive\",\"use\":\"Twice daily\",\"weeks\":8,\"measure\":\"Self-assessed questionnaire\",\"year\":2026,\"results\":[{\"value\":82,\"label\":\"saw less visible redness\"},{\"value\":78,\"label\":\"said pores looked smaller\"},{\"value\":88,\"label\":\"would buy it again\"}],\"note\":\"Independent consumer study run in Porto, 2026. Self-assessed; not a clinical trial. Individual results vary.\"},\"costs\":[{\"label\":\"Formula\",\"cents\":210},{\"label\":\"Glass, dropper and carton\",\"cents\":310},{\"label\":\"Filling in Porto\",\"cents\":240},{\"label\":\"Delivery\",\"cents\":410},{\"label\":\"Team\",\"cents\":490}],\"endOfLife\":[{\"part\":\"Bottle\",\"material\":\"Clear glass, 30% recycled\",\"bin\":\"Glass bank\"},{\"part\":\"Collar\",\"material\":\"Stainless steel\",\"bin\":\"Metal recycling\"},{\"part\":\"Bulb\",\"material\":\"Natural rubber\",\"bin\":\"General waste\"},{\"part\":\"Carton\",\"material\":\"FSC board, no lamination\",\"bin\":\"Paper recycling\"}],\"histogram\":[498,160,43,17,13],\"next\":\"hyaluronic\",\"gallery\":[{\"shot\":\"pack\",\"caption\":\"On the plinth\"},{\"shot\":\"three-quarter\",\"caption\":\"Three-quarter\"},{\"shot\":\"label\",\"caption\":\"Printed on the glass\"},{\"shot\":\"drop\",\"caption\":\"One drop\"},{\"shot\":\"drop-stone\",\"caption\":\"On the stone\"}],\"subscribe\":{\"weeks\":8,\"discount\":0.1},\"reviews\":[{\"id\":\"ni-01\",\"name\":\"Mariana T.\",\"city\":\"Porto\",\"skin\":\"Oily\",\"age\":\"25–34\",\"concern\":\"Red or oily\",\"rating\":5,\"title\":\"Shine under control by 3pm\",\"body\":\"I used to blot twice a day. Now my nose and forehead stay matte until mid-afternoon.\",\"date\":\"2026-09-14\",\"usedFor\":\"Used 9 weeks\",\"helpful\":26,\"verified\":true,\"home\":true},{\"id\":\"ni-02\",\"name\":\"Pablo G.\",\"city\":\"Bilbao\",\"skin\":\"Combination\",\"age\":\"35–44\",\"concern\":\"Red or oily\",\"rating\":4,\"title\":\"Pores look smaller\",\"body\":\"Not a miracle, but the pores on my nose look noticeably finer. Pills a little if I put cream on too fast.\",\"date\":\"2026-08-03\",\"usedFor\":\"Used 8 weeks\",\"helpful\":15,\"verified\":true},{\"id\":\"ni-03\",\"name\":\"Camille R.\",\"city\":\"Nantes\",\"skin\":\"Sensitive\",\"age\":\"25–34\",\"concern\":\"Redness\",\"rating\":5,\"title\":\"My cheeks are less red\",\"body\":\"Rosacea-prone, and this is the first serum that calmed things rather than set them off. Took about three weeks.\",\"date\":\"2026-07-19\",\"usedFor\":\"Used 12 weeks\",\"helpful\":31,\"verified\":true,\"home\":true},{\"id\":\"ni-04\",\"name\":\"Maximilian F.\",\"city\":\"Cologne\",\"skin\":\"Oily\",\"age\":\"18–24\",\"concern\":\"Breakouts\",\"rating\":3,\"title\":\"Fewer breakouts, some pilling\",\"body\":\"Breakouts are down, but it balls up under my moisturiser most mornings. I now use it only at night.\",\"date\":\"2026-09-25\",\"usedFor\":\"Used 6 weeks\",\"helpful\":18,\"verified\":true,\"reply\":{\"by\":\"Marta\",\"role\":\"formulation\",\"body\":\"Thanks, Maximilian. The xanthan gum that gives it slip can pill under thicker creams if they go on while it's still wet. Give it a full minute, or use a lighter gel moisturiser on top. Nights only is a good routine too.\"}},{\"id\":\"ni-05\",\"name\":\"Agnieszka P.\",\"city\":\"Poznań\",\"skin\":\"Combination\",\"age\":\"35–44\",\"concern\":\"Red or oily\",\"rating\":5,\"title\":\"Evened out my T-zone\",\"body\":\"Oily centre, dry cheeks. This balanced the oily part without drying the rest.\",\"date\":\"2026-10-07\",\"usedFor\":\"Used 7 weeks\",\"helpful\":9,\"verified\":true},{\"id\":\"ni-06\",\"name\":\"Beatriz O.\",\"city\":\"Faro\",\"skin\":\"Normal\",\"age\":\"45–54\",\"concern\":\"Redness\",\"rating\":4,\"title\":\"Good, gentle, no flushing\",\"body\":\"I had flushing from a 20% niacinamide. None with this one. Redness round my nose is calmer.\",\"date\":\"2026-06-27\",\"usedFor\":\"Used 15 weeks\",\"helpful\":12,\"verified\":true},{\"id\":\"ni-07\",\"name\":\"Nicolas L.\",\"city\":\"Lille\",\"skin\":\"Oily\",\"age\":\"25–34\",\"concern\":\"Red or oily\",\"rating\":2,\"title\":\"Didn't do much for my pores\",\"body\":\"Feels nice, my skin is maybe a bit less red, but my pores look exactly the same after two months.\",\"date\":\"2026-08-15\",\"usedFor\":\"Used 8 weeks\",\"helpful\":10,\"verified\":true,\"home\":true},{\"id\":\"ni-08\",\"name\":\"Elena V.\",\"city\":\"Madrid\",\"skin\":\"Sensitive\",\"age\":\"35–44\",\"concern\":\"Redness\",\"rating\":5,\"title\":\"Pairs well with the Hyaluronic\",\"body\":\"Hyaluronic first, then this at night. My skin has never been this calm in October.\",\"date\":\"2026-10-12\",\"usedFor\":\"Used 5 weeks\",\"helpful\":4,\"verified\":true},{\"id\":\"ni-09\",\"name\":\"Sebastian K.\",\"city\":\"Frankfurt\",\"skin\":\"Combination\",\"age\":\"45–54\",\"concern\":\"Red or oily\",\"rating\":4,\"title\":\"Simple routine, real result\",\"body\":\"Morning and night, four drops. Less shine, fewer red patches after shaving.\",\"date\":\"2026-09-03\",\"usedFor\":\"Used 10 weeks\",\"helpful\":6,\"verified\":true},{\"id\":\"ni-10\",\"name\":\"Joana M.\",\"city\":\"Aveiro\",\"skin\":\"Oily\",\"age\":\"18–24\",\"concern\":\"Breakouts\",\"rating\":5,\"title\":\"Finally something that doesn't break me out\",\"body\":\"The zinc really helps. Spots heal faster and leave less of a mark.\",\"date\":\"2026-07-08\",\"usedFor\":\"Used 11 weeks\",\"helpful\":14,\"verified\":true}],\"inciLead\":{\"lines\":[\"Niacinamide\"],\"amounts\":{\"Niacinamide\":\"10%\",\"Zinc PCA\":\"1%\",\"Allantoin\":\"0.2%\"}}}",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "routine",
+              "type": "json",
+              "value": "{\"am\":{\"step\":2,\"dose\":\"4 drops\",\"note\":\"T-zone first.\"},\"pm\":{\"step\":3,\"dose\":\"4 drops\",\"note\":\"Over the Hyaluronic.\"},\"damp\":false,\"sensitiveSafe\":true,\"pairsWith\":[{\"handle\":\"hyaluronic\",\"when\":[\"PM\"]}],\"note\":\"Calm twice a day, with hydration under it at night.\",\"sensitiveNote\":\"Fine on sensitive skin: we stopped at 10%, below the strengths that flush.\"}",
+              "references": null
+            },
+            null,
+            {
+              "namespace": "cuvette",
+              "key": "hero_order",
+              "type": "number_integer",
+              "value": "3",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "position",
+              "type": "number_integer",
+              "value": "3",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "features",
+              "type": "list.single_line_text_field",
+              "value": "[\"label-chart\"]",
+              "references": null
+            }
+          ]
+        },
+        {
+          "id": "gid://shopify/Product/8800100000004",
+          "handle": "retinal",
+          "title": "Retinal 0.1%",
+          "description": "Encapsulated retinaldehyde with squalane and bisabolol. Smooths texture and softens fine lines. Nights only, three times a week to start.",
+          "descriptionHtml": "<p>Encapsulated retinaldehyde with squalane and bisabolol.</p><p>Smooths texture and softens fine lines. Nights only, three times a week to start.</p>",
+          "productType": "Serum",
+          "vendor": "Cuvette",
+          "tags": [
+            "hero",
+            "serum",
+            "night",
+            "new"
+          ],
+          "availableForSale": true,
+          "createdAt": "2026-10-18T09:00:00Z",
+          "updatedAt": "2026-10-17T09:00:00Z",
+          "seo": {
+            "title": "Retinal 0.1% Serum",
+            "description": null
+          },
+          "priceRange": {
+            "minVariantPrice": {
+              "amount": "38.0",
+              "currencyCode": "EUR"
+            },
+            "maxVariantPrice": {
+              "amount": "38.0",
+              "currencyCode": "EUR"
+            }
+          },
+          "featuredImage": {
+            "url": "/concepts/cuvette/shopify/retinal-oil.jpg",
+            "altText": "Beads of Retinal 0.1% oil on dark basalt",
+            "width": 1600,
+            "height": 2000
+          },
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/8800100001004",
+                "title": "30 ml",
+                "sku": "CV-01R",
+                "availableForSale": true,
+                "price": {
+                  "amount": "38.0",
+                  "currencyCode": "EUR"
+                },
+                "compareAtPrice": null,
+                "selectedOptions": [
+                  {
+                    "name": "Size",
+                    "value": "30 ml"
+                  }
+                ]
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "mediaContentType": "IMAGE",
+                "alt": "Beads of Retinal 0.1% oil on dark basalt",
+                "image": {
+                  "url": "/concepts/cuvette/shopify/retinal-oil.jpg",
+                  "altText": "Beads of Retinal 0.1% oil on dark basalt",
+                  "width": 1600,
+                  "height": 2000
+                }
+              },
+              {
+                "mediaContentType": "VIDEO",
+                "alt": "Applying two drops at night"
+              },
+              {
+                "mediaContentType": "IMAGE",
+                "alt": "A single bead of Retinal 0.1% under a raking light",
+                "image": {
+                  "url": "/concepts/cuvette/shopify/retinal-bead.jpg",
+                  "altText": "A single bead of Retinal 0.1% under a raking light",
+                  "width": 1600,
+                  "height": 2000
+                }
+              }
+            ]
+          },
+          "metafields": [
+            {
+              "namespace": "cuvette",
+              "key": "strength",
+              "type": "single_line_text_field",
+              "value": "0.1%",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "active",
+              "type": "single_line_text_field",
+              "value": "Retinaldehyde",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "size_ml",
+              "type": "number_integer",
+              "value": "30",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "ph",
+              "type": "single_line_text_field",
+              "value": "5.5",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "pao",
+              "type": "single_line_text_field",
+              "value": "3M",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "lot",
+              "type": "single_line_text_field",
+              "value": "2610-21",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "filled",
+              "type": "date",
+              "value": "2026-10-21",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "liquid_colour",
+              "type": "color",
+              "value": "#b9a2ee",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "liquid_density",
+              "type": "number_decimal",
+              "value": "0.55",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "label_accent",
+              "type": "color",
+              "value": "#b9a2ee",
+              "references": null
+            },
+            null,
+            {
+              "namespace": "cuvette",
+              "key": "ink_on_paper",
+              "type": "color",
+              "value": "#4e4464",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "editorial",
+              "type": "json",
+              "value": "{\"descriptor\":\"Encapsulated retinaldehyde with squalane and bisabolol\",\"benefit\":\"Smooths texture and softens fine lines. Nights only, three times a week to start.\",\"job\":\"Renew\",\"jobs\":[\"Renew\",\"Smooth\"],\"concerns\":[\"Texture or fine lines\"],\"keywords\":[\"retinal\",\"retinaldehyde\",\"retinoid\",\"vitamin a\",\"fine lines\",\"wrinkles\",\"texture\",\"renew\",\"night\"],\"texture\":\"Light oil\",\"dose\":\"2 drops\",\"when\":[\"PM\"],\"actives\":[{\"name\":\"Retinaldehyde, encapsulated\",\"amount\":\"0.1%\",\"does\":\"Speeds up cell turnover\"},{\"name\":\"Squalane\",\"amount\":\"5%\",\"does\":\"Cushions the skin barrier\"},{\"name\":\"Bisabolol\",\"amount\":\"0.5%\",\"does\":\"Calms redness\"}],\"inci\":[\"Squalane\",\"Caprylic/Capric Triglyceride\",\"Retinal\",\"Bisabolol\",\"Tocopherol\",\"Helianthus Annuus Seed Oil\"],\"formulaNote\":\"Retinaldehyde works one step closer to the skin than retinol, so 0.1% does the work of a far higher retinol strength.\",\"howTo\":{\"headline\":\"Nights only, slowly.\",\"steps\":[\"Cleanse and dry the skin fully.\",\"Two drops over the face, avoiding the eyes.\",\"Moisturiser on top. SPF the next morning.\"],\"layering\":\"On its own at night. Not on the same night as acids.\",\"avoid\":\"Not during pregnancy. Skip a night if skin stings.\"},\"study\":{\"n\":28,\"ages\":\"30–61\",\"skin\":\"All skin types\",\"use\":\"Three nights a week\",\"weeks\":8,\"measure\":\"Self-assessed questionnaire\",\"year\":2026,\"results\":[{\"value\":82,\"label\":\"said texture felt smoother\"},{\"value\":71,\"label\":\"saw fine lines soften\"},{\"value\":89,\"label\":\"would buy it again\"}],\"note\":\"Independent consumer study run in Porto, 2026. Self-assessed; not a clinical trial. Individual results vary.\"},\"costs\":[{\"label\":\"Formula\",\"cents\":520},{\"label\":\"Glass, dropper and carton\",\"cents\":310},{\"label\":\"Filling in Porto\",\"cents\":240},{\"label\":\"Delivery\",\"cents\":410},{\"label\":\"Team\",\"cents\":760}],\"endOfLife\":[{\"part\":\"Bottle\",\"material\":\"Clear glass, 30% recycled\",\"bin\":\"Glass bank\"},{\"part\":\"Collar\",\"material\":\"Stainless steel\",\"bin\":\"Metal recycling\"},{\"part\":\"Bulb\",\"material\":\"Natural rubber\",\"bin\":\"General waste\"},{\"part\":\"Carton\",\"material\":\"FSC board, no lamination\",\"bin\":\"Paper recycling\"}],\"histogram\":[41,9,3,1,1],\"next\":\"hyaluronic\",\"reviews\":[{\"id\":\"rt-01\",\"name\":\"Sofia R.\",\"city\":\"Braga\",\"skin\":\"Normal\",\"age\":\"35–44\",\"concern\":\"Texture or fine lines\",\"rating\":5,\"title\":\"No peeling\",\"body\":\"The first retinoid I've used without a week of flaking. Smoother by the third week.\",\"date\":\"2026-10-12\",\"usedFor\":\"Used 6 weeks\",\"helpful\":7,\"verified\":true}]}",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "routine",
+              "type": "json",
+              "value": "{\"pm\":{\"step\":3,\"dose\":\"2 drops\",\"note\":\"Three nights a week to start.\",\"sensitive\":{\"note\":\"Once a week for the first month.\"}},\"damp\":false,\"sensitiveSafe\":false,\"pairsWith\":[{\"handle\":\"hyaluronic\",\"when\":[\"PM\"]}],\"note\":\"Renew at night with hydration under it. Mornings stay simple: moisturiser and SPF.\",\"sensitiveNote\":\"On sensitive skin, start once a week and let Hyaluronic cushion it.\"}",
+              "references": null
+            },
+            null,
+            {
+              "namespace": "cuvette",
+              "key": "hero_order",
+              "type": "number_integer",
+              "value": "4",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "position",
+              "type": "number_integer",
+              "value": "4",
+              "references": null
+            },
+            {
+              "namespace": "cuvette",
+              "key": "features",
+              "type": "list.single_line_text_field",
+              "value": "[\"label-chart\"]",
+              "references": null
+            }
+          ]
+        },
+        {
+          "id": "gid://shopify/Product/8800100000005",
+          "handle": "morning-set",
+          "title": "The morning set",
+          "description": "Vitamin C 15% and Hyaluronic 2%, in the order you use them. Brighten, then hydrate. The two-step morning, under SPF.",
+          "descriptionHtml": "<p>Vitamin C 15% and Hyaluronic 2%, in the order you use them.</p><p>Brighten, then hydrate. The two-step morning, under SPF.</p>",
+          "productType": "Set",
+          "vendor": "Cuvette",
+          "tags": [
+            "set",
+            "bundle",
+            "morning"
+          ],
+          "availableForSale": true,
+          "createdAt": "2026-03-02T10:15:00Z",
+          "updatedAt": "2026-10-17T09:00:00Z",
+          "seo": {
+            "title": "The Morning Set",
+            "description": null
+          },
+          "priceRange": {
+            "minVariantPrice": {
+              "amount": "52.0",
+              "currencyCode": "EUR"
+            },
+            "maxVariantPrice": {
+              "amount": "52.0",
+              "currencyCode": "EUR"
+            }
+          },
+          "featuredImage": null,
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/8800100001005",
+                "title": "2 × 30 ml",
+                "sku": "CV-SET-AM",
+                "availableForSale": true,
+                "price": {
+                  "amount": "52.0",
+                  "currencyCode": "EUR"
+                },
+                "compareAtPrice": {
+                  "amount": "60.0",
+                  "currencyCode": "EUR"
+                },
+                "selectedOptions": [
+                  {
+                    "name": "Size",
+                    "value": "2 × 30 ml"
+                  }
+                ]
+              }
+            ]
+          },
+          "media": {
+            "nodes": []
+          },
+          "metafields": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            {
+              "namespace": "cuvette",
+              "key": "editorial",
+              "type": "json",
+              "value": "{\"descriptor\":\"Vitamin C 15% and Hyaluronic 2%, in the order you use them\",\"benefit\":\"Brighten, then hydrate. The two-step morning, under SPF.\",\"job\":\"Morning\",\"jobs\":[\"Brighten\",\"Hydrate\"],\"concerns\":[\"Dull or marked\",\"Tight or dehydrated\"],\"keywords\":[\"set\",\"morning\",\"routine\",\"bundle\",\"gift\",\"vitamin c\",\"hyaluronic\",\"duo\",\"pair\"],\"texture\":\"Water-light, then fluid gel\",\"dose\":\"3 drops each\",\"when\":[\"AM\"],\"actives\":[{\"name\":\"L-ascorbic acid\",\"amount\":\"15%\",\"does\":\"Brightens and fades marks\"},{\"name\":\"Hyaluronic acid, five weights\",\"amount\":\"2%\",\"does\":\"Holds water in the skin\"},{\"name\":\"Ferulic acid and vitamin E\",\"amount\":\"1.5%\",\"does\":\"Protect the vitamin C\"}],\"inci\":[],\"howTo\":{\"headline\":\"Two steps, every morning.\",\"steps\":[\"Cleanse, then three drops of Vitamin C.\",\"Three drops of Hyaluronic on top, skin still damp.\",\"Moisturiser, then SPF.\"],\"layering\":\"Vitamin C first, Hyaluronic second, SPF last.\",\"avoid\":\"On sensitive skin, start Vitamin C on alternate mornings for the first two weeks.\"},\"study\":{\"n\":32,\"ages\":\"24–58\",\"skin\":\"All skin types, incl. sensitive\",\"use\":\"Twice daily\",\"weeks\":4,\"measure\":\"Self-assessed questionnaire\",\"year\":2026,\"results\":[{\"value\":91,\"label\":\"said skin looked brighter\"},{\"value\":84,\"label\":\"saw dark marks fade\"},{\"value\":96,\"label\":\"would buy it again\"}],\"note\":\"Independent consumer study run in Porto, 2026. Self-assessed; not a clinical trial. Individual results vary.\"},\"costs\":[{\"label\":\"Formula\",\"cents\":810},{\"label\":\"Glass, droppers and carton\",\"cents\":620},{\"label\":\"Filling in Porto\",\"cents\":480},{\"label\":\"Delivery\",\"cents\":410},{\"label\":\"Team\",\"cents\":1140}],\"endOfLife\":[{\"part\":\"Bottle\",\"material\":\"Clear glass, 30% recycled\",\"bin\":\"Glass bank\"},{\"part\":\"Collar\",\"material\":\"Stainless steel\",\"bin\":\"Metal recycling\"},{\"part\":\"Bulb\",\"material\":\"Natural rubber\",\"bin\":\"General waste\"},{\"part\":\"Carton\",\"material\":\"FSC board, no lamination\",\"bin\":\"Paper recycling\"}],\"histogram\":[168,32,8,3,3],\"gallery\":[{\"shot\":\"pack\",\"caption\":\"Vitamin C and Hyaluronic\"},{\"shot\":\"carton\",\"caption\":\"The carton\"}],\"subscribe\":{\"weeks\":8,\"discount\":0.1},\"reviews\":[{\"id\":\"set-01\",\"name\":\"Daniela F.\",\"city\":\"Lisbon\",\"skin\":\"Combination\",\"age\":\"35–44\",\"concern\":\"Dull or marked\",\"rating\":5,\"title\":\"The whole morning in two bottles\",\"body\":\"I like being told the order. Vitamin C, Hyaluronic, sunscreen, out the door in two minutes.\",\"date\":\"2026-09-19\",\"usedFor\":\"Used 8 weeks\",\"helpful\":17,\"verified\":true,\"home\":true},{\"id\":\"set-02\",\"name\":\"Oriol P.\",\"city\":\"Barcelona\",\"skin\":\"Normal\",\"age\":\"25–34\",\"concern\":\"Tight or dehydrated\",\"rating\":5,\"title\":\"Bought it as a gift, kept it\",\"body\":\"Meant to give it to my sister. The carton is lovely and the serums are better. Ordered her another.\",\"date\":\"2026-10-04\",\"usedFor\":\"Used 4 weeks\",\"helpful\":8,\"verified\":true},{\"id\":\"set-03\",\"name\":\"Isabelle M.\",\"city\":\"Toulouse\",\"skin\":\"Sensitive\",\"age\":\"45–54\",\"concern\":\"Redness\",\"rating\":3,\"title\":\"Hyaluronic great, Vitamin C too strong for me\",\"body\":\"The Hyaluronic is perfect. The Vitamin C is a bit much for my skin, even with the Hyaluronic under it.\",\"date\":\"2026-08-12\",\"usedFor\":\"Used 6 weeks\",\"helpful\":12,\"verified\":true,\"reply\":{\"by\":\"Marta\",\"role\":\"formulation\",\"body\":\"Thank you, Isabelle. Try the Vitamin C every other morning for two weeks with the Hyaluronic first, then build up. If it's still too much, we'll swap it for a Niacinamide at no cost.\"}},{\"id\":\"set-04\",\"name\":\"Moritz E.\",\"city\":\"Stuttgart\",\"skin\":\"Oily\",\"age\":\"35–44\",\"concern\":\"Dull or marked\",\"rating\":4,\"title\":\"Good value\",\"body\":\"Cheaper than buying the two separately, and you get both lots dated on the carton.\",\"date\":\"2026-07-22\",\"usedFor\":\"Used 10 weeks\",\"helpful\":5,\"verified\":true},{\"id\":\"set-05\",\"name\":\"Aleksandra Z.\",\"city\":\"Łódź\",\"skin\":\"Dry\",\"age\":\"25–34\",\"concern\":\"Tight or dehydrated\",\"rating\":5,\"title\":\"Brighter and not tight\",\"body\":\"Vitamin C alone made my skin a bit tight. With the Hyaluronic on top it's perfect.\",\"date\":\"2026-09-30\",\"usedFor\":\"Used 7 weeks\",\"helpful\":9,\"verified\":true},{\"id\":\"set-06\",\"name\":\"Rui N.\",\"city\":\"Porto\",\"skin\":\"Combination\",\"age\":\"45–54\",\"concern\":\"Dull or marked\",\"rating\":2,\"title\":\"Arrived a day late\",\"body\":\"The products are fine, but delivery took three days instead of two. Not what I expected from a shop in my own city.\",\"date\":\"2026-08-27\",\"usedFor\":\"Used 3 weeks\",\"helpful\":4,\"verified\":true}]}",
+              "references": null
+            },
+            null,
+            {
+              "namespace": "cuvette",
+              "key": "components",
+              "type": "list.product_reference",
+              "value": "[\"gid://shopify/Product/8800100000001\",\"gid://shopify/Product/8800100000002\"]",
+              "references": {
+                "nodes": [
+                  {
+                    "__typename": "Product",
+                    "id": "gid://shopify/Product/8800100000001",
+                    "handle": "vitamin-c"
+                  },
+                  {
+                    "__typename": "Product",
+                    "id": "gid://shopify/Product/8800100000002",
+                    "handle": "hyaluronic"
+                  }
+                ]
+              }
+            },
+            null,
+            {
+              "namespace": "cuvette",
+              "key": "position",
+              "type": "number_integer",
+              "value": "5",
+              "references": null
+            },
+            null
+          ]
+        }
+      ]
+    },
+    "collections": {
+      "nodes": [
+        {
+          "id": "gid://shopify/Collection/6077",
+          "handle": "serums",
+          "title": "Serums",
+          "description": "One lead active each, at a stated strength.",
+          "products": {
+            "nodes": [
+              {
+                "handle": "vitamin-c"
+              },
+              {
+                "handle": "hyaluronic"
+              },
+              {
+                "handle": "niacinamide"
+              },
+              {
+                "handle": "retinal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Collection/4077",
+          "handle": "sets",
+          "title": "Sets",
+          "description": "Two serums in the order you use them, for less than apart.",
+          "products": {
+            "nodes": [
+              {
+                "handle": "morning-set"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "concerns": {
+      "nodes": [
+        {
+          "handle": "dull-or-marked",
+          "fields": [
+            {
+              "key": "label",
+              "value": "Dull or marked"
+            },
+            {
+              "key": "aliases",
+              "value": "[\"Dullness\", \"Dark marks\", \"Uneven tone\"]"
+            },
+            {
+              "key": "position",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "handle": "tight-or-dehydrated",
+          "fields": [
+            {
+              "key": "label",
+              "value": "Tight or dehydrated"
+            },
+            {
+              "key": "aliases",
+              "value": "[\"Dehydration\", \"Dryness\"]"
+            },
+            {
+              "key": "position",
+              "value": "2"
+            }
+          ]
+        },
+        {
+          "handle": "red-or-oily",
+          "fields": [
+            {
+              "key": "label",
+              "value": "Red or oily"
+            },
+            {
+              "key": "aliases",
+              "value": "[\"Redness\", \"Oiliness\", \"Visible pores\"]"
+            },
+            {
+              "key": "position",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "handle": "texture-or-fine-lines",
+          "fields": [
+            {
+              "key": "label",
+              "value": "Texture or fine lines"
+            },
+            {
+              "key": "aliases",
+              "value": "[\"Fine lines\", \"Rough texture\"]"
+            },
+            {
+              "key": "position",
+              "value": "4"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
