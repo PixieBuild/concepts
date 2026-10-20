@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   motion,
   useInView,
@@ -190,6 +190,8 @@ export function StaggerLines({
   );
 }
 
+const subscribeNever = () => () => {};
+
 export function Parallax({
   children,
   className,
@@ -200,7 +202,9 @@ export function Parallax({
   amount?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
+  // Applied only after hydration, so the server and first client render agree.
+  const hydrated = useSyncExternalStore(subscribeNever, () => true, () => false);
+  const reduced = useReducedMotion() === true && hydrated;
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],

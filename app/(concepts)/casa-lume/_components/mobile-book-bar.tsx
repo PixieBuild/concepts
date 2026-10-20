@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { trackHeroEnd } from "@/app/(concepts)/casa-lume/_lib/hero-end";
 import { path } from "@/app/(concepts)/casa-lume/site";
 
 export function MobileBookBar() {
@@ -14,16 +15,16 @@ export function MobileBookBar() {
 
   useEffect(() => {
     const onScroll = () => {
-      const hero = document.getElementById("hero");
-      setVisible(
-        hero
-          ? hero.getBoundingClientRect().bottom <= 96
-          : window.scrollY > window.innerHeight * 0.6,
-      );
+      const end = heroEnd.get();
+      setVisible(end ? end.bottom <= 96 : window.scrollY > window.innerHeight * 0.6);
     };
+    const heroEnd = trackHeroEnd(onScroll);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      heroEnd.stop();
+    };
   }, []);
 
   if (pathname.startsWith(path("/booking"))) return null;

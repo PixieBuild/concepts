@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 import { DateField } from "@/app/(concepts)/casa-lume/_components/date-field";
 import { GuestField } from "@/app/(concepts)/casa-lume/_components/guest-field";
 import Image from "next/image";
-import { ROOMS } from "@/app/(concepts)/casa-lume/_lib/content";
+import { ROOMS, type Room } from "@/app/(concepts)/casa-lume/_lib/content";
 import {
   confirmationNumber,
   formatCurrency,
@@ -70,7 +70,7 @@ export function BookingFlow({
     setSearching(true);
     await new Promise((resolve) => setTimeout(resolve, 900));
     setSearching(false);
-    setStep(1);
+    setStep(room && room.guests >= values.guests ? 2 : 1);
   }
 
   return (
@@ -95,6 +95,8 @@ export function BookingFlow({
                 }}
                 searching={searching}
                 onSubmit={handleStay}
+                chosen={room}
+                onChangeRoom={() => setRoomSlug(null)}
               />
             )}
 
@@ -219,10 +221,14 @@ function StayStep({
   defaults,
   searching,
   onSubmit,
+  chosen,
+  onChangeRoom,
 }: {
   defaults: { arrival?: Date; departure?: Date; guests: number };
   searching: boolean;
   onSubmit: (values: StayDetails) => void;
+  chosen: Room | null;
+  onChangeRoom: () => void;
 }) {
   const form = useForm<StayDetails>({
     resolver: zodResolver(stayDetailsSchema),
@@ -238,6 +244,21 @@ function StayStep({
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
+      {chosen && (
+        <p className="mb-8 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border/60 pb-5 text-[0.9375rem] text-muted-foreground">
+          <span>
+            Reserving <span className="font-heading text-[1.25rem] text-foreground italic">{chosen.name}</span>
+            {" · "}from {formatCurrency(chosen.priceFrom)} a night
+          </span>
+          <button
+            type="button"
+            onClick={onChangeRoom}
+            className="min-h-11 text-[0.6875rem] tracking-[0.16em] text-foreground uppercase underline decoration-border underline-offset-4 hover:decoration-foreground"
+          >
+            Change
+          </button>
+        </p>
+      )}
       <StepHeading
         eyebrow="Step one"
         title="When would you like to arrive?"

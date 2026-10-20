@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -72,10 +72,14 @@ const CHAPTERS: Chapter[] = [
   },
 ];
 
+const subscribeNever = () => () => {};
+
 export function HouseChapters() {
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
-  const reduced = useReducedMotion();
+  // Applied only after hydration, so the server and first client render agree.
+  const hydrated = useSyncExternalStore(subscribeNever, () => true, () => false);
+  const reduced = useReducedMotion() === true && hydrated;
 
   useEffect(() => {
     const observer = new IntersectionObserver(

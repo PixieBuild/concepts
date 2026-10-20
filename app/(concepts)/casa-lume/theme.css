@@ -38,6 +38,7 @@
   --olive: oklch(0.6039 0.0323 124.35);
   --clay: oklch(0.4814 0.0947 41.64);
   --ink: oklch(0.4361 0.0134 63.1);
+  --gilt: oklch(0.83 0.075 82);
 }
 
 .theme-casa-lume body {
@@ -116,4 +117,143 @@
   font-size: 0.625rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+/* Homepage hero, "Diciassette luci": the load-time evening runs in CSS so it stays off the
+   main thread; scroll-driven motion lives in the components. */
+@property --casa-sun {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+.theme-casa-lume .evening-reveal {
+  clip-path: inset(100% 0 0 0);
+}
+
+.theme-casa-lume [data-evening] .evening-reveal {
+  animation: evening-plate-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+}
+
+.theme-casa-lume [data-evening="night"] .evening-reveal {
+  clip-path: none;
+  animation: none;
+}
+
+@keyframes evening-plate-in {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* The sky darkens from the top while the land goes from the bottom, like the real thing. */
+.theme-casa-lume .evening-dusk {
+  --casa-sun: 0;
+  -webkit-mask-image:
+    linear-gradient(to top, #000 calc(var(--casa-sun) * 165% - 65%), transparent calc(var(--casa-sun) * 165%)),
+    linear-gradient(to bottom, #000 calc(var(--casa-sun) * 150% - 90%), transparent calc(var(--casa-sun) * 150% - 20%));
+  mask-image:
+    linear-gradient(to top, #000 calc(var(--casa-sun) * 165% - 65%), transparent calc(var(--casa-sun) * 165%)),
+    linear-gradient(to bottom, #000 calc(var(--casa-sun) * 150% - 90%), transparent calc(var(--casa-sun) * 150% - 20%));
+}
+
+.theme-casa-lume [data-evening="dusk"] .evening-dusk {
+  animation: evening-sunset 3.2s cubic-bezier(0.32, 0.04, 0.38, 1) both;
+}
+
+/* After the sunset the dusk plate is simply on top, so the camera moves an unmasked layer. */
+.theme-casa-lume [data-evening="night"] .evening-dusk {
+  -webkit-mask-image: none;
+  mask-image: none;
+  animation: none;
+}
+
+/* The opaque dusk plate now covers golden hour entirely, so it stops being painted and rastered. */
+.theme-casa-lume [data-evening="night"] .evening-golden {
+  visibility: hidden;
+}
+
+@keyframes evening-sunset {
+  from {
+    --casa-sun: 0;
+  }
+  to {
+    --casa-sun: 1;
+  }
+}
+
+.theme-casa-lume .evening-light {
+  opacity: 0;
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Night repeats dusk's values exactly, so lights already on or still warming are not restarted. */
+.theme-casa-lume :is([data-evening="dusk"], [data-evening="night"]) .evening-light {
+  animation: evening-warm 1.1s linear var(--on, 0s) both;
+}
+
+.theme-casa-lume :is([data-evening="dusk"], [data-evening="night"]) .evening-light[data-off] {
+  animation: evening-out 1.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.theme-casa-lume :is([data-evening="dusk"], [data-evening="night"]) .evening-light[data-relit] {
+  animation: evening-warm 1.1s linear both;
+}
+
+.theme-casa-lume .evening-light[data-hot] {
+  filter: brightness(1.22) saturate(1.06);
+}
+
+/* A filament warming: a catch, a dip, then the room settles. */
+@keyframes evening-warm {
+  0% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.62;
+  }
+  26% {
+    opacity: 0.44;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes evening-out {
+  0% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Letterpress stock for the welcome card. */
+.theme-casa-lume .paper-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='.33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-casa-lume .evening-reveal {
+    clip-path: none;
+    animation: none !important;
+  }
+
+  .theme-casa-lume .evening-dusk {
+    --casa-sun: 1;
+    animation: none !important;
+  }
+
+  .theme-casa-lume .evening-light {
+    opacity: 1;
+    animation: none !important;
+  }
 }
