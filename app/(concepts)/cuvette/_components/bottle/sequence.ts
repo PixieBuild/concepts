@@ -5,6 +5,7 @@ import { axisAt, compactCrop } from "./camera";
 import { Compositor, type GpuPicture, type Ink, type LiveLight, type Warp } from "./compositor";
 import { PlaneDecoder } from "./decoder";
 import { lightAt } from "./light";
+import { SLOW_MBPS } from "./frames";
 import { frameUrls, proxyUrls, type Picture, type PictureUrls, type Rect, type SequenceItem, type TemplateManifest } from "./manifest";
 import type { Blobs, Planes } from "./planes";
 
@@ -19,8 +20,12 @@ export type PlayerOptions = {
   box: { w: number; h: number };
   onFirstFrame?: () => void;
   onLost?: () => void;
+  /** Called once if the first seconds of downloads run below SLOW_MBPS: too slow to fill the sequence in time. */
+  onSlow?: () => void;
 };
 
+// Downloads are judged this long after the first paint, once the background queue is running.
+const MEASURE_MS = 3000;
 const FADE_MS = 450;
 const SHARPEN_MS = 60;
 // This long without a scroll step is rest: full paint size, a settled dissolve, and nothing blurred on screen.
@@ -119,6 +124,7 @@ export class SequencePlayer {
   private full: Tier;
   private proxy: Tier | null = null;
   private fetching = new Map<number, AbortController>();
+  private received = { bytes: 0, since: 0, done: false };
   private background = new AbortController();
   private job: Job | null = null;
   private compiled = false;
@@ -576,6 +582,7 @@ export class SequencePlayer {
       const get = (url: string) => fetch(url, { signal, priority }).then((r) => (r.ok ? r.blob() : Promise.reject(new Error(url))));
       const [base, light, data] = await Promise.all([get(urls.base), get(urls.light), get(urls.data)]);
       tier.blobs.set(k, { base, light, data });
+      this.measure(base.size + light.size + data.size);
     } catch {
       // Cancelled, or failed: a failed frame is skipped and the screen holds on its neighbour.
       if (!signal.aborted) tier.failed.add(k);
@@ -585,9 +592,21 @@ export class SequencePlayer {
     }
   }
 
+  /** Judges the link once, MEASURE_MS after the first paint: below SLOW_MBPS the page swaps in the chapter stills. */
+  private measure(bytes: number) {
+    const r = this.received;
+    if (!r.since || r.done || this.keysOnly) return;
+    r.bytes += bytes;
+    const elapsed = performance.now() - r.since;
+    if (elapsed < MEASURE_MS) return;
+    r.done = true;
+    if ((r.bytes * 8) / (elapsed * 1000) < SLOW_MBPS) this.options.onSlow?.();
+  }
+
   /** After the first paint: every proxy, then (on a fast enough link) every full frame, nearest the scroll first, at
    * low priority so the files fetch and decode are the only waits left. */
   private async prefetch() {
+    this.received.since = performance.now();
     const connection = (navigator as Navigator & { connection?: { effectiveType?: string } }).connection;
     const fast = !connection?.effectiveType || connection.effectiveType === "4g";
     const queue: [Tier, number][] = [];

@@ -5,7 +5,7 @@ import { useMotionValueEvent, useReducedMotion, type MotionValue } from "motion/
 
 import { cn } from "@/lib/utils";
 import { lookKey, type BottleLook } from "../../_lib/product-look";
-import { saveData } from "./frames";
+import { saveData, slowLink } from "./frames";
 import { fontsReady } from "./label";
 import { loadManifest, type TemplateManifest } from "./manifest";
 import { SequencePlayer } from "./sequence";
@@ -35,6 +35,8 @@ export function BottleSequence({ look, progress, running, poster, className, can
   const reduced = useReducedMotion() ?? false;
   const [compact, setCompact] = useState<boolean | null>(null);
   const [drawn, setDrawn] = useState(false);
+  // A slow link gets the chapter stills, as reduced motion does: the full sequence would never catch the scroll.
+  const [slow, setSlow] = useState(false);
   // A lost GPU context leaves its canvas unusable: a new one takes its place, with the poster shown meanwhile.
   const [generation, setGeneration] = useState(0);
   const key = lookKey(look);
@@ -51,7 +53,7 @@ export function BottleSequence({ look, progress, running, poster, className, can
   const create = useEffectEvent((el: HTMLCanvasElement, manifest: TemplateManifest, compactView: boolean) => {
     const p = new SequencePlayer(el, manifest, look, {
       compact: compactView,
-      keysOnly: reduced,
+      keysOnly: reduced || slow || slowLink(),
       lean: saveData(),
       box: deviceBox(el),
       onFirstFrame: () => setDrawn(true),
@@ -59,6 +61,7 @@ export function BottleSequence({ look, progress, running, poster, className, can
         setDrawn(false);
         setGeneration((g) => g + 1);
       },
+      onSlow: () => setSlow(true),
     });
     player.current = p;
     p.setProgress(progress.get());
@@ -82,7 +85,7 @@ export function BottleSequence({ look, progress, running, poster, className, can
       made?.destroy();
       player.current = null;
     };
-  }, [compact, reduced, generation]);
+  }, [compact, reduced, slow, generation]);
 
   // The light leans towards a mouse over the stage; touch and reduced motion leave it to the scroll alone.
   useEffect(() => {
