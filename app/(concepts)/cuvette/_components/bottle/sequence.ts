@@ -68,6 +68,13 @@ const STEP = 0.125;
 // Between two rendered frames the nearer one shows, warped onto the camera, and passing the middle of the gap cuts to
 // the other. Any blend of the two, scrubbed or eased, double-exposes the dropper and the small type while it lasts.
 const HYSTERESIS = 0.08;
+// The plan only leaves gaps this wide where the dropper is still or out of shot. Where the camera also zooms past
+// BLEND_ZOOM across one, the axis warp can't follow the set's parallax and a cut jolts the plinth and backdrop, so
+// those gaps blend with the scroll instead; with the dropper hanging in shot the camera barely moves, and they cut.
+// At rest a blend would double the label's type, so it settles onto the nearer frame.
+const BLEND_GAP = 0.02;
+const BLEND_ZOOM = 0.04;
+const SETTLE_MS = 200;
 const SKIP = 0.02;
 const PROXIES = 12;
 const PROXIES_COMPACT = 8;
@@ -77,6 +84,10 @@ const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const smoothstep = (x: number) => {
   const t = clamp(x);
   return t * t * (3 - 2 * t);
+};
+const axisLength = (p: number, size: [number, number]) => {
+  const { foot, shoulder } = axisAt(p, size);
+  return Math.hypot(foot[0] - shoulder[0], foot[1] - shoulder[1]);
 };
 const percentile = (xs: number[], p: number) => [...xs].sort((a, b) => a - b)[Math.min(xs.length - 1, Math.floor(p * xs.length))] ?? 0;
 
@@ -125,6 +136,8 @@ export class SequencePlayer {
   private shown: number | null = null;
   private onProxy = new Set<number>();
   private mix = { lo: -1, goal: 0 };
+  private blends: boolean[];
+  private blend = { lo: -1, t: 0, at: 0 };
   private sharpen = new Map<number, number>();
   private look: BottleLook;
   private key: string;
@@ -193,6 +206,13 @@ export class SequencePlayer {
         : items;
     if (!this.frames.length) this.frames = items.slice(0, 1);
     this.chapters = seq.chapters.map((c) => this.nearest(c.progress));
+    // A thinned gap blends only if every rendered gap inside it is sparse, so a skipped dense frame still cuts.
+    const sparse = (a: number, b: number) => items.slice(a + 1, b + 1).every((f, i) => f.progress - items[a + i].progress > BLEND_GAP);
+    const zoom = (a: SequenceItem, b: SequenceItem) => Math.abs(Math.log(axisLength(a.progress, seq.size) / axisLength(b.progress, seq.size)));
+    this.blends = this.frames.map((f, k) => {
+      const next = this.frames[k + 1];
+      return Boolean(next) && zoom(f, next) > BLEND_ZOOM && sparse(items.indexOf(f), items.indexOf(next));
+    });
     canvas.addEventListener("webglcontextlost", this.onLost);
     this.size = seq.size;
 
@@ -843,6 +863,18 @@ export class SequencePlayer {
     return m.goal;
   }
 
+  /** How much of frame lo + 1 shows across a blended gap: the scroll's own position while it moves, easing onto the
+   * nearer frame once it rests. */
+  private blendAt(lo: number, t: number, resting: boolean, now: number): number {
+    const b = this.blend;
+    const goal = resting ? this.settle(lo, t) : smoothstep(t);
+    const dt = b.at ? now - b.at : 0;
+    if (b.lo !== lo || !resting) b.t = goal;
+    else b.t += clamp(goal - b.t, -dt / SETTLE_MS, dt / SETTLE_MS);
+    Object.assign(b, { lo, at: now });
+    return b.t;
+  }
+
   /** Where to draw picture k so it sits on the camera at progress q: its frame pixel for each output pixel. */
   private map(k: number, q: number, warp: boolean): Warp {
     const from = this.frames[k].progress;
@@ -936,7 +968,8 @@ export class SequencePlayer {
     const q = this.progressAt(clamp(next + clamp(gap, -this.lead, this.lead), 0, this.frames.length - 1));
     const live = lightAt(q, this.pointer);
     const lo = Math.floor(next);
-    const t = this.settle(lo, next - lo);
+    const t = this.blends[lo] ? this.blendAt(lo, next - lo, resting, now) : this.settle(lo, next - lo);
+    again ||= this.blends[lo] && Math.abs(t - Math.round(t)) > EPS;
     const fade = this.lookFade;
     if (fade && !fade.start) fade.start = now;
     const s = fade ? smoothstep((now - fade.start) / FADE_MS) : 1;
