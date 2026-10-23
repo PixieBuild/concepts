@@ -12,10 +12,11 @@ const PATH: Lens[] = [
 ];
 
 const DROPPER = {
-  lift: 2.35,
-  lower: 1.65,
+  lift: 3.9,
+  lower: 2.43,
   hang: [0.98, 0, 0.34],
-  phases: { lift: [0.42, 0.52], shift: [0.52, 0.57], lower: [0.57, 0.62], raise: [0.8, 0.84], back: [0.84, 0.88], seat: [0.88, 0.94] },
+  phases: { lift: [0.4, 0.515], shift: [0.515, 0.56], lower: [0.56, 0.62], raise: [0.8, 0.845], back: [0.845, 0.875], seat: [0.875, 0.94] },
+  dropPhases: { fall: [0.667, 0.712], spread: [0.712, 0.775] },
 } as const;
 
 const BULB = 3.3;
@@ -86,6 +87,9 @@ export function compactCrop(p: number, size: [number, number], aspect: number, s
   const top = project(L, [d.x, d.height + BULB, d.z], size)[1];
   // Only while the bulb is in or near the frame: a bulb far above it would gain nothing.
   const near = smooth(between(top, -0.25 * h, 0));
-  const drop = d.out * near * Math.min(safeTop, Math.max(0, safeTop - top));
+  // From the fall through the spread the stone matters more than the bulb, which slips into the header's shadow.
+  const { fall, spread } = DROPPER.dropPhases;
+  const landing = smooth(between(p, fall[0], fall[0] + 0.5 * (fall[1] - fall[0]))) * (1 - smooth(between(p, spread[1], DROPPER.phases.raise[0])));
+  const drop = d.out * near * (1 - landing) * Math.min(safeTop, Math.max(0, safeTop - top));
   return [Math.round(x), -Math.round(drop), cw, h];
 }

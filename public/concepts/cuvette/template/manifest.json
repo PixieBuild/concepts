@@ -1,6 +1,6 @@
 {
  "version": 2,
- "updated": "2026-10-19T02:00:00",
+ "updated": "2026-10-24T01:58:44",
  "note": "Product-free template renders of the Cuvette bottle; a product is composited from data at runtime. Made by scripts/cuvette/blender (sequence.py, render.py, pack_lean.py).",
  "label": {
   "arc": 2.3,
@@ -298,7 +298,7 @@
   }
  },
  "sequence": {
-  "frames": 90,
+  "frames": 114,
   "path": {
    "wide": "sequence/wide/{frame}.avif",
    "compact": "sequence/compact/{frame}.avif",
@@ -326,11 +326,11 @@
    },
    {
     "progress": 0.6666666666666666,
-    "frame": 53
+    "frame": 58
    },
    {
     "progress": 1,
-    "frame": 89
+    "frame": 113
    }
   ],
   "dropper": {
@@ -362,16 +362,16 @@
    },
    "drop_phases": {
     "grow": [
-     0.62,
-     0.66
+     0.615,
+     0.655
     ],
     "fall": [
-     0.69,
-     0.72
+     0.667,
+     0.712
     ],
     "spread": [
-     0.72,
-     0.77
+     0.712,
+     0.775
     ]
    }
   },
@@ -4018,12 +4018,12 @@
    },
    {
     "frame": 52,
-    "progress": 0.62271,
+    "progress": 0.61957,
     "rect": [
-     414,
+     412,
      0,
-     813,
-     971
+     817,
+     972
     ],
     "crop": [
      434,
@@ -4044,7 +4044,77 @@
      },
      {
       "file": "data",
-      "x": 816,
+      "x": 820,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 848,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 848,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 53,
+    "progress": 0.62835,
+    "rect": [
+     416,
+     0,
+     808,
+     970
+    ],
+    "crop": [
+     434,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 810,
       "y": 0,
       "channels": [
        "v.lo",
@@ -4087,7 +4157,287 @@
     ]
    },
    {
-    "frame": 53,
+    "frame": 54,
+    "progress": 0.63526,
+    "rect": [
+     420,
+     0,
+     801,
+     968
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 804,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 832,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 832,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 55,
+    "progress": 0.64243,
+    "rect": [
+     422,
+     0,
+     796,
+     967
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 798,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 56,
+    "progress": 0.64872,
+    "rect": [
+     424,
+     0,
+     792,
+     967
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 794,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 57,
+    "progress": 0.655,
+    "rect": [
+     424,
+     0,
+     791,
+     966
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 794,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 58,
     "progress": 0.6666666666666666,
     "rect": [
      424,
@@ -4157,8 +4507,358 @@
     ]
    },
    {
-    "frame": 54,
-    "progress": 0.69002,
+    "frame": 59,
+    "progress": 0.6707,
+    "rect": [
+     424,
+     0,
+     790,
+     966
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 792,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 60,
+    "progress": 0.67773,
+    "rect": [
+     424,
+     0,
+     790,
+     965
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 792,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 61,
+    "progress": 0.68186,
+    "rect": [
+     424,
+     0,
+     790,
+     965
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 792,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 62,
+    "progress": 0.6851,
+    "rect": [
+     424,
+     0,
+     790,
+     965
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 792,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 63,
+    "progress": 0.68786,
+    "rect": [
+     424,
+     0,
+     790,
+     965
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 792,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 64,
+    "progress": 0.6903,
     "rect": [
      424,
      0,
@@ -4227,8 +4927,218 @@
     ]
    },
    {
-    "frame": 55,
-    "progress": 0.70249,
+    "frame": 65,
+    "progress": 0.69252,
+    "rect": [
+     424,
+     0,
+     789,
+     965
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 792,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 66,
+    "progress": 0.69456,
+    "rect": [
+     424,
+     0,
+     789,
+     964
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 792,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 67,
+    "progress": 0.69646,
+    "rect": [
+     424,
+     0,
+     789,
+     964
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 792,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 68,
+    "progress": 0.69825,
     "rect": [
      422,
      0,
@@ -4297,13 +5207,13 @@
     ]
    },
    {
-    "frame": 56,
-    "progress": 0.71198,
+    "frame": 69,
+    "progress": 0.69995,
     "rect": [
      422,
      0,
      791,
-     962
+     964
     ],
     "crop": [
      432,
@@ -4367,13 +5277,13 @@
     ]
    },
    {
-    "frame": 57,
-    "progress": 0.71866,
+    "frame": 70,
+    "progress": 0.70156,
     "rect": [
-     420,
+     422,
      0,
-     793,
-     961
+     791,
+     964
     ],
     "crop": [
      432,
@@ -4394,7 +5304,7 @@
      },
      {
       "file": "data",
-      "x": 796,
+      "x": 794,
       "y": 0,
       "channels": [
        "v.lo",
@@ -4437,8 +5347,498 @@
     ]
    },
    {
-    "frame": 58,
-    "progress": 0.71997,
+    "frame": 71,
+    "progress": 0.7031,
+    "rect": [
+     422,
+     0,
+     791,
+     964
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 794,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 72,
+    "progress": 0.70458,
+    "rect": [
+     422,
+     0,
+     791,
+     963
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 794,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 73,
+    "progress": 0.706,
+    "rect": [
+     422,
+     0,
+     791,
+     963
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 794,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 74,
+    "progress": 0.70737,
+    "rect": [
+     422,
+     0,
+     791,
+     963
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 794,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 75,
+    "progress": 0.7087,
+    "rect": [
+     422,
+     0,
+     791,
+     963
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 794,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 76,
+    "progress": 0.70999,
+    "rect": [
+     422,
+     0,
+     791,
+     963
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 794,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 77,
+    "progress": 0.71124,
+    "rect": [
+     422,
+     0,
+     791,
+     963
+    ],
+    "crop": [
+     432,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 794,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 992,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 992,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 78,
+    "progress": 0.7196,
     "rect": [
      420,
      0,
@@ -4507,83 +5907,13 @@
     ]
    },
    {
-    "frame": 59,
-    "progress": 0.71999,
-    "rect": [
-     420,
-     0,
-     792,
-     961
-    ],
-    "crop": [
-     432,
-     0,
-     800,
-     1000
-    ],
-    "tiles": [
-     {
-      "file": "data",
-      "x": 0,
-      "y": 0,
-      "channels": [
-       "u.hi",
-       "u.lo",
-       "v.hi"
-      ]
-     },
-     {
-      "file": "data",
-      "x": 794,
-      "y": 0,
-      "channels": [
-       "v.lo",
-       "cov",
-       "nv"
-      ]
-     },
-     {
-      "file": "light",
-      "x": 0,
-      "y": 0,
-      "channels": [
-       "shade"
-      ]
-     },
-     {
-      "file": "light",
-      "x": 816,
-      "y": 0,
-      "channels": [
-       "front"
-      ]
-     },
-     {
-      "file": "light",
-      "x": 0,
-      "y": 992,
-      "channels": [
-       "light.1"
-      ]
-     },
-     {
-      "file": "light",
-      "x": 816,
-      "y": 992,
-      "channels": [
-       "depth.1"
-      ]
-     }
-    ]
-   },
-   {
-    "frame": 60,
-    "progress": 0.72946,
+    "frame": 79,
+    "progress": 0.73027,
     "rect": [
      418,
      0,
      794,
-     960
+     959
     ],
     "crop": [
      434,
@@ -4647,13 +5977,13 @@
     ]
    },
    {
-    "frame": 61,
-    "progress": 0.75225,
+    "frame": 80,
+    "progress": 0.7384,
     "rect": [
-     414,
+     416,
      0,
-     796,
-     955
+     795,
+     958
     ],
     "crop": [
      434,
@@ -4717,13 +6047,223 @@
     ]
    },
    {
-    "frame": 62,
-    "progress": 0.78672,
+    "frame": 81,
+    "progress": 0.74587,
     "rect": [
-     408,
+     416,
+     0,
+     795,
+     956
+    ],
+    "crop": [
+     434,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 798,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 976,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 976,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 82,
+    "progress": 0.75343,
+    "rect": [
+     414,
+     0,
+     796,
+     954
+    ],
+    "crop": [
+     434,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 798,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 976,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 976,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 83,
+    "progress": 0.76191,
+    "rect": [
+     412,
+     0,
+     798,
+     952
+    ],
+    "crop": [
+     434,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 800,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 976,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 976,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 84,
+    "progress": 0.76846,
+    "rect": [
+     410,
      0,
      799,
-     944
+     950
     ],
     "crop": [
      436,
@@ -4771,7 +6311,7 @@
      {
       "file": "light",
       "x": 0,
-      "y": 960,
+      "y": 976,
       "channels": [
        "light.1"
       ]
@@ -4779,6 +6319,146 @@
      {
       "file": "light",
       "x": 816,
+      "y": 976,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 85,
+    "progress": 0.775,
+    "rect": [
+     410,
+     0,
+     798,
+     948
+    ],
+    "crop": [
+     436,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 800,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 976,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 816,
+      "y": 976,
+      "channels": [
+       "depth.1"
+      ]
+     }
+    ]
+   },
+   {
+    "frame": 86,
+    "progress": 0.8,
+    "rect": [
+     406,
+     0,
+     804,
+     940
+    ],
+    "crop": [
+     438,
+     0,
+     800,
+     1000
+    ],
+    "tiles": [
+     {
+      "file": "data",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "u.hi",
+       "u.lo",
+       "v.hi"
+      ]
+     },
+     {
+      "file": "data",
+      "x": 806,
+      "y": 0,
+      "channels": [
+       "v.lo",
+       "cov",
+       "nv"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 0,
+      "channels": [
+       "shade"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 832,
+      "y": 0,
+      "channels": [
+       "front"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 0,
+      "y": 960,
+      "channels": [
+       "light.1"
+      ]
+     },
+     {
+      "file": "light",
+      "x": 832,
       "y": 960,
       "channels": [
        "depth.1"
@@ -4787,7 +6467,7 @@
     ]
    },
    {
-    "frame": 63,
+    "frame": 87,
     "progress": 0.8065,
     "rect": [
      404,
@@ -4857,7 +6537,7 @@
     ]
    },
    {
-    "frame": 64,
+    "frame": 88,
     "progress": 0.81095,
     "rect": [
      404,
@@ -4927,7 +6607,7 @@
     ]
    },
    {
-    "frame": 65,
+    "frame": 89,
     "progress": 0.81444,
     "rect": [
      404,
@@ -4997,7 +6677,7 @@
     ]
    },
    {
-    "frame": 66,
+    "frame": 90,
     "progress": 0.81756,
     "rect": [
      402,
@@ -5067,7 +6747,7 @@
     ]
    },
    {
-    "frame": 67,
+    "frame": 91,
     "progress": 0.8205,
     "rect": [
      402,
@@ -5137,7 +6817,7 @@
     ]
    },
    {
-    "frame": 68,
+    "frame": 92,
     "progress": 0.82337,
     "rect": [
      402,
@@ -5207,7 +6887,7 @@
     ]
    },
    {
-    "frame": 69,
+    "frame": 93,
     "progress": 0.82626,
     "rect": [
      402,
@@ -5277,7 +6957,7 @@
     ]
    },
    {
-    "frame": 70,
+    "frame": 94,
     "progress": 0.82928,
     "rect": [
      402,
@@ -5347,7 +7027,7 @@
     ]
    },
    {
-    "frame": 71,
+    "frame": 95,
     "progress": 0.83258,
     "rect": [
      402,
@@ -5417,7 +7097,7 @@
     ]
    },
    {
-    "frame": 72,
+    "frame": 96,
     "progress": 0.83649,
     "rect": [
      400,
@@ -5487,7 +7167,7 @@
     ]
    },
    {
-    "frame": 73,
+    "frame": 97,
     "progress": 0.87943,
     "rect": [
      400,
@@ -5557,7 +7237,7 @@
     ]
    },
    {
-    "frame": 74,
+    "frame": 98,
     "progress": 0.88711,
     "rect": [
      400,
@@ -5627,7 +7307,7 @@
     ]
    },
    {
-    "frame": 75,
+    "frame": 99,
     "progress": 0.89124,
     "rect": [
      400,
@@ -5697,7 +7377,7 @@
     ]
    },
    {
-    "frame": 76,
+    "frame": 100,
     "progress": 0.89476,
     "rect": [
      400,
@@ -5767,7 +7447,7 @@
     ]
    },
    {
-    "frame": 77,
+    "frame": 101,
     "progress": 0.89797,
     "rect": [
      400,
@@ -5837,7 +7517,7 @@
     ]
    },
    {
-    "frame": 78,
+    "frame": 102,
     "progress": 0.90098,
     "rect": [
      402,
@@ -5907,7 +7587,7 @@
     ]
    },
    {
-    "frame": 79,
+    "frame": 103,
     "progress": 0.90387,
     "rect": [
      402,
@@ -5977,7 +7657,7 @@
     ]
    },
    {
-    "frame": 80,
+    "frame": 104,
     "progress": 0.90671,
     "rect": [
      402,
@@ -6047,7 +7727,7 @@
     ]
    },
    {
-    "frame": 81,
+    "frame": 105,
     "progress": 0.90952,
     "rect": [
      402,
@@ -6117,7 +7797,7 @@
     ]
    },
    {
-    "frame": 82,
+    "frame": 106,
     "progress": 0.91237,
     "rect": [
      402,
@@ -6187,7 +7867,7 @@
     ]
    },
    {
-    "frame": 83,
+    "frame": 107,
     "progress": 0.91528,
     "rect": [
      402,
@@ -6257,7 +7937,7 @@
     ]
    },
    {
-    "frame": 84,
+    "frame": 108,
     "progress": 0.91832,
     "rect": [
      402,
@@ -6327,7 +8007,7 @@
     ]
    },
    {
-    "frame": 85,
+    "frame": 109,
     "progress": 0.92159,
     "rect": [
      402,
@@ -6397,7 +8077,7 @@
     ]
    },
    {
-    "frame": 86,
+    "frame": 110,
     "progress": 0.92523,
     "rect": [
      404,
@@ -6467,7 +8147,7 @@
     ]
    },
    {
-    "frame": 87,
+    "frame": 111,
     "progress": 0.92963,
     "rect": [
      404,
@@ -6537,7 +8217,7 @@
     ]
    },
    {
-    "frame": 88,
+    "frame": 112,
     "progress": 0.93687,
     "rect": [
      404,
@@ -6607,7 +8287,7 @@
     ]
    },
    {
-    "frame": 89,
+    "frame": 113,
     "progress": 1,
     "rect": [
      408,
@@ -6678,10 +8358,10 @@
    }
   ],
   "bytes": {
-   "wide": 780095,
-   "compact": 671300,
-   "light": 5561066,
-   "data": 2879158
+   "wide": 974127,
+   "compact": 25724,
+   "light": 6881679,
+   "data": 3386866
   },
   "proxy": {
    "size": [
@@ -6693,7 +8373,7 @@
     "light": "sequence/proxy/light/{frame}.avif",
     "data": "sequence/proxy/data/{frame}.webp"
    },
-   "bytes": 3657650,
+   "bytes": 4467048,
    "items": [
     {
      "frame": 0,
@@ -9974,9 +11654,9 @@
     {
      "frame": 52,
      "rect": [
-      207,
+      206,
       0,
-      407,
+      409,
       486
      ],
      "tiles": [
@@ -9992,7 +11672,7 @@
       },
       {
        "file": "data",
-       "x": 423,
+       "x": 425,
        "y": 0,
        "channels": [
         "v.lo",
@@ -10010,7 +11690,7 @@
       },
       {
        "file": "light",
-       "x": 423,
+       "x": 425,
        "y": 0,
        "channels": [
         "front"
@@ -10018,7 +11698,7 @@
       },
       {
        "file": "light",
-       "x": 846,
+       "x": 850,
        "y": 0,
        "channels": [
         "light.1"
@@ -10026,7 +11706,7 @@
       },
       {
        "file": "light",
-       "x": 1269,
+       "x": 1275,
        "y": 0,
        "channels": [
         "depth.1"
@@ -10037,10 +11717,10 @@
     {
      "frame": 53,
      "rect": [
-      212,
+      208,
       0,
-      395,
-      483
+      404,
+      485
      ],
      "tiles": [
       {
@@ -10055,7 +11735,7 @@
       },
       {
        "file": "data",
-       "x": 411,
+       "x": 420,
        "y": 0,
        "channels": [
         "v.lo",
@@ -10073,7 +11753,7 @@
       },
       {
        "file": "light",
-       "x": 411,
+       "x": 420,
        "y": 0,
        "channels": [
         "front"
@@ -10081,7 +11761,7 @@
       },
       {
        "file": "light",
-       "x": 822,
+       "x": 840,
        "y": 0,
        "channels": [
         "light.1"
@@ -10089,7 +11769,7 @@
       },
       {
        "file": "light",
-       "x": 1233,
+       "x": 1260,
        "y": 0,
        "channels": [
         "depth.1"
@@ -10099,6 +11779,258 @@
     },
     {
      "frame": 54,
+     "rect": [
+      210,
+      0,
+      401,
+      484
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 417,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 417,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 834,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1251,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 55,
+     "rect": [
+      211,
+      0,
+      398,
+      484
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 414,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 414,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 828,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1242,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 56,
+     "rect": [
+      212,
+      0,
+      396,
+      484
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 824,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1236,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 57,
+     "rect": [
+      212,
+      0,
+      396,
+      483
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 824,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1236,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 58,
      "rect": [
       212,
       0,
@@ -10161,7 +12093,574 @@
      ]
     },
     {
-     "frame": 55,
+     "frame": 59,
+     "rect": [
+      212,
+      0,
+      395,
+      483
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 822,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1233,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 60,
+     "rect": [
+      212,
+      0,
+      395,
+      483
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 822,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1233,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 61,
+     "rect": [
+      212,
+      0,
+      395,
+      483
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 822,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1233,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 62,
+     "rect": [
+      212,
+      0,
+      395,
+      483
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 822,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1233,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 63,
+     "rect": [
+      212,
+      0,
+      395,
+      483
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 822,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1233,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 64,
+     "rect": [
+      212,
+      0,
+      395,
+      483
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 822,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1233,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 65,
+     "rect": [
+      212,
+      0,
+      395,
+      483
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 822,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1233,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 66,
+     "rect": [
+      212,
+      0,
+      395,
+      482
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 822,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1233,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 67,
+     "rect": [
+      212,
+      0,
+      395,
+      482
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 411,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 822,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1233,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 68,
      "rect": [
       211,
       0,
@@ -10224,12 +12723,12 @@
      ]
     },
     {
-     "frame": 56,
+     "frame": 69,
      "rect": [
       211,
       0,
       396,
-      481
+      482
      ],
      "tiles": [
       {
@@ -10287,12 +12786,12 @@
      ]
     },
     {
-     "frame": 57,
+     "frame": 70,
      "rect": [
-      210,
+      211,
       0,
-      397,
-      481
+      396,
+      482
      ],
      "tiles": [
       {
@@ -10307,7 +12806,7 @@
       },
       {
        "file": "data",
-       "x": 413,
+       "x": 412,
        "y": 0,
        "channels": [
         "v.lo",
@@ -10325,7 +12824,7 @@
       },
       {
        "file": "light",
-       "x": 413,
+       "x": 412,
        "y": 0,
        "channels": [
         "front"
@@ -10333,7 +12832,7 @@
       },
       {
        "file": "light",
-       "x": 826,
+       "x": 824,
        "y": 0,
        "channels": [
         "light.1"
@@ -10341,7 +12840,7 @@
       },
       {
        "file": "light",
-       "x": 1239,
+       "x": 1236,
        "y": 0,
        "channels": [
         "depth.1"
@@ -10350,7 +12849,448 @@
      ]
     },
     {
-     "frame": 58,
+     "frame": 71,
+     "rect": [
+      211,
+      0,
+      396,
+      482
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 824,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1236,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 72,
+     "rect": [
+      211,
+      0,
+      396,
+      482
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 824,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1236,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 73,
+     "rect": [
+      211,
+      0,
+      396,
+      482
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 824,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1236,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 74,
+     "rect": [
+      211,
+      0,
+      396,
+      482
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 824,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1236,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 75,
+     "rect": [
+      211,
+      0,
+      396,
+      482
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 824,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1236,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 76,
+     "rect": [
+      211,
+      0,
+      396,
+      482
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 824,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1236,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 77,
+     "rect": [
+      211,
+      0,
+      396,
+      482
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 412,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 824,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1236,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 78,
      "rect": [
       210,
       0,
@@ -10413,70 +13353,7 @@
      ]
     },
     {
-     "frame": 59,
-     "rect": [
-      210,
-      0,
-      396,
-      481
-     ],
-     "tiles": [
-      {
-       "file": "data",
-       "x": 0,
-       "y": 0,
-       "channels": [
-        "u.hi",
-        "u.lo",
-        "v.hi"
-       ]
-      },
-      {
-       "file": "data",
-       "x": 412,
-       "y": 0,
-       "channels": [
-        "v.lo",
-        "cov",
-        "nv"
-       ]
-      },
-      {
-       "file": "light",
-       "x": 0,
-       "y": 0,
-       "channels": [
-        "shade"
-       ]
-      },
-      {
-       "file": "light",
-       "x": 412,
-       "y": 0,
-       "channels": [
-        "front"
-       ]
-      },
-      {
-       "file": "light",
-       "x": 824,
-       "y": 0,
-       "channels": [
-        "light.1"
-       ]
-      },
-      {
-       "file": "light",
-       "x": 1236,
-       "y": 0,
-       "channels": [
-        "depth.1"
-       ]
-      }
-     ]
-    },
-    {
-     "frame": 60,
+     "frame": 79,
      "rect": [
       209,
       0,
@@ -10539,9 +13416,72 @@
      ]
     },
     {
-     "frame": 61,
+     "frame": 80,
      "rect": [
-      207,
+      208,
+      0,
+      398,
+      479
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 414,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 414,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 828,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1242,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 81,
+     "rect": [
+      208,
       0,
       398,
       478
@@ -10602,12 +13542,138 @@
      ]
     },
     {
-     "frame": 62,
+     "frame": 82,
      "rect": [
-      204,
+      207,
+      0,
+      398,
+      477
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 414,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 414,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 828,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1242,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 83,
+     "rect": [
+      206,
+      0,
+      399,
+      476
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 415,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 415,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 830,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1245,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 84,
+     "rect": [
+      205,
       0,
       400,
-      472
+      475
      ],
      "tiles": [
       {
@@ -10665,7 +13731,133 @@
      ]
     },
     {
-     "frame": 63,
+     "frame": 85,
+     "rect": [
+      205,
+      0,
+      399,
+      474
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 415,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 415,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 830,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1245,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 86,
+     "rect": [
+      203,
+      0,
+      402,
+      470
+     ],
+     "tiles": [
+      {
+       "file": "data",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "u.hi",
+        "u.lo",
+        "v.hi"
+       ]
+      },
+      {
+       "file": "data",
+       "x": 418,
+       "y": 0,
+       "channels": [
+        "v.lo",
+        "cov",
+        "nv"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 0,
+       "y": 0,
+       "channels": [
+        "shade"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 418,
+       "y": 0,
+       "channels": [
+        "front"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 836,
+       "y": 0,
+       "channels": [
+        "light.1"
+       ]
+      },
+      {
+       "file": "light",
+       "x": 1254,
+       "y": 0,
+       "channels": [
+        "depth.1"
+       ]
+      }
+     ]
+    },
+    {
+     "frame": 87,
      "rect": [
       202,
       0,
@@ -10728,7 +13920,7 @@
      ]
     },
     {
-     "frame": 64,
+     "frame": 88,
      "rect": [
       202,
       0,
@@ -10791,7 +13983,7 @@
      ]
     },
     {
-     "frame": 65,
+     "frame": 89,
      "rect": [
       202,
       0,
@@ -10854,7 +14046,7 @@
      ]
     },
     {
-     "frame": 66,
+     "frame": 90,
      "rect": [
       201,
       0,
@@ -10917,7 +14109,7 @@
      ]
     },
     {
-     "frame": 67,
+     "frame": 91,
      "rect": [
       201,
       0,
@@ -10980,7 +14172,7 @@
      ]
     },
     {
-     "frame": 68,
+     "frame": 92,
      "rect": [
       201,
       0,
@@ -11043,7 +14235,7 @@
      ]
     },
     {
-     "frame": 69,
+     "frame": 93,
      "rect": [
       201,
       0,
@@ -11106,7 +14298,7 @@
      ]
     },
     {
-     "frame": 70,
+     "frame": 94,
      "rect": [
       201,
       0,
@@ -11169,7 +14361,7 @@
      ]
     },
     {
-     "frame": 71,
+     "frame": 95,
      "rect": [
       201,
       0,
@@ -11232,7 +14424,7 @@
      ]
     },
     {
-     "frame": 72,
+     "frame": 96,
      "rect": [
       200,
       0,
@@ -11295,7 +14487,7 @@
      ]
     },
     {
-     "frame": 73,
+     "frame": 97,
      "rect": [
       200,
       0,
@@ -11358,7 +14550,7 @@
      ]
     },
     {
-     "frame": 74,
+     "frame": 98,
      "rect": [
       200,
       0,
@@ -11421,7 +14613,7 @@
      ]
     },
     {
-     "frame": 75,
+     "frame": 99,
      "rect": [
       200,
       0,
@@ -11484,7 +14676,7 @@
      ]
     },
     {
-     "frame": 76,
+     "frame": 100,
      "rect": [
       200,
       0,
@@ -11547,7 +14739,7 @@
      ]
     },
     {
-     "frame": 77,
+     "frame": 101,
      "rect": [
       200,
       0,
@@ -11610,7 +14802,7 @@
      ]
     },
     {
-     "frame": 78,
+     "frame": 102,
      "rect": [
       201,
       0,
@@ -11673,7 +14865,7 @@
      ]
     },
     {
-     "frame": 79,
+     "frame": 103,
      "rect": [
       201,
       0,
@@ -11736,7 +14928,7 @@
      ]
     },
     {
-     "frame": 80,
+     "frame": 104,
      "rect": [
       201,
       0,
@@ -11799,7 +14991,7 @@
      ]
     },
     {
-     "frame": 81,
+     "frame": 105,
      "rect": [
       201,
       0,
@@ -11862,7 +15054,7 @@
      ]
     },
     {
-     "frame": 82,
+     "frame": 106,
      "rect": [
       201,
       0,
@@ -11925,7 +15117,7 @@
      ]
     },
     {
-     "frame": 83,
+     "frame": 107,
      "rect": [
       201,
       0,
@@ -11988,7 +15180,7 @@
      ]
     },
     {
-     "frame": 84,
+     "frame": 108,
      "rect": [
       201,
       0,
@@ -12051,7 +15243,7 @@
      ]
     },
     {
-     "frame": 85,
+     "frame": 109,
      "rect": [
       201,
       0,
@@ -12114,7 +15306,7 @@
      ]
     },
     {
-     "frame": 86,
+     "frame": 110,
      "rect": [
       202,
       0,
@@ -12177,7 +15369,7 @@
      ]
     },
     {
-     "frame": 87,
+     "frame": 111,
      "rect": [
       202,
       5,
@@ -12240,7 +15432,7 @@
      ]
     },
     {
-     "frame": 88,
+     "frame": 112,
      "rect": [
       202,
       29,
@@ -12303,7 +15495,7 @@
      ]
     },
     {
-     "frame": 89,
+     "frame": 113,
      "rect": [
       204,
       28,
