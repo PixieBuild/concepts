@@ -20,7 +20,7 @@ const rolesFor = (p: Product): Record<string, string> => ({
   ...p.inciRoles,
 });
 
-const photosFor = (products: Product[], suffix: string) => Object.fromEntries(products.map((p) => [p.slug, photoSrc(`${p.slug}-${suffix}.jpg`)]));
+const photosFor = (products: Product[], suffix: string) => Object.fromEntries(products.map((p) => [p.slug, photoSrc(`${p.slug}-${suffix}.webp`)]));
 
 export default function CuvettePage() {
   const products = listProducts();
@@ -52,7 +52,7 @@ export default function CuvettePage() {
         )}
         {charted.length > 0 && <LabelChart products={charted.map((p) => ({ ...toCard(p), inciLead: p.inciLead, roles: rolesFor(p) }))} />}
         <Voices reviews={reviews} products={cards} photos={photosFor(serums, "skin")} />
-        {lot && <PortoBand product={toCard(lot)} photo={photoSrc("porto-bench.jpg")} />}
+        {lot && <PortoBand product={toCard(lot)} photo={photoSrc("porto-bench.webp")} />}
       </main>
       <Footer />
     </>

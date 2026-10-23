@@ -129,7 +129,7 @@ export function Routine({ products, concerns, sets, photos }: Props) {
             />
 
             {Object.values(photos).some(Boolean) && (
-              <div className="relative mt-12 hidden aspect-3/2 overflow-hidden bg-[#0c0d0e] lg:block">
+              <div className="relative mt-12 hidden aspect-video overflow-hidden bg-[#0c0d0e] lg:block">
                 {concerns.map(({ id }) => {
                   const lead = leadOf(id);
                   if (!lead) return null;
@@ -137,9 +137,9 @@ export function Routine({ products, concerns, sets, photos }: Props) {
                   const src = photos[lead.slug];
                   const cls = cn("transition-opacity duration-700", on ? "opacity-100" : "opacity-0");
                   return src ? (
-                    <Image key={id} src={src} alt={on ? `${lead.title} on fingertips` : ""} fill sizes="(min-width: 1760px) 520px, 30vw" className={cn("object-cover", cls)} />
+                    <Image key={id} src={src} alt={on ? `${lead.title} on fingertips` : ""} fill sizes="30vw" className={cn("object-cover object-[50%_68%]", cls)} />
                   ) : (
-                    <Bottle key={id} product={lead} shot="drop" sizes="(min-width: 1760px) 520px, 30vw" alt={on ? undefined : ""} className={cn("object-[50%_52%]", cls)} />
+                    <Bottle key={id} product={lead} shot="drop" sizes="30vw" alt={on ? undefined : ""} className={cn("object-[50%_52%]", cls)} />
                   );
                 })}
               </div>

@@ -100,7 +100,7 @@ function Plate({ quotes, current }: { quotes: ReelQuote[]; current: ReelQuote })
         const on = q.key === current.key;
         const cls = cn("transition-opacity duration-1000 ease-out motion-reduce:transition-none", on ? "opacity-100" : "opacity-0");
         const alt = on ? undefined : "";
-        if (q.photo) return <Image key={q.key} src={q.photo} alt="" fill sizes={PLATE_SIZES} className={cn("object-cover", cls)} />;
+        if (q.photo) return <Image key={q.key} src={q.photo} alt="" fill sizes={PLATE_SIZES} className={cn("object-cover object-[52%_42%]", cls)} />;
         if (!q.narrow) return <Bottle key={q.key} product={q.product} shot={q.shot} sizes={PLATE_SIZES} alt={alt} className={cn(POSITION[q.shot], cls)} />;
         return (
           <Fragment key={q.key}>

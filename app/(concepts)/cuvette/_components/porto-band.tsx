@@ -21,7 +21,7 @@ export function PortoBand({ photo = null, product }: { photo?: string | null; pr
     >
       <div className="relative aspect-4/5 overflow-hidden bg-[#0c0d0e] md:col-span-7 md:aspect-auto lg:col-span-6">
         {photo ? (
-          <Image src={photo} alt="A gloved hand writing a lot number on a glass vial at the filling bench in Porto" fill sizes="(min-width: 1024px) 50vw, (min-width: 768px) 58vw, 100vw" className="object-cover" />
+          <Image src={photo} alt="A gloved hand writing a lot number on a glass vial at the filling bench in Porto" fill sizes="(min-width: 1024px) 50vw, (min-width: 768px) 58vw, 100vw" className="object-cover object-[50%_38%]" />
         ) : (
           <LotPlate product={product} />
         )}
