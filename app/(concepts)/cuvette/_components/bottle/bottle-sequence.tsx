@@ -5,7 +5,7 @@ import { useMotionValueEvent, useReducedMotion, type MotionValue } from "motion/
 
 import { cn } from "@/lib/utils";
 import { lookKey, type BottleLook } from "../../_lib/product-look";
-import { saveData, slowLink } from "./frames";
+import { saveData } from "./frames";
 import { fontsReady } from "./label";
 import { loadManifest, type TemplateManifest } from "./manifest";
 import { SequencePlayer } from "./sequence";
@@ -53,7 +53,7 @@ export function BottleSequence({ look, progress, running, poster, className, can
   const create = useEffectEvent((el: HTMLCanvasElement, manifest: TemplateManifest, compactView: boolean) => {
     const p = new SequencePlayer(el, manifest, look, {
       compact: compactView,
-      keysOnly: reduced || slow || slowLink(),
+      keysOnly: reduced || slow || saveData(),
       lean: saveData(),
       box: deviceBox(el),
       onFirstFrame: () => setDrawn(true),
