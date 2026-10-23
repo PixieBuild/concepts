@@ -38,8 +38,7 @@ export function generateMetadata(): Metadata {
     alternates: { canonical: path() },
     openGraph: { type: "website", siteName: BRAND, locale: "en_GB", title, description, url: url() },
     twitter: { card: "summary_large_image", title, description },
-    // Draft: kept out of search until the concept ships. Flip when status goes "ready".
-    robots: { index: false, follow: false },
+    robots: { index: true, follow: true, "max-image-preview": "large" },
     formatDetection: { telephone: false, email: false, address: false },
   };
 }

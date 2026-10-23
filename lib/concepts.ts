@@ -181,7 +181,7 @@ export const CONCEPTS: Concept[] = [
     tags: ["3d", "path-traced", "product", "skincare", "beauty", "scroll-driven", "ecommerce", "cart", "checkout", "dark"],
     bestFor:
       "Skincare, cosmetics, fragrance and drinks brands selling a small range of bottled products online, where the product page and the checkout have to feel as considered as the hero.",
-    status: "draft",
+    status: "ready",
     addedAt: "2026-09-15",
     theme: { fonts: "Mona Sans, expanded / Fragment Mono", accent: "#f3a948", supportsDarkMode: false },
     pages: [
