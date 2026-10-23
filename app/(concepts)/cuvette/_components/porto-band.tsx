@@ -10,7 +10,7 @@ const WORDS: Record<number, string> = { 3: "three", 4: "four", 5: "five", 6: "si
 const subject = encodeURIComponent("A return envelope, please");
 const body = encodeURIComponent(`Name:\nDelivery address:\nHow many empties (up to ${GLASS_RETURN.perEnvelope} per envelope):\n`);
 
-/** `product` is the catalogue's pick for the "lot" slot (`cuvette.features`): its lot and fill date are quoted. */
+/** `product` is the catalogue's pick for the "lot" slot (`features`): its lot and fill date are quoted. */
 export function PortoBand({ photo = null, product }: { photo?: string | null; product: ProductCard }) {
   const empties = WORDS[GLASS_RETURN.perEnvelope] ?? GLASS_RETURN.perEnvelope;
   return (

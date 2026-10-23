@@ -108,7 +108,7 @@ function actives(products: Product[]): string {
   return `${WORDS[n] ?? n} ${n === 1 ? "active" : "actives"}.`;
 }
 
-/** The first few listed products in merchant order; the headline counts the whole store, and /cuvette/shop lists it. */
+/** The first few listed products in range order; the headline counts the whole shop, and /cuvette/shop lists it. */
 export function Range({ products }: { products: Product[] }) {
   const { listed } = useCatalog();
   const [hovered, setHovered] = useState<Slug | null>(null);

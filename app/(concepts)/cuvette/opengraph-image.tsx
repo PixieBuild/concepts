@@ -12,7 +12,8 @@ const IMAGE_WIDTH = 640;
 const WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
 
 export default async function OpengraphImage() {
-  const [image, fonts, products] = await Promise.all([stillDataUri("range", "group", IMAGE_WIDTH, OG_SIZE.height), ogFonts(), listProducts()]);
+  const [image, fonts] = await Promise.all([stillDataUri("range", "group", IMAGE_WIDTH, OG_SIZE.height), ogFonts()]);
+  const products = listProducts();
   const serums = products.filter((p) => !isSet(p));
   const count = WORDS[serums.length] ?? String(serums.length);
 

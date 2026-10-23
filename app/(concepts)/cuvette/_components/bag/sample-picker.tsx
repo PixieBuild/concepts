@@ -11,7 +11,7 @@ import type { Slug } from "../../_lib/product";
 import { useCatalog } from "../catalog-provider";
 import { ProductName } from "./product-name";
 
-// A full Shopify range would make this a long list; the rest wait behind "Show more", in merchant order.
+// A longer range would make this a long list; the rest wait behind "Show more", in range order.
 const SHOWN = 4;
 
 /** The collapsed row's value: what to do next, or what's already picked. */

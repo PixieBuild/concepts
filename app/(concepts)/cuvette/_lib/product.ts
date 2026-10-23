@@ -1,7 +1,7 @@
 import { POLICY, vatInside } from "./content";
 import type { BottleLook } from "./product-look";
 
-/** A Shopify product handle: the URL segment and the key everything else is stored under. */
+/** A product's URL segment and the key everything else is stored under. */
 export type Slug = string;
 
 /** Shots a rendered still can exist for; files are `{product}-{shot}.jpg` (see `_lib/stills.ts`). */
@@ -69,10 +69,9 @@ export type Size = { ml: number; price: number; variantId: string; available: bo
 export type Purchase = "once" | "subscribe";
 export type Daypart = "AM" | "PM";
 
-/** A photo the merchant uploaded to the product in Shopify admin, in admin order. */
-export type MerchantImage = { url: string; alt: string; width: number; height: number };
+/** A product photograph in public/, shown after the bottle shots. */
+export type Photo = { url: string; alt: string; width: number; height: number };
 
-/** One serum's place in a routine, from the `cuvette.routine` metafield. */
 export type RoutineSlot = { step: number; dose: string; note: string; sensitive?: { step?: number; note?: string } };
 
 export type RoutineMeta = {
@@ -82,7 +81,7 @@ export type RoutineMeta = {
   damp: boolean;
   sensitiveSafe: boolean;
   /** Products the routine builder adds alongside this one, and when. */
-  pairsWith: { handle: Slug; when: Daypart[] }[];
+  pairsWith: { slug: Slug; when: Daypart[] }[];
   note?: string;
   sensitiveNote?: string;
 };
@@ -91,8 +90,6 @@ export type Rating = { average: number; count: number; display: string };
 
 type CardFields = {
   slug: Slug;
-  /** Shopify GID. */
-  id: string;
   code: string;
   name: string;
   strength: string;
@@ -103,7 +100,7 @@ type CardFields = {
   seoTitle: string;
   descriptor: string;
   benefit: string;
-  /** Shopify product type, e.g. "Serum" or "Set". */
+  /** e.g. "Serum" or "Set". */
   type: string;
   tags: string[];
   job: string;
@@ -111,7 +108,7 @@ type CardFields = {
   concerns: string[];
   keywords: string[];
   sizes: Size[];
-  /** Cents; set from the variant's compare-at price. */
+  /** Cents, shown struck through beside the price. */
   compareAt: number | null;
   available: boolean;
   subscribe: { weeks: number; discount: number };
@@ -126,17 +123,17 @@ type CardFields = {
   colour: Colour;
   gallery: { shot: Shot; caption: string }[];
   histogram: [five: number, four: number, three: number, two: number, one: number];
-  /** One per bottle in the shot, composited live from the template; empty when the bottle metafields are missing. */
+  /** One per bottle in the shot, composited live from the template. */
   looks: BottleLook[];
-  images: MerchantImage[];
-  /** Local demo products only: pre-baked stills in public/ stand in for the live composite. */
+  photos: Photo[];
+  /** Pre-baked stills in public/ stand in for the live composite. */
   baked: boolean;
-  /** A set's component handles, in the order you use them; empty for a single product. */
+  /** The slugs of a set's serums, in the order you use them; empty for a single product. */
   contains: Slug[];
   /** What a set's components cost apart, in cents; null for a single product. */
   separately: number | null;
   routine: RoutineMeta | null;
-  /** Editorial slots this product fills, from `cuvette.features`, e.g. "colour-clock". */
+  /** Editorial slots this product fills, e.g. "colour-clock". */
   features: string[];
   hero: number | null;
   updatedAt: string;
@@ -226,7 +223,7 @@ export function concernId(label: string): string {
   return label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
-/** "4 serums and a set", "5 serums, a cleanser and 2 sets": the range counted by Shopify product type. */
+/** "4 serums and a set", "5 serums, a cleanser and 2 sets": the range counted by product type. */
 export function rangeSummary(products: Pick<ProductCard, "type">[]): string {
   const counts = new Map<string, number>();
   for (const p of products) counts.set(p.type.toLowerCase(), (counts.get(p.type.toLowerCase()) ?? 0) + 1);

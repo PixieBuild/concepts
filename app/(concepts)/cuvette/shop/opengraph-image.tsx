@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 import { listProducts } from "../_lib/catalog";
 import { isSet, rangeSummary, type Product } from "../_lib/product";
-import { INK, MUTED, OG_SIZE, PAPER, asJpeg, imageDataUri, ogFonts, stillDataUri } from "../_og/assets";
+import { INK, MUTED, OG_SIZE, PAPER, asJpeg, ogFonts, photoDataUri, stillDataUri } from "../_og/assets";
 
 export const alt = "The Cuvette shop: every serum in the range, each in a glass dropper bottle under a single light";
 export const size = OG_SIZE;
@@ -10,14 +10,15 @@ export const contentType = "image/jpeg";
 
 const FRAME = { width: 320, height: OG_SIZE.height / 2 };
 
-/** The baked packshot, cropped from the top so the dropper keeps its headroom, for local demo products, else the merchant's first upload; null leaves the frame out. */
+/** The baked packshot, cropped from the top so the dropper keeps its headroom, else the first photo; null leaves the frame out. */
 async function frameFor(p: Product): Promise<string | null> {
   if (p.baked) return stillDataUri(p.slug, "pack", FRAME.width, FRAME.height, "north");
-  return p.images[0] ? imageDataUri(p.images[0].url, FRAME.width, FRAME.height) : null;
+  return p.photos[0] ? photoDataUri(p.photos[0].url, FRAME.width, FRAME.height) : null;
 }
 
 export default async function OpengraphImage() {
-  const [products, fonts] = await Promise.all([listProducts(), ogFonts()]);
+  const products = listProducts();
+  const fonts = await ogFonts();
   const serums = products.filter((p) => !isSet(p));
   const frames = (await Promise.all(serums.map(async (p) => ({ p, src: await frameFor(p) })))).filter((f): f is { p: Product; src: string } => !!f.src).slice(0, 4);
 

@@ -40,7 +40,7 @@ function Swatch({ product, className }: { product: ProductCard; className?: stri
   );
 }
 
-// Menus show the merchant's first few by `cuvette.position`; the shop page holds the rest.
+// Menus show the first few in range order; the shop page holds the rest.
 const MENU_MAX = 6;
 
 function ShopMenu() {

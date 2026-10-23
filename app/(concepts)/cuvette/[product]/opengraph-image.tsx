@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { getProduct } from "../_lib/catalog";
 import { priceShort } from "../_lib/format";
 import { isSet, priceOf, sizeLabel as sizeOf, type Product } from "../_lib/product";
-import { INK, MUTED, OG_SIZE, PAPER, asJpeg, imageDataUri, ogFonts, stillDataUri } from "../_og/assets";
+import { INK, MUTED, OG_SIZE, PAPER, asJpeg, ogFonts, photoDataUri, stillDataUri } from "../_og/assets";
 
 export const contentType = "image/jpeg";
 
@@ -12,22 +12,22 @@ const PHOTO = { width: 504, height: OG_SIZE.height };
 
 function altFor(p: Product): string {
   const price = priceShort(priceOf(p));
-  const uploaded = p.images[0];
-  if (uploaded) return `Cuvette ${p.title}, ${price}: ${uploaded.alt}`;
+  const photo = p.photos[0];
+  if (photo) return `Cuvette ${p.title}, ${price}: ${photo.alt}`;
   if (!p.baked) return `Cuvette ${p.title}, ${p.descriptor.toLowerCase()}, ${price}`;
   const what = isSet(p) ? `${p.parts.map((part) => part.title).join(" and ")} dropper bottles` : `${p.title} serum in a glass dropper bottle`;
   return `Cuvette ${p.title}: ${what} on a basalt plinth, ${price}`;
 }
 
-/** The merchant's first upload, else the baked packshot (local demo products), else none: the card is type alone. */
+/** The first photo, else the baked packshot, else none: the card is type alone. */
 async function photoFor(p: Product): Promise<string | null> {
-  const uploaded = p.images[0];
-  if (uploaded) return imageDataUri(uploaded.url, PHOTO.width, PHOTO.height);
+  const photo = p.photos[0];
+  if (photo) return photoDataUri(photo.url, PHOTO.width, PHOTO.height);
   return p.baked ? stillDataUri(p.slug, "pack", PHOTO.width, PHOTO.height) : null;
 }
 
-export async function generateImageMetadata({ params }: { params: { product: string } }) {
-  const p = await getProduct(params.product);
+export function generateImageMetadata({ params }: { params: { product: string } }) {
+  const p = getProduct(params.product);
   return p ? [{ id: "card", alt: altFor(p), size: OG_SIZE, contentType }] : [];
 }
 
@@ -47,7 +47,7 @@ function Strength({ product }: { product: Product }) {
 }
 
 export default async function OpengraphImage({ params }: { params: Promise<{ product: string }> }) {
-  const product = (await getProduct((await params).product)) ?? notFound();
+  const product = getProduct((await params).product) ?? notFound();
   const [image, fonts] = await Promise.all([photoFor(product), ogFonts()]);
   const spec = isSet(product) ? [sizeOf(product), product.when.includes("AM") && !product.when.includes("PM") ? "Mornings" : "Daily"] : [product.ph && `pH ${product.ph}`, sizeOf(product)].filter(Boolean);
 

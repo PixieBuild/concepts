@@ -21,15 +21,15 @@ const mono = Fragment_Mono({ variable: "--font-mono", subsets: ["latin"], weight
 
 const title = "Cuvette — Clinical serums at a stated strength, filled in Porto";
 
-/** Names the serums the store sells today, so the description never goes stale when Shopify adds one. */
-async function describeShop(): Promise<string> {
-  const titles = (await listProducts()).filter((p) => !isSet(p)).map((p) => p.title);
+/** Names the serums the shop sells, so the description never goes stale when one is added. */
+function describeShop(): string {
+  const titles = listProducts().filter((p) => !isSet(p)).map((p) => p.title);
   const list = titles.length > 1 ? `${titles.slice(0, -1).join(", ")} and ${titles.at(-1)}` : (titles[0] ?? "");
   return `Clinical serums, one lead active each${list ? `: ${list}` : ""}. Fragrance-free, dated and numbered by lot, filled in Porto.`;
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const description = await describeShop();
+export function generateMetadata(): Metadata {
+  const description = describeShop();
   return {
     metadataBase: new URL(SITE_URL),
     title: { default: title, template: `%s — ${BRAND}` },
@@ -50,8 +50,9 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default async function CuvetteLayout({ children }: LayoutProps<"/cuvette">) {
-  const [products, description] = await Promise.all([catalogCards(), describeShop()]);
+export default function CuvetteLayout({ children }: LayoutProps<"/cuvette">) {
+  const products = catalogCards();
+  const description = describeShop();
   return (
     <html lang="en" className={`theme-cuvette ${sans.variable} ${mono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col overflow-x-clip bg-background font-sans text-foreground">

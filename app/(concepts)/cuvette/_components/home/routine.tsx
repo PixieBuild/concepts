@@ -69,7 +69,7 @@ function Column({ title, time, steps, products }: { title: string; time: string;
 }
 
 type Props = {
-  /** routineProducts(): serums with a `cuvette.routine` metafield. */
+  /** routineProducts(): serums with a `routine`. */
   products: ProductCard[];
   concerns: ConcernOption[];
   sets: SetCard[];

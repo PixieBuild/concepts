@@ -8,7 +8,7 @@ import { isSet, priceOf, serumsIn, type ProductCard, type Purchase, type Size, t
 
 export type { Purchase };
 
-/** `variantId` is the Shopify variant; null means the product's first, resolved against the catalogue on read. */
+/** `variantId` is the size bought; null means the product's first, resolved against the catalogue on read. */
 export type BagLine = { id: string; slug: Slug; variantId: string | null; purchase: Purchase; qty: number };
 
 export type Bag = {
@@ -30,7 +30,7 @@ export type BagState = {
   hydrated: boolean;
 };
 
-export const BAG_KEY = "cuvette:bag:v1";
+export const BAG_KEY = "cuvette:bag:v2";
 export const MAX_QTY = 9;
 export const NOTE_MAX = 200;
 
@@ -56,7 +56,7 @@ export function linePrice(line: Pick<BagLine, "slug" | "purchase" | "qty"> & { v
   return product ? unitPriceOf(product, line.purchase, line.variantId ?? null) * line.qty : 0;
 }
 
-/** False once Shopify reports the product or its variant sold out: the line stays visible but is not bought. */
+/** False once the product or its size is sold out: the line stays visible but is not bought. */
 export function isBuyable(line: Pick<BagLine, "slug"> & { variantId?: string | null }, catalog: ClientCatalog): boolean {
   const product = catalog.get(line.slug);
   return !!product && product.available && sizeOf(product, line.variantId ?? null)?.available !== false;
@@ -164,8 +164,8 @@ const SERVER: Stored = { bag: EMPTY, open: false, hydrated: false };
 const getServerSnapshot = () => SERVER;
 
 /**
- * Lines for products and variants the store still has, each pinned to its variant; anything since removed in Shopify
- * drops out quietly. Sold-out lines stay, so the shopper sees why they are not charged.
+ * Lines for products and sizes the shop still has, each pinned to its size; anything since removed drops out
+ * quietly. Sold-out lines stay, so the shopper sees why they are not charged.
  */
 function inCatalog(stored: Bag, catalog: ClientCatalog): Bag {
   const lines = stored.lines.flatMap((l) => {

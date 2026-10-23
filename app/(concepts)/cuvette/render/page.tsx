@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 };
 
 // Dev-only. `?bake` hosts the compositor for scripts/cuvette/bake-stills.mjs; otherwise it shows the first catalogue
-// product that has no baked still, composited from its Shopify data alone, in the hero, a product page and the bag.
+// product that has no baked still, composited from its product data alone, in the hero, a product page and the bag.
 export default async function RenderPage({ searchParams }: PageProps<"/cuvette/render">) {
   if (process.env.NODE_ENV === "production") notFound();
   const { bake } = await searchParams;
-  const products = (await listProducts()).filter((p) => p.looks.length > 0);
+  const products = listProducts().filter((p) => p.looks.length > 0);
   const live = products.filter((p) => !p.baked && !isSet(p)).map((p) => p.looks[0]);
   if (bake !== undefined) {
     const baked = products.filter((p) => p.baked);

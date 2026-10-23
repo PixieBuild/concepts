@@ -38,14 +38,9 @@ export async function stillDataUri(subject: StillSubject, shot: Shot, width: num
   return `data:image/jpeg;base64,${jpeg.toString("base64")}`;
 }
 
-/** A merchant image (Shopify CDN, or the mock store's local placeholder) cropped to `width × height`, or null if unreachable. */
-export async function imageDataUri(src: string, width: number, height: number): Promise<string | null> {
-  const remote = /^https?:\/\//.test(src);
-  const source = remote
-    ? await fetch(src)
-        .then(async (r) => (r.ok ? Buffer.from(await r.arrayBuffer()) : null))
-        .catch(() => null)
-    : await readFile(join(process.cwd(), "public", src)).catch(() => null);
+/** A product photo from public/ cropped to `width × height`, or null if the file is missing. */
+export async function photoDataUri(src: string, width: number, height: number): Promise<string | null> {
+  const source = await readFile(join(process.cwd(), "public", src)).catch(() => null);
   if (!source) return null;
   const jpeg = await sharp(source).resize(width, height, { fit: "cover", position: "centre" }).jpeg({ quality: 88, mozjpeg: true }).toBuffer();
   return `data:image/jpeg;base64,${jpeg.toString("base64")}`;

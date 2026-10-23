@@ -173,12 +173,12 @@ export const CONCEPTS: Concept[] = [
   {
     slug: "cuvette",
     name: "Cuvette",
-    tagline: "Skincare shop built on one path-traced bottle, composited per product and ready for Shopify",
+    tagline: "Skincare shop built on one path-traced bottle, composited live for every product",
     description:
-      "A Porto serum brand with four single-active serums and a morning set. The hero is one path-traced bottle scrubbed frame by frame as you scroll, with each product's label and serum colour composited live from its data, so a new Shopify product gets its own bottle without a render. Around it sit a products page with filters, product pages with a rendered gallery and editorial reviews, a routine builder, a bag with a set upsell and samples, and a three-step checkout that ends on a demo payment and a confirmation.",
+      "A Porto serum brand with four single-active serums and a morning set. The hero is one path-traced bottle scrubbed frame by frame as you scroll, with each product's label and serum colour composited live from its data, so a new product gets its own bottle without a render. Around it sit a products page with filters, product pages with a rendered gallery and editorial reviews, a routine builder, a bag with a set upsell and samples, and a three-step checkout that ends on a demo payment and a confirmation.",
     category: "ecommerce",
     industry: "Skincare brand",
-    tags: ["3d", "path-traced", "product", "skincare", "beauty", "scroll-driven", "ecommerce", "shopify", "cart", "checkout", "dark"],
+    tags: ["3d", "path-traced", "product", "skincare", "beauty", "scroll-driven", "ecommerce", "cart", "checkout", "dark"],
     bestFor:
       "Skincare, cosmetics, fragrance and drinks brands selling a small range of bottled products online, where the product page and the checkout have to feel as considered as the hero.",
     status: "draft",

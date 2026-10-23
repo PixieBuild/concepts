@@ -351,7 +351,7 @@ function Results({ product, chooser }: { product: Product; chooser: Chooser }) {
   );
 }
 
-/** `products` is heroProducts() from the catalogue: tagged `hero` in Shopify, at most four, each with a bottle. */
+/** `products` is heroProducts() from the catalogue: those with a `hero` place, at most four, each with a bottle. */
 export function Stage({ products }: { products: Product[] }) {
   const track = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);

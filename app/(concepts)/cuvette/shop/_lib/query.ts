@@ -54,7 +54,7 @@ export function isFiltered(query: ShopQuery): boolean {
   return !!(query.concern || query.type);
 }
 
-/** "Serum" → "Serums", "Brush" → "Brushes": Shopify product types read as a shelf. */
+/** "Serum" → "Serums", "Brush" → "Brushes": product types read as a shelf. */
 export function plural(type: string): string {
   return /(s|sh|ch|x)$/i.test(type) ? `${type}es` : `${type}s`;
 }

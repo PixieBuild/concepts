@@ -36,8 +36,8 @@ function Row({ product }: { product: Product }) {
   );
 }
 
-export default async function NotFound() {
-  const products = await listProducts();
+export default function NotFound() {
+  const products = listProducts();
   return (
     <>
       <Header variant="solid" />

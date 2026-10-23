@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { bundles, getProduct, listProducts } from "../_lib/catalog";
+import { allProducts, bundles, getProduct } from "../_lib/catalog";
 import { BRAND } from "../_lib/content";
 import { priceShort } from "../_lib/format";
 import { isSet, priceOf, rating, sizeLabel, type Product } from "../_lib/product";
@@ -22,11 +22,11 @@ import { Costs, DropBand, LabelBand, MorningOrder, NextStep, Results, SpecStrip 
 import { StickyAdd } from "./_components/sticky-add";
 import { StickyColumn } from "./_components/sticky-column";
 
-// Every product the store lists is prerendered; one added in Shopify since renders on its first visit.
-export const dynamicParams = true;
+// Every product is prerendered, hidden ones included; any other slug is a 404.
+export const dynamicParams = false;
 
-export async function generateStaticParams() {
-  return (await listProducts()).map((p) => ({ product: p.slug }));
+export function generateStaticParams() {
+  return allProducts().map((p) => ({ product: p.slug }));
 }
 
 function describe(p: Product): string {
@@ -43,7 +43,7 @@ function describe(p: Product): string {
 
 async function productFrom(params: Promise<{ product: string }>): Promise<Product> {
   const { product } = await params;
-  return (await getProduct(product)) ?? notFound();
+  return getProduct(product) ?? notFound();
 }
 
 export async function generateMetadata(props: PageProps<"/cuvette/[product]">): Promise<Metadata> {
@@ -63,7 +63,8 @@ export default async function ProductPage(props: PageProps<"/cuvette/[product]">
   const { display, count } = rating(product);
   const set = isSet(product);
   const featured = visibleReviews(product.reviews);
-  const [next, sets] = await Promise.all([product.next ? getProduct(product.next) : null, bundles()]);
+  const next = product.next ? getProduct(product.next) : null;
+  const sets = bundles();
   const offers = sets.filter((s) => s.contains.includes(product.slug));
   const clock = product.features.includes("colour-clock") ? product.storage : undefined;
 

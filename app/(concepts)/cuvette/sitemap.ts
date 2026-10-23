@@ -4,8 +4,9 @@ import { heroProducts, listProducts } from "./_lib/catalog";
 import { productImages, stillUrl } from "./_lib/schema";
 import { url } from "./site";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [products, [hero]] = await Promise.all([listProducts(), heroProducts()]);
+export default function sitemap(): MetadataRoute.Sitemap {
+  const products = listProducts();
+  const [hero] = heroProducts();
   const latest = products.reduce((max, p) => (p.updatedAt > max ? p.updatedAt : max), "");
   return [
     {

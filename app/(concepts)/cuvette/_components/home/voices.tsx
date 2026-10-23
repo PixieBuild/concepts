@@ -4,7 +4,7 @@ import { canShow } from "../../_lib/stills";
 import type { BottleProduct } from "../bottle/bottle";
 import { ReviewsReel, type ReelQuote } from "./reviews-reel";
 
-/** A review and the handle of the product it is about; the page sends every listed product's reviews. */
+/** A review and the slug of the product it is about; the page sends every listed product's reviews. */
 export type ReviewRef = { review: Review; slug: Slug };
 
 type Voice = { review: Review; product: ProductCard };
@@ -83,11 +83,11 @@ function narrowStandIn(product: ProductCard, shot: Shot): ReelQuote["narrow"] {
 }
 
 function toBottle(product: ProductCard): BottleProduct {
-  const { slug, title, contains, separately, parts, looks, images, baked, colour } = product;
-  return { slug, title, contains, separately, parts, looks, images, baked, colour };
+  const { slug, title, contains, separately, parts, looks, photos, baked, colour } = product;
+  return { slug, title, contains, separately, parts, looks, photos, baked, colour };
 }
 
-/** The merchant's `home` picks (else the most helpful), taken a product at a time so neighbours differ. */
+/** Reviews marked `home` (else the most helpful), taken a product at a time so neighbours differ. */
 function pickQuotes(all: Voice[]): Voice[] {
   const curated = all.filter((v) => v.review.home);
   const pool = curated.length ? curated : [...all].sort((a, b) => b.review.helpful - a.review.helpful);

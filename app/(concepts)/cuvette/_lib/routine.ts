@@ -33,7 +33,7 @@ function stepsFor(part: Daypart, picks: { product: ProductCard; when: Daypart[] 
 }
 
 /**
- * The routine for a concern, built from each serum's `cuvette.routine` metafield: the serums that name the concern,
+ * The routine for a concern, built from each serum's `routine`: the serums that name the concern,
  * plus whatever they pair with, ordered by step (or the sensitive-skin step), wrapped in the shopper's own basics.
  */
 export function routineFor(concern: string, sensitive: boolean, products: ProductCard[]): Routine {
@@ -43,10 +43,10 @@ export function routineFor(concern: string, sensitive: boolean, products: Produc
   for (const p of leads) picks.set(p.slug, { product: p, when: null });
   for (const p of leads) {
     for (const pair of p.routine!.pairsWith) {
-      const partner = bySlug.get(pair.handle);
-      if (!partner?.routine || picks.get(pair.handle)?.when === null) continue;
-      const when = [...new Set([...(picks.get(pair.handle)?.when ?? []), ...pair.when])];
-      picks.set(pair.handle, { product: partner, when });
+      const partner = bySlug.get(pair.slug);
+      if (!partner?.routine || picks.get(pair.slug)?.when === null) continue;
+      const when = [...new Set([...(picks.get(pair.slug)?.when ?? []), ...pair.when])];
+      picks.set(pair.slug, { product: partner, when });
     }
   }
   const lead = leads[0];

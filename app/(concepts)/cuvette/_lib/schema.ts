@@ -26,14 +26,9 @@ function bakedUrls(p: ProductCard): string[] {
   return [findStill(p.slug, "pack")!, ...own, ...parts].map((still) => `${SITE_URL}${still.src}`);
 }
 
-/** Shopify CDN URLs are absolute already; the mock store's local placeholders are made so. */
-export function absoluteImage(src: string): string {
-  return /^https?:\/\//.test(src) ? src : `${SITE_URL}${src}`;
-}
-
-/** The merchant's uploads first (the first is the one search and share cards lead with), then any baked stills; absolute, no repeats. */
+/** The product's photos first (the first is the one search and share cards lead with), then any baked stills; absolute, no repeats. */
 export function productImages(p: ProductCard): string[] {
-  return [...new Set([...p.images.map((image) => absoluteImage(image.url)), ...bakedUrls(p)])];
+  return [...new Set([...p.photos.map((photo) => `${SITE_URL}${photo.url}`), ...bakedUrls(p)])];
 }
 
 const SHIPS_TO = Object.keys(COUNTRIES);
@@ -102,7 +97,7 @@ function shippingDetails(cents: number): Json[] {
 
 const SKIN_CARE = "Health & Beauty > Personal Care > Cosmetics > Skin Care";
 
-/** Google's product taxonomy from the Shopify product type: serums (and sets of only serums) go one level deeper. */
+/** Google's product taxonomy from the product type: serums (and sets of only serums) go one level deeper. */
 function categoryOf(p: Product): string {
   const serums = isSet(p) ? p.parts.every((part) => /serum/i.test(part.type)) : /serum/i.test(p.type);
   return serums ? `${SKIN_CARE} > Facial Serums` : SKIN_CARE;

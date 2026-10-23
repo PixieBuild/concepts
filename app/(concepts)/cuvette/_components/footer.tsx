@@ -5,13 +5,13 @@ import { BRAND, COMPANY } from "../_lib/content";
 import { productHref } from "../_lib/product";
 import { HelpButton, HelpSheets } from "./help-sheets";
 
-// The merchant's first few by `cuvette.position`; the shop page lists the rest.
+// The first few in range order; the shop page lists the rest.
 const FOOTER_MAX = 4;
 import { Newsletter } from "./newsletter";
 
-export async function Footer() {
+export function Footer() {
   const [local, domain] = COMPANY.email.split("@");
-  const products = await listProducts();
+  const products = listProducts();
   return (
     <footer className="border-t border-border">
       <div className="shell pt-16 pb-10 sm:pb-20 lg:pt-20">

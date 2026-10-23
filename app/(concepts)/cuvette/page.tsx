@@ -22,16 +22,14 @@ const rolesFor = (p: Product): Record<string, string> => ({
 
 const photosFor = (products: Product[], suffix: string) => Object.fromEntries(products.map((p) => [p.slug, photoSrc(`${p.slug}-${suffix}.jpg`)]));
 
-export default async function CuvettePage() {
-  const [products, hero, routine, sets, concernList, chart, lot] = await Promise.all([
-    listProducts(),
-    heroProducts(),
-    routineProducts(),
-    bundles(),
-    concerns(),
-    featuredProducts("label-chart"),
-    featuredProduct("lot", (p) => !isSet(p) && p.looks.length > 0),
-  ]);
+export default function CuvettePage() {
+  const products = listProducts();
+  const hero = heroProducts();
+  const routine = routineProducts();
+  const sets = bundles();
+  const concernList = concerns();
+  const chart = featuredProducts("label-chart");
+  const lot = featuredProduct("lot", (p) => !isSet(p) && p.looks.length > 0);
   const cards = products.map(toCard);
   const serums = products.filter((p) => !isSet(p));
   const reviews = products.flatMap((p) => p.reviews.map((review) => ({ review, slug: p.slug })));

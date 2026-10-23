@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import type { MerchantImage, Shot } from "../_lib/product";
+import type { Photo, Shot } from "../_lib/product";
 import { resolveStill, type StillSubject } from "../_lib/stills";
 
 type Props = {
@@ -35,8 +35,8 @@ export function Still({ product, shot, alt, sizes = "100vw", priority = false, f
   );
 }
 
-type MerchantProps = {
-  image: MerchantImage;
+type PhotoProps = {
+  photo: Photo;
   /** Pass "" when a live composite on top carries the accessible name. */
   alt?: string;
   sizes?: string;
@@ -60,12 +60,12 @@ export function LivePoster({ tint, className }: { tint: string; className?: stri
   );
 }
 
-/** A photo the merchant uploaded in Shopify admin, filling its positioned parent. */
-export function MerchantPhoto({ image, alt, sizes = "100vw", priority = false, quality = 75, contain, className }: MerchantProps) {
+/** A product photograph, filling its positioned parent. */
+export function ProductPhoto({ photo, alt, sizes = "100vw", priority = false, quality = 75, contain, className }: PhotoProps) {
   return (
     <Image
-      src={image.url}
-      alt={alt ?? image.alt}
+      src={photo.url}
+      alt={alt ?? photo.alt}
       fill
       sizes={sizes}
       preload={priority}

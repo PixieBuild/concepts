@@ -46,7 +46,7 @@ function Hero({ looks, look, onLook }: { looks: BottleLook[]; look: BottleLook; 
   );
 }
 
-/** Dev-only proof that a product is data alone: a Shopify product with no render appears everywhere a product does. */
+/** Dev-only proof that a product is data alone: one with no render appears everywhere a product does. */
 export function BottleLab({ looks, subject, prices }: LabProps) {
   const [look, setLook] = useState<BottleLook>(subject);
   const bag = [subject, ...looks.filter((l) => l.id !== subject.id).slice(0, 1)].map((l) => ({ look: l, cents: prices[l.id] ?? 0 }));

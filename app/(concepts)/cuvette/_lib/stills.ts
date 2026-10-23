@@ -29,7 +29,7 @@ const FALLBACK: Partial<Record<Shot, Shot[]>> = {
   group: ["group-wide"],
 };
 
-/** Local demo products ship pre-baked stills; any other product from Shopify has none and is composited live. */
+/** Products with pre-baked stills show them; any other product is composited live. */
 export function hasBakedStills(subject: StillSubject): boolean {
   return hasStill(subject, subject === "range" ? "group" : "pack");
 }
@@ -53,7 +53,7 @@ const LIVE: Shot[] = ["pack", "three-quarter", "label", "drop", "thumb", "hero-w
 
 type Showable = Pick<ProductCard, "slug" | "baked" | "looks">;
 
-/** Whether a page can show this shot of the product: baked for demo products, composited live when it has a bottle. */
+/** Whether a page can show this shot of the product: baked when it has stills, composited live when it has a bottle. */
 export function canShow(product: Showable, shot: Shot): boolean {
   if (product.baked) return hasStill(product.slug, shot);
   return product.looks.length > 0 && LIVE.includes(shot);
