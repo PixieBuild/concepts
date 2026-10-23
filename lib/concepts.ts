@@ -86,7 +86,7 @@ export const CONCEPTS: Concept[] = [
       { path: "/location", label: "Location" },
       { path: "/booking", label: "Booking" },
     ],
-    thumbnail: "/previews/casa-lume-v2.webp",
+    thumbnail: "/previews/casa-lume.webp",
   },
   {
     slug: "alder-brass",
