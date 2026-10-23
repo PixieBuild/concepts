@@ -68,12 +68,10 @@ const STEP = 0.125;
 // Between two rendered frames the nearer one shows, warped onto the camera, and passing the middle of the gap cuts to
 // the other. Any blend of the two, scrubbed or eased, double-exposes the dropper and the small type while it lasts.
 const HYSTERESIS = 0.08;
-// The plan only leaves gaps this wide where the dropper is still or out of shot. Where the camera also zooms past
-// BLEND_ZOOM across one, the axis warp can't follow the set's parallax and a cut jolts the plinth and backdrop, so
-// those gaps blend with the scroll instead; with the dropper hanging in shot the camera barely moves, and they cut.
-// At rest a blend would double the label's type, so it settles onto the nearer frame.
-const BLEND_GAP = 0.02;
-const BLEND_ZOOM = 0.04;
+// The plan only leaves gaps this wide where nothing but the camera moves (the dropper and drop get denser frames).
+// The axis warp can't follow the camera's parallax or orbit, so a cut there jolts the whole set: those gaps blend
+// with the scroll instead. At rest a blend would double the label's type, so it settles onto the nearer frame.
+const BLEND_GAP = 0.014;
 const SETTLE_MS = 200;
 const SKIP = 0.02;
 const PROXIES = 12;
@@ -84,10 +82,6 @@ const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const smoothstep = (x: number) => {
   const t = clamp(x);
   return t * t * (3 - 2 * t);
-};
-const axisLength = (p: number, size: [number, number]) => {
-  const { foot, shoulder } = axisAt(p, size);
-  return Math.hypot(foot[0] - shoulder[0], foot[1] - shoulder[1]);
 };
 const percentile = (xs: number[], p: number) => [...xs].sort((a, b) => a - b)[Math.min(xs.length - 1, Math.floor(p * xs.length))] ?? 0;
 
@@ -208,11 +202,7 @@ export class SequencePlayer {
     this.chapters = seq.chapters.map((c) => this.nearest(c.progress));
     // A thinned gap blends only if every rendered gap inside it is sparse, so a skipped dense frame still cuts.
     const sparse = (a: number, b: number) => items.slice(a + 1, b + 1).every((f, i) => f.progress - items[a + i].progress > BLEND_GAP);
-    const zoom = (a: SequenceItem, b: SequenceItem) => Math.abs(Math.log(axisLength(a.progress, seq.size) / axisLength(b.progress, seq.size)));
-    this.blends = this.frames.map((f, k) => {
-      const next = this.frames[k + 1];
-      return Boolean(next) && zoom(f, next) > BLEND_ZOOM && sparse(items.indexOf(f), items.indexOf(next));
-    });
+    this.blends = this.frames.map((f, k) => k + 1 < this.frames.length && sparse(items.indexOf(f), items.indexOf(this.frames[k + 1])));
     canvas.addEventListener("webglcontextlost", this.onLost);
     this.size = seq.size;
 
