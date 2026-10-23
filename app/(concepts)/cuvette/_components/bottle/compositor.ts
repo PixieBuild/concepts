@@ -171,6 +171,7 @@ uniform ivec4 uInkRect;
 uniform vec3 uSigma[3];
 uniform float uClear[3], uGain[3];
 uniform float uDmax, uCocStep;
+const float THIN = 0.8;
 uniform float uExposure, uGrain, uVignette, uSeed, uEnamel, uInkCover, uLegible;
 uniform vec3 uWhite;
 uniform float uSlope, uPower, uSat;
@@ -226,7 +227,9 @@ vec3 serum(ivec2 f, vec2 g) {
     float l = tone(grey(uTLight[k], f)) * uGain[k];
     // A water-clear serum shows the dark set through it: its even backlit glow drops, its lit edges stay.
     l *= mix(1.0, clamp(pow(l / 3.0, 0.6), 0.42, 1.0), uClear[k]);
-    c += g.y * l * exp(-uSigma[k] * uDmax * e * e);
+    // The pipette's column, the drop and the bead are a few mm of serum: tinted as at least THIN deep, they keep the
+    // serum's colour instead of reading grey until the dropper is back in the bottle.
+    c += g.y * l * exp(-uSigma[k] * max(uDmax * e * e, THIN));
   }
   return max(c, vec3(0.0));
 }
