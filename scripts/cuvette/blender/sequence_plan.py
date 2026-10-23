@@ -6,6 +6,7 @@
 
 With --keep and --span, only the frames strictly inside the span are re-planned (at --step motion per frame) and every
 other frame keeps its progress, so its render stays valid: how chapter 3's dose was re-timed without re-rendering the rest.
+With --keep and --insert MAX_GAP, every frame is kept and only gaps wider than MAX_GAP gain frames.
 
 The homepage camera eases into each chapter and rests there, while the dropper and the drop move inside chapter 3's
 rest. Sampling progress evenly would spend frames on still pictures and skip the drop, so frames are spaced evenly in
@@ -14,6 +15,7 @@ chapter rests still get the odd frame.
 """
 
 import argparse
+import bisect
 import json
 import math
 from pathlib import Path
@@ -178,6 +180,38 @@ def respan(kept, lo, hi, step, floor=0.12, grid=20000, max_gap=0.012):
     return sorted([p for p in kept if p <= lo] + out[1:-1] + [p for p in kept if p >= hi])
 
 
+def insert(kept, max_gap, floor=0.12, grid=20000):
+    """Keeps every frame and splits each gap wider than `max_gap` with the fewest new frames, spaced evenly in motion
+    as far as the cap allows (else drawn towards even progress)."""
+    speed = [motion(i / grid, (i + 1) / grid) for i in range(grid)]
+    mean = sum(speed) / grid
+    acc = [0.0]
+    for s in speed:
+        acc.append(acc[-1] + s + floor * mean)
+
+    def at(p):
+        j = min(grid - 1, int(p * grid))
+        return acc[j] + (acc[j + 1] - acc[j]) * (p * grid - j)
+
+    def inverse(target):
+        j = min(grid - 1, max(0, bisect.bisect_left(acc, target) - 1))
+        return (j + (target - acc[j]) / (acc[j + 1] - acc[j])) / grid
+
+    out = list(kept)
+    for a, b in zip(kept, kept[1:]):
+        n = math.ceil((b - a) / max_gap - 1e-9)
+        if n < 2:
+            continue
+        moved = [inverse(at(a) + (at(b) - at(a)) * k / n) for k in range(1, n)]
+        even = [a + (b - a) * k / n for k in range(1, n)]
+        for w in [k / 20 for k in range(20, -1, -1)]:
+            ps = [a] + [round(w * m + (1 - w) * e, 5) for m, e in zip(moved, even)] + [b]
+            if max(q - p for p, q in zip(ps, ps[1:])) <= max_gap:
+                break
+        out += ps[1:-1]
+    return sorted(out)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--frames", type=int, default=108)
@@ -185,10 +219,14 @@ def main():
     ap.add_argument("--keep", help="a plan whose frames outside --span are kept")
     ap.add_argument("--span", type=float, nargs=2)
     ap.add_argument("--step", type=float, default=0.065, help="motion per re-planned frame, in frame heights")
+    ap.add_argument("--insert", type=float, metavar="MAX_GAP", help="with --keep: keep every frame, split gaps over this")
     args = ap.parse_args()
-    if args.keep and not args.span:
-        ap.error("--keep needs --span LO HI")
-    if args.keep:
+    if args.keep and not (args.span or args.insert):
+        ap.error("--keep needs --span LO HI or --insert MAX_GAP")
+    if args.keep and args.insert:
+        ps = insert(json.loads(Path(args.keep).read_text())["progress"], args.insert)
+        steps = [motion(ps[i], ps[i + 1]) for i in range(len(ps) - 1)]
+    elif args.keep:
         ps = respan(json.loads(Path(args.keep).read_text())["progress"], *args.span, args.step)
         steps = [motion(ps[i], ps[i + 1]) for i in range(len(ps) - 1)]
     else:
